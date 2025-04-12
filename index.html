@@ -1,0 +1,168 @@
+ 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端关键设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday! 🎉</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui;
+        }
+
+        /* 渐变背景 */
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 生日卡片容器 */
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* 动画气球 */
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: float 6s infinite;
+            opacity: 0.8;
+        }
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 50px;
+            background: #4d4d4d;
+        }
+
+        /* 关键帧动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* 响应式文字 */
+        h1 {
+            color: #ff6b6b;
+            font-size: calc(2rem + 1vw);
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(255,107,107,0.2);
+        }
+
+        /* 照片墙 */
+        .photo-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .photo {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        /* 时间线祝福语 */
+        .timeline {
+            border-left: 3px solid #ff6b6b;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        .timeline-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,107,107,0.05);
+            border-radius: 8px;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 480px) {
+            .card {
+                margin: 10px;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态气球 -->
+    <div class="balloon" style="left:10%;top:-20px;"></div>
+    <div class="balloon" style="left:30%;top:-30px;animation-delay:1s;background:#ffd93d;"></div>
+    <div class="balloon" style="right:15%;top:-40px;animation-delay:2s;background:#6c5ce7;"></div>
+
+    <div class="card">
+        <h1>🎂 Happy Birthday! 🎈</h1>
+        
+        <!-- 照片墙 -->
+        <div class="photo-wall">
+            <img src="https://picsum.photos/200/300?random=1" class="photo" alt="Memory 1">
+            <img src="https://picsum.photos/200/300?random=2" class="photo" alt="Memory 2">
+            <img src="https://picsum.photos/200/300?random=3" class="photo" alt="Memory 3">
+        </div>
+
+        <!-- 时间线祝福 -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>🥂 第一杯：感谢相遇</h3>
+                <p>感谢你帮助我的美好回忆</p>
+            </div>
+            <div class="timeline-item">
+                <h3>🎁 第二杯：成长祝福</h3>
+                <p>愿你新的一岁继续闪闪发光</p>
+            </div>
+            <div class="timeline-item">
+                <h3>🌈 第三杯：未来可期</h3>
+                <p>期待见证你更多精彩的人生篇章</p>
+            </div>
+        </div>
+
+        <!-- 动态心形 -->
+        <div style="text-align:center; margin:20px 0;">
+            ❤️✨❤️✨❤️
+        </div>
+    </div>
+
+    <!-- 网易云音乐嵌入 -->
+    <div style="display:none">
+        <iframe 
+            frameborder="no" 
+            border="0" 
+            marginwidth="0" 
+            marginheight="0" 
+            width="0" 
+            height="0" 
+            src="//music.163.com/outchain/player?type=2&id=29723028&auto=1&height=66">
+        </iframe>
+    </div>
+</body>
+</html>
+ 
