@@ -1,168 +1,196 @@
  
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <!-- 移动端关键设置 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday! 🎉</title>
+    <title>Happy Birthday LXQ</title>
     <style>
-        /* 基础重置 */
+        /* 重置样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui;
         }
 
-        /* 渐变背景 */
+        /* 动态渐变背景 */
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             min-height: 100vh;
-            padding: 20px;
-            position: relative;
+            background: linear-gradient(135deg, #fff3f3 0%, #ffe6f0 50%, #ffd9e2 100%);
+            animation: gradientBG 18s ease infinite;
+            font-family: 'Segoe UI', cursive;
             overflow-x: hidden;
         }
 
-        /* 生日卡片容器 */
-        .card {
-            max-width: 600px;
-            margin: 20px auto;
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 花瓣容器 */
+        .petals {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 呼吸灯标题 */
+        .title {
             position: relative;
-        }
-
-        /* 动画气球 */
-        .balloon {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            background: #ff6b6b;
-            border-radius: 50%;
-            animation: float 6s infinite;
-            opacity: 0.8;
-        }
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 2px;
-            height: 50px;
-            background: #4d4d4d;
-        }
-
-        /* 关键帧动画 */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        /* 响应式文字 */
-        h1 {
-            color: #ff6b6b;
-            font-size: calc(2rem + 1vw);
             text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px rgba(255,107,107,0.2);
+            padding: 2rem 0;
+            font-size: 3.5rem;
+            color: #ff5d8f;
+            text-shadow: 0 0 15px rgba(255,93,143,0.5);
+            animation: breath 1.2s ease-in-out infinite;
         }
 
-        /* 照片墙 */
+        @keyframes breath {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; text-shadow: 0 0 25px rgba(255,93,143,0.8); }
+        }
+
+        /* 照片墙布局 */
         .photo-wall {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .photo {
+
+        .photo-frame {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 15px;
+            transform: rotate(var(--r));
+            box-shadow: 0 8px 20px rgba(255,148,177,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .photo-frame img {
             width: 100%;
-            height: 120px;
-            border-radius: 8px;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
             object-fit: cover;
-            transition: transform 0.3s;
-        }
-        .photo:hover {
-            transform: scale(1.05);
         }
 
-        /* 时间线祝福语 */
-        .timeline {
-            border-left: 3px solid #ff6b6b;
-            padding-left: 20px;
-            margin: 20px 0;
-        }
-        .timeline-item {
-            margin: 15px 0;
-            padding: 10px;
-            background: rgba(255,107,107,0.05);
-            border-radius: 8px;
+        /* 祝福卡片 */
+        .card {
+            position: relative;
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: linear-gradient(45deg, #fff0f3, #ffe5eb);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255,182,193,0.3);
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* 移动端优化 */
-        @media (max-width: 480px) {
-            .card {
-                margin: 10px;
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
+        .card:hover {
+            transform: translateY(-10px) rotateZ(2deg);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 90%;
+            height: 20px;
+            background: linear-gradient(45deg, #ffb3c6, #ff99ac);
+            transform: translateX(-50%);
+            border-radius: 50%;
+            filter: blur(15px);
+            opacity: 0.6;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #7a4a4a;
+            text-align: center;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .title { font-size: 2.5rem; }
+            .photo-wall { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- 动态气球 -->
-    <div class="balloon" style="left:10%;top:-20px;"></div>
-    <div class="balloon" style="left:30%;top:-30px;animation-delay:1s;background:#ffd93d;"></div>
-    <div class="balloon" style="right:15%;top:-40px;animation-delay:2s;background:#6c5ce7;"></div>
+    <!-- 花瓣动画 -->
+    <div class="petals"></div>
 
+    <!-- 主标题 -->
+    <h1 class="title">Happy Birthday LXQ ❤️</h1>
+
+    <!-- 照片墙 -->
+    <div class="photo-wall">
+        <div class="photo-frame" style="--r:-3deg">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="photo1">
+        </div>
+        <div class="photo-frame" style="--r:2deg">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="photo2">
+        </div>
+        <div class="photo-frame" style="--r:-5deg">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="photo3">
+        </div>
+    </div>
+
+    <!-- 祝福卡片 -->
     <div class="card">
-        <h1>🎂 Happy Birthday! 🎈</h1>
-        
-        <!-- 照片墙 -->
-        <div class="photo-wall">
-            <img src="https://picsum.photos/200/300?random=1" class="photo" alt="Memory 1">
-            <img src="https://picsum.photos/200/300?random=2" class="photo" alt="Memory 2">
-            <img src="https://picsum.photos/200/300?random=3" class="photo" alt="Memory 3">
-        </div>
-
-        <!-- 时间线祝福 -->
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3>🥂 第一杯：感谢相遇</h3>
-                <p>感谢你帮助我的美好回忆</p>
-            </div>
-            <div class="timeline-item">
-                <h3>🎁 第二杯：成长祝福</h3>
-                <p>愿你新的一岁继续闪闪发光</p>
-            </div>
-            <div class="timeline-item">
-                <h3>🌈 第三杯：未来可期</h3>
-                <p>期待见证你更多精彩的人生篇章</p>
-            </div>
-        </div>
-
-        <!-- 动态心形 -->
-        <div style="text-align:center; margin:20px 0;">
-            ❤️✨❤️✨❤️
-        </div>
+        <p>
+            愿你的每一天都如樱花般绚烂<br>
+            所有美好如期而至<br>
+            🎂 Happy Birthday! 🎉<br>
+            - 永远18岁的LXQ -
+        </p>
     </div>
 
-    <!-- 网易云音乐嵌入 -->
-    <div style="display:none">
-        <iframe 
-            frameborder="no" 
-            border="0" 
-            marginwidth="0" 
-            marginheight="0" 
-            width="0" 
-            height="0" 
-            src="//music.163.com/outchain/player?type=2&id=29723028&auto=1&height=66">
-        </iframe>
-    </div>
+    <!-- 花瓣动画脚本 -->
+    <script>
+        function createPetals() {
+            const container = document.querySelector('.petals');
+            const petalCount = 25;
+            
+            for(let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.innerHTML = '🌸';
+                petal.style.cssText = `
+                    position: absolute;
+                    font-size: ${20 + Math.random()*15}px;
+                    opacity: ${0.5 + Math.random()*0.5};
+                    animation: fall ${8 + Math.random()*6}s linear infinite;
+                    left: ${Math.random()*100}%;
+                    animation-delay: ${Math.random()*5}s;
+                `;
+                
+                container.appendChild(petal);
+            }
+
+            // 动态添加动画关键帧
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    0% { transform: translateY(-10vh) rotate(0deg); }
+                    100% { transform: translateY(110vh) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // 初始化
+        window.addEventListener('load', createPetals);
+    </script>
 </body>
 </html>
- 
