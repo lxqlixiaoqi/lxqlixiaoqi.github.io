@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>琪的网站</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="sakura.js"></script>
+    <script src="scripts/message.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="gallery.html">照片墙</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>欢迎来到李晓琪的梦幻世界🎈</h1>
+        <p>这里是专属李晓琪的魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
+        <div class="heart-container"></div>
+        <div class="star-container"></div>
+        <div class="sakura-container"></div>
+            <section class="timeline-container">
+            <h2>成长时间线📅</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2007</h3>
+                        <p>小天使降临人间👼</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="photo-grid">
+            <h2>精彩瞬间📸</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="placeholder1.jpg" alt="美好回忆">
+                    <div class="card-content">
+                        <h3>校园时光</h3>
+                        <p>青葱岁月的点点滴滴</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="message-board">
+            <h2>留言板💌</h2>
+            <form id="messageForm">
+                <input type="text" id="name" placeholder="你的姓名" required>
+                <input type="email" id="contact" placeholder="联系方式（选填）">
+                <textarea id="content" placeholder="留下你的祝福..." required></textarea>
+                <button type="submit">发送爱心💖</button>
+            </form>
+            <div class="messages"></div>
+        </section>
+    </main>
+    <footer>
+        <p>© 镇 2025 送给李晓琪的 18 岁生日礼物</p>
+    </footer>
+<!-- 在body底部新增互动元素容器 -->
+<div class="emojis-container"></div>
+<div id="mascot">🐰</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<script src="scripts/fun-effects.js"></script>
+</body>
+</html>
