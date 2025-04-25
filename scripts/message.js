@@ -10,7 +10,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     const response = await fetch('https://api.github.com/repos/lxqlixiaoqi/lxqlixiaoqi.github.io/issues', {
       method: 'POST',
       headers: {
-        'Authorization': 'token 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',
+        // 'Authorization': 'token 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',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -41,7 +41,7 @@ async function loadMessages() {
   try {
     const response = await fetch('https://api.github.com/repos/lxqlixiaoqi/lxqlixiaoqi.github.io/issues', {
       headers: {
-        'Authorization': 'token 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',
+        // 'Authorization': 'token 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',
       }
     });
 
