@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // 初始化 Supabase 客户端
 const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
-const supabaseKey = 'YeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTYwMjU2NiwiZXhwIjoyMDYxMTc4NTY2fQ.s1RYh4_ElBSJnqRX_FTq7dBUvGUlg1eARD6iPAwCIoQ';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTYwMjU2NiwiZXhwIjoyMDYxMTc4NTY2fQ.s1RYh4_ElBSJnqRX_FTq7dBUvGUlg1eARD6iPAwCIoQ';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // 处理留言提交
