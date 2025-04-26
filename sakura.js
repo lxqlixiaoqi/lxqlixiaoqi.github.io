@@ -20,5 +20,18 @@ setInterval(createSakura, 500); // 减少生成频率
 
 // 页面加载完成后开始樱花雨
 window.addEventListener('load', () => {
-    createSakura();
+    // 添加节流控制
+    let isCreating = false;
+    setInterval(() => {
+        if(!isCreating) {
+            isCreating = true;
+            createSakura();
+            setTimeout(() => isCreating = false, 1000);
+        }
+    }, 800);
+    
+    // 移动端减少花瓣数量
+    if(window.innerWidth <= 768) {
+        document.styleSheets[0].insertRule('.sakura { filter: drop-shadow(0 0 3px #ff9eb5); }', 0);
+    }
 });
