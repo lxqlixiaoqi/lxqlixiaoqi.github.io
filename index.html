@@ -29,20 +29,22 @@
         <!-- 新增倒计时模块 -->
         <section class="countdown-container">
           <h2>生日倒计时⏳</h2>
-          <div class="countdown-number">365</div>
+          <div class="countdown-number">9.15</div>
           <p>天</p>
         </section>
-        
-        <!-- 新增心情卡片 -->
-        <section class="mood-grid">
-          <div class="card mood-card">
-            <div class="card-content">
-              <h3>甜蜜模式🍯</h3>
-              <div class="emoji-selector">❤️🌸🌟🎂</div>
+        <section class="photo-grid">
+            <h2>精彩瞬间📸</h2>
+            <div class="grid-container">
+                <div class="photo-card">
+                    <img src="placeholder1.jpg" alt="美好回忆" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="photo-title">校园时光</h3>
+                        <p class="photo-description">青葱岁月的点点滴滴</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </section>
-            <section class="timeline-container">
+        <section class="timeline-container">
             <h2>成长时间线📅</h2>
             <div class="timeline">
                 <div class="timeline-item">
@@ -53,39 +55,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="photo-grid">
-            <h2>精彩瞬间📸</h2>
-            <div class="grid">
-                <div class="card">
-                    <img src="placeholder1.jpg" alt="美好回忆">
-                    <div class="card-content">
-                        <h3>校园时光</h3>
-                        <p>青葱岁月的点点滴滴</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mood-grid">
-            <h2>今日心情💖</h2>
-            <div class="grid">
-                <div class="card mood-card">
-                    <div class="card-content">
-                        <h3>甜蜜模式🍯</h3>
-                        <p>点击选择你的心情状态</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="diary-section">
-            <h2>私密日记本📔</h2>
-            <div class="diary-entry card">
-                <textarea placeholder="记录今天的小确幸..."></textarea>
-            </div>
-        </section>
-
         <section class="message-board">
             <h2>留言板💌</h2>
             <form id="messageForm">
@@ -96,6 +65,12 @@
             </form>
             <div class="messages"></div>
         </section>
+        <!-- 删除第一个心情卡片模块 -->
+        <!-- 删除第二个心情卡片模块 -->
+        <!-- 删除私密日记本模块 -->
+        <!-- 删除重复的留言板模块 -->
+
+        
     </main>
     <footer>
         <p>© 镇 2025 送给李晓琪的 18 岁生日礼物</p>
@@ -105,5 +80,25 @@
 <div id="mascot">🐰</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 <script src="scripts/fun-effects.js"></script>
+<script>
+    function updateCountdown() {
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        let targetDate = new Date(currentYear, 8, 15); // 9月是第8个月（0索引）
+        if (currentDate > targetDate) {
+            targetDate = new Date(currentYear + 1, 8, 15);
+        }
+        const timeDiff = targetDate - currentDate;
+        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        const countdownElement = document.querySelector('.countdown-number');
+        if (countdownElement) {
+            countdownElement.textContent = daysLeft;
+        }
+    }
+    // 页面加载时更新倒计时
+    window.addEventListener('load', updateCountdown);
+    // 每天更新一次倒计时
+    setInterval(updateCountdown, 24 * 60 * 60 * 1000);
+</script>
 </body>
 </html>
