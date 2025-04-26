@@ -71,47 +71,66 @@ document.querySelector('.save-button').addEventListener('click', async () => {
     const { record: { diaries } } = await response.json();
 
     // 添加新日记
-    await fetch(DIARY_ENDPOINT, {
+    const updateResponse = await fetch(DIARY_ENDPOINT, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': `${DIARY_API_KEY}`
+        'X-Master-Key': DIARY_API_KEY,
+        'X-Bin-Versioning': 'false'
       },
       body: JSON.stringify({
-        diaries: [...diaries, {
           content,
           weather,
           mood,
           created_at: new Date().toISOString()
-        }]
-      })
+        })
     });
+
+    if (!updateResponse.ok) {
+      const errorData = await updateResponse.json();
+      const errorMap = {
+        400: '请求格式错误，请检查日记内容',
+        401: 'API密钥无效',
+        403: '存储空间不足或权限限制',
+        404: '日记存储空间不存在',
+        413: '日记内容超出存储限制',
+        'Content-Type': '需要设置 Content-Type 为 application/json',
+        'Invalid Bin Id': '提供的 Bin ID 无效',
+        'Bin cannot be blank': '请求体需要包含 JSON 数据',
+        'Schema Doc Validation Mismatch': 'JSON 数据与 Schema 文档不匹配'
+      };
+      throw new Error(errorMap[updateResponse.status] || errorMap[errorData.message] || `服务器错误: ${updateResponse.status}`);
+    }
 
     alert('日记保存成功！✨');
     window.location.reload();
   } catch (error) {
-    console.error('保存失败:', error);
+    console.error('详细错误日志:', {
+      message: error.message,
+      stack: error.stack,
+      requestHeaders: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
+        'X-Bin-Versioning': 'false'
+      },
+      responseStatus: error.response?.status,
+      responseHeaders: error.response?.headers
+    });
     console.error('完整错误信息:', {
   message: error.message,
   stack: error.stack,
   requestInfo: error.request
 });
 alert(`魔法失效啦！✨\n错误原因: ${error.message}\n请截图控制台联系管理员`);
-    console.error('完整请求信息:', {
+    console.error('请求元数据:', {
       url: DIARY_ENDPOINT,
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6)
+        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
+        'X-Bin-Versioning': 'false'
       },
-      body: JSON.stringify({
-        diaries: [...diaries, {
-          content,
-          weather,
-          mood,
-          created_at: new Date().toISOString()
-        }]
-      })
+      payload_size: `${JSON.stringify(body).length} bytes`
     });
   }
 });
@@ -119,25 +138,34 @@ alert(`魔法失效啦！✨\n错误原因: ${error.message}\n请截图控制台
 // 加载历史日记
 async function loadDiaries() {
   try {
-    const response = await fetch(`${DIARY_ENDPOINT}/latest`, {
+    const response = await fetch(`${DIARY_ENDPOINT}/latest?meta=false`, {
       headers: {
         'X-Master-Key': DIARY_API_KEY,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Bin-Meta': 'false'
       }
     });
     
     if (!response.ok) {
       const errorBody = await response.text();
+      const errorMap = {
+        400: 'API请求失败',
+        401: '认证失败',
+        403: '权限不足',
+        404: '日记不存在'
+      };
       console.error('获取日记失败:', {
         status: response.status,
         headers: Object.fromEntries(response.headers.entries()),
         errorBody
       });
-      throw new Error(`API请求失败: ${response.status} ${response.statusText}`);
+      throw new Error(errorMap[response.status] || `API请求失败: ${response.status} ${response.statusText}`);
     }
     
-    const { record: { diaries } } = await response.json();
+    const data = await response.json();
+    if (!data?.record) throw new Error('无效响应格式');
 
+    const diaries = data.record.diaries;
     const container = document.querySelector('.diary-list');
     diaries.reverse().forEach(diary => {
       const card = document.createElement('div');
@@ -153,7 +181,17 @@ async function loadDiaries() {
       container.prepend(card);
     });
   } catch (error) {
-    console.error('加载失败:', error);
+    console.error('加载失败:', {
+      message: error.message,
+      stack: error.stack,
+      url: `${DIARY_ENDPOINT}/latest?meta=false`,
+      method: 'GET',
+      headers: {
+        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
+        'Content-Type': 'application/json',
+        'X-Bin-Meta': 'false'
+      }
+    });
   }
 }
 
