@@ -34,11 +34,40 @@ document.querySelector('.save-button').addEventListener('click', async () => {
   const weather = document.getElementById('weather').value;
   const mood = document.getElementById('mood').value;
 
+  // 添加元素存在性检查
+  if(!document.querySelector('.save-button')) {
+    console.error('保存按钮元素未找到');
+    return;
+  }
+
   try {
-    // 获取现有日记
+    // 添加网络连接检测
+    if(!navigator.onLine) {
+      alert('⚠️ 网络连接不可用');
+      return;
+    }
+
+    // 获取现有日记（添加超时机制）
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
     const response = await fetch(DIARY_ENDPOINT, {
-      headers: {'X-Master-Key': `${DIARY_API_KEY}`}
+      headers: {'X-Master-Key': `${DIARY_API_KEY}`},
+      signal: controller.signal
     });
+    clearTimeout(timeoutId);
+
+    // 添加HTTP状态检查
+    if(!response.ok) {
+      const errorData = await response.text();
+      console.error('API请求失败:', {
+        status: response.status,
+        headers: response.headers,
+        errorData
+      });
+      throw new Error(`API请求失败: ${response.status}`);
+    }
+
     const { record: { diaries } } = await response.json();
 
     // 添加新日记
@@ -62,16 +91,51 @@ document.querySelector('.save-button').addEventListener('click', async () => {
     window.location.reload();
   } catch (error) {
     console.error('保存失败:', error);
-    alert('保存失败，请检查网络');
+    console.error('完整错误信息:', {
+  message: error.message,
+  stack: error.stack,
+  requestInfo: error.request
+});
+alert(`魔法失效啦！✨\n错误原因: ${error.message}\n请截图控制台联系管理员`);
+    console.error('完整请求信息:', {
+      url: DIARY_ENDPOINT,
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6)
+      },
+      body: JSON.stringify({
+        diaries: [...diaries, {
+          content,
+          weather,
+          mood,
+          created_at: new Date().toISOString()
+        }]
+      })
+    });
   }
 });
 
 // 加载历史日记
 async function loadDiaries() {
   try {
-    const response = await fetch(DIARY_ENDPOINT, {
-      headers: {'X-Master-Key': `${DIARY_API_KEY}`}
+    const response = await fetch(`${DIARY_ENDPOINT}/latest`, {
+      headers: {
+        'X-Master-Key': DIARY_API_KEY,
+        'Content-Type': 'application/json'
+      }
     });
+    
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error('获取日记失败:', {
+        status: response.status,
+        headers: Object.fromEntries(response.headers.entries()),
+        errorBody
+      });
+      throw new Error(`API请求失败: ${response.status} ${response.statusText}`);
+    }
+    
     const { record: { diaries } } = await response.json();
 
     const container = document.querySelector('.diary-list');
