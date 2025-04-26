@@ -1,3 +1,11 @@
+// 引入 Supabase 客户端
+import { createClient } from '@supabase/supabase-js';
+
+// 初始化 Supabase 客户端
+const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
+const supabaseKey = 'YeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTYwMjU2NiwiZXhwIjoyMDYxMTc4NTY2fQ.s1RYh4_ElBSJnqRX_FTq7dBUvGUlg1eARD6iPAwCIoQ';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 // 处理GitHub Issues留言提交
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -7,24 +15,19 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
   const content = document.getElementById('content').value;
 
   try {
-    const response = await fetch('https://api.github.com/repos/lxqlixiaoqi/lxqlixiaoqi.github.io/issues', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'token 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',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: `来自${name}的留言`,
-        body: `**联系方式**: ${contact || '未提供'}\n\n${content}`
-      })
-    });
+    // 替换本地存储逻辑，将新留言插入到 Supabase
+    const { data, error } = await supabase
+      .from('messages')
+      .insert([{ name: name, contact: contact, content: content, created_at: new Date() }]);
 
-    if (response.ok) {
-      alert('留言提交成功！🎉');
-      e.target.reset();
-    } else {
-      throw new Error('提交失败');
+    if (error) {
+      throw error;
     }
+
+    alert('留言提交成功！🎉');
+    e.target.reset();
+    // 重新加载留言
+    loadMessages();
   } catch (error) {
     console.error('Error:', error);
     alert('提交失败，请稍后重试');
@@ -39,24 +42,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadMessages() {
   try {
-    const response = await fetch('https://api.github.com/repos/lxqlixiaoqi/lxqlixiaoqi.github.io/issues', {
-      headers: {
-        'Authorization': 'token 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',
-      }
-    });
+    // 从 Supabase 获取留言
+    const { data: messages, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      throw error;
+    }
 
     const messagesContainer = document.querySelector('.messages');
     messagesContainer.innerHTML = '加载中...';
-
-    const issues = await response.json();
     messagesContainer.innerHTML = '';
-    
-    issues.reverse().forEach(issue => {
+    messages.forEach(message => {      
       const messageDiv = document.createElement('div');
       messageDiv.className = 'message-item';
       messageDiv.innerHTML = `
-        <div class="message-header">
-          <span class="username">👤 ${issue.user.login}</span>
+        <div class="message-header">\n          <span class="username">👤 ${issue.user.login}</span>
           <span class="timestamp">⏰ ${new Date(issue.created_at).toLocaleString()}</span>
         </div>
         <div class="message-content">💬 ${issue.body}</div>
