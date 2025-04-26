@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
+
 <body>
-<div class="veil-overlay"></div>
+    <div class="veil-overlay"></div>
     <nav>
         <ul>
             <li><a href="index.html">首页</a></li>
@@ -29,6 +31,24 @@
             </div>
             <!-- 新增富文本编辑器容器 -->
             <div id="editor"></div>
+            <div class="emoji-selectors">
+                <select id="weather" class="weather-picker">
+                    <option value="sunny">☀️ 晴天</option>
+                    <option value="cloudy">☁️ 多云</option>
+                    <option value="rainy">🌧️ 雨天</option>
+                    <option value="snowy">❄️ 雪天</option>
+                </select>
+                <select id="mood" class="mood-picker">
+                    <option value="happy">😊 开心</option>
+                    <option value="sad">😢 难过</option>
+                    <option value="angry">😠 生气</option>
+                    <option value="calm">😌 平静</option>
+                </select>
+            </div>
+        </div>
+        <div class="diary-list-container">
+            <h2>✨ 星愿回忆录 ✨</h2>
+            <div class="diary-list"></div>
         </div>
         <button class="save-button">保存星愿💫</button>
     </main>
@@ -51,9 +71,10 @@
 
         // 加载保存内容
         const savedContent = localStorage.getItem('diaryContent');
-        if(savedContent) quill.root.innerHTML = savedContent;
+        if (savedContent) quill.root.innerHTML = savedContent;
     </script>
     <script src="scripts/diary.js"></script>
-<script src="scripts/fun-effects.js"></script>
+    <script src="scripts/fun-effects.js"></script>
 </body>
+
 </html>
