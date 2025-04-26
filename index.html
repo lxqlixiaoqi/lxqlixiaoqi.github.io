@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>琪的网站</title>
+    <title>琪Q的网站</title>
     <link rel="stylesheet" href="styles/main.css">
     <script src="sakura.js"></script>
     <script src="scripts/message.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <nav>
@@ -18,9 +20,13 @@
     </nav>
     <main>
         <h1>欢迎来到李晓琪的梦幻世界🎈</h1>
-        <p>这里是专属李晓琪的魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
+        <p>这里是专属李晓琪的空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
         <div class="heart-container"></div>
-        <div class="star-container"></div>
+        <div class="star-container">
+            <div class="stars"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div>
+        </div>
         <div class="sakura-container"></div>
             <section class="timeline-container">
             <h2>成长时间线📅</h2>
@@ -38,10 +44,25 @@
             <h2>精彩瞬间📸</h2>
             <div class="grid">
                 <div class="card">
-                    <img src="placeholder1.jpg" alt="美好回忆">
-                    <div class="card-content">
-                        <h3>校园时光</h3>
-                        <p>青葱岁月的点点滴滴</p>
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="placeholder1.jpg" alt="美好回忆">
+                        </div>
+                        <div class="card-back">
+                            <h3>校园时光</h3>
+                            <p>青葱岁月的点点滴滴</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="placeholder2.jpg" alt="欢乐时光">
+                        </div>
+                        <div class="card-back">
+                            <h3>欢乐时光</h3>
+                            <p>与朋友们的快乐回忆</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,7 +85,91 @@
 <!-- 在body底部新增互动元素容器 -->
 <div class="emojis-container"></div>
 <div id="mascot">🐰</div>
+<div class="floating-hearts"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 <script src="scripts/fun-effects.js"></script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // 星空背景动画(移动端优化版)
+    function createStars(container, count, size, duration) {
+        // 检测移动设备并减少元素数量
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const finalCount = isMobile ? Math.floor(count/2) : count;
+        
+        for (let i = 0; i < finalCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            container.appendChild(star);
+            
+            gsap.to(star, {
+                y: -1000,
+                duration: duration + Math.random() * 5,
+                repeat: -1,
+                ease: 'none'
+            });
+        }
+    }
+    
+    // 3D卡片效果
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card.querySelector('.card-inner'), {
+                rotationY: 180,
+                duration: 0.5
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card.querySelector('.card-inner'), {
+                rotationY: 0,
+                duration: 0.5
+            });
+        });
+    });
+    
+    // 浮动爱心特效(移动端优化版)
+    function createHearts() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const interval = isMobile ? 500 : 300;
+        
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = 'Qi';
+            heart.className = 'heart';
+            heart.style.left = `${Math.random() * 100}%`;
+            document.querySelector('.floating-hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }, interval);
+    }
+    
+
+    
+    // 初始化动画
+    gsap.from('h1', { duration: 1, y: -50, opacity: 0, ease: 'power2.out' });
+    ScrollTrigger.create({
+        trigger: '.timeline-container',
+        start: 'top 80%',
+        animation: gsap.from('.timeline-item', { duration: 1, x: -50, opacity: 0, stagger: 0.3 })
+    });
+    
+    // 创建星空(移动端优化版)
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    createStars(document.querySelector('.stars'), isMobile ? 50 : 100, 2, 20);
+    createStars(document.querySelector('.stars2'), isMobile ? 25 : 50, 3, 15);
+    createStars(document.querySelector('.stars3'), isMobile ? 12 : 25, 4, 10);
+    
+    // 启动特效
+    createHearts();
+
+</script>
 </body>
 </html>
