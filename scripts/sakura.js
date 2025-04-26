@@ -27,3 +27,3186 @@ setInterval(createSakura, 300);
 window.addEventListener('load', () => {
   createSakura();
 });
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  createSakura();
+});
+
+// 页面加载完成后初始化樱花雨
+window.addEventListener('load', () => {
+  // 假设初始创建 10 朵樱花，可以根据需要调整数量
+  for (let i = 0; i < 10; i++) {
+    createSakura();
+  }
+});
