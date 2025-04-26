@@ -15,6 +15,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
   const content = document.getElementById('content').value;
 
   try {
+    console.log('尝试提交留言:', { name, contact, content });
     // 替换本地存储逻辑，将新留言插入到 Supabase
     const { data, error } = await supabase
       .from('messages')
@@ -24,12 +25,13 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
       throw error;
     }
 
+    console.log('留言提交成功:', data);
     alert('留言提交成功！🎉');
     e.target.reset();
-    // 重新加载留言
-    loadMessages();
+    // 确保在异步操作完成后重新加载留言
+    await loadMessages();
   } catch (error) {
-    console.error('Error:', error);
+    console.error('提交留言时出错:', error);
     alert('提交失败，请稍后重试');
   }
 });
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadMessages() {
   try {
+    console.log('尝试加载留言');
     // 从 Supabase 获取留言
     const { data: messages, error } = await supabase
       .from('messages')
@@ -52,6 +55,7 @@ async function loadMessages() {
       throw error;
     }
 
+    console.log('留言加载成功:', messages);
     const messagesContainer = document.querySelector('.messages');
     messagesContainer.innerHTML = '加载中...';
     messagesContainer.innerHTML = '';
@@ -68,7 +72,7 @@ async function loadMessages() {
       messagesContainer.appendChild(messageDiv);
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error('加载留言时出错:', error);
     if (error.message.includes('requested path is invalid')) {
       messagesContainer.innerHTML = JSON.stringify({ "error": "requested path is invalid" });
     } else {
