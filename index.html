@@ -21,8 +21,8 @@
         </ul>
     </nav>
     <main>
-        <h1>欢迎来到李晓琪的梦幻世界🎈</h1>
-        <p>这里是专属李晓琪的魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
+        <h1>欢迎来到晓琪的website🎈</h1>
+        <p>这里是专属晓琪的魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
         <div class="heart-container"></div>
         <div class="star-container"></div>
         <div class="sakura-container"></div>
@@ -55,7 +55,22 @@
                 </div>
             </div>
         </section>
-        <section class="message-board">
+        <!-- 新增星座运势模块 -->
+<section class="horoscope-container">
+  <h2>星座运势占卜🔮</h2>
+  <button class="horoscope-btn">点击获取今日运势✨</button>
+  <div id="horoscope-result" class="horoscope-result"></div>
+</section>
+
+<!-- 新增语音留言模块 -->
+<section class="voice-message">
+  <h2>语音留言🎤</h2>
+  <button id="voice-btn">按住说话</button>
+  <div id="voice-status" class="voice-status"></div>
+  <input type="text" id="voice-input" class="voice-input" placeholder="语音识别结果">
+</section>
+
+<section class="message-board">
             <h2>留言板💌</h2>
             <form id="messageForm">
                 <input type="text" id="name" placeholder="你的姓名" required>
@@ -65,10 +80,7 @@
             </form>
             <div class="messages"></div>
         </section>
-        <!-- 删除第一个心情卡片模块 -->
-        <!-- 删除第二个心情卡片模块 -->
-        <!-- 删除私密日记本模块 -->
-        <!-- 删除重复的留言板模块 -->
+
 
         
     </main>
@@ -78,8 +90,12 @@
 <!-- 在body底部新增互动元素容器 -->
 <div class="emojis-container"></div>
 <div id="mascot">🐰</div>
+<!-- 新增烟花容器 -->
+<div id="fireworks-container"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 <script src="scripts/fun-effects.js"></script>
+<script src="scripts/magic-effects.js"></script>
+<script src="scripts/extra-effects.js"></script>
 <script>
     function updateCountdown() {
         const currentDate = new Date();
@@ -100,5 +116,7 @@
     // 每天更新一次倒计时
     setInterval(updateCountdown, 24 * 60 * 60 * 1000);
 </script>
+<!-- 移动端癫狂模式触发按钮 -->
+<button id="mobile-crazy-trigger" class="mobile-trigger">🎇 触摸激活</button>
 </body>
 </html>
