@@ -1,3 +1,78 @@
+/* 基础样式 */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ff69b4;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    background: rgba(255,105,180,0.1);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    nav {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        background: rgba(255,255,255,0.95);
+        padding: 0.5rem 1rem;
+    }
+    
+    nav ul {
+        gap: 0.8rem;
+    }
+    
+    nav a {
+        font-size: 12px;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .card {
+        width: 95% !important;
+        margin: 8px auto;
+        height: 280px;
+        max-width: none;
+    }
+}
+
 /* 3D卡片效果(移动端优化版) */
 .card {
     perspective: 1000px;
@@ -69,3 +144,2476 @@
     from { opacity: 0.3; }
     to { opacity: 1; }
 }
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars, .stars2, .stars3 {
+    display: none !important;
+}
+
+/* 更新背景为樱花粉 */
+body {
+    background: #ffe6f2 !important;
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 100%) !important;
+}
+
+/* 增强樱花容器可见度 */
+.sakura-container {
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .card {
+        height: 350px;
+    }
+    
+    .timeline-container, .photo-grid, .message-board {
+        padding: 0 15px;
+    }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* 移除星空相关样式 */
+.star-container, .stars,
