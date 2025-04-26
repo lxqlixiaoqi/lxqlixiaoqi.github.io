@@ -6,7 +6,7 @@ const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
 const supabaseKey = 'YeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTYwMjU2NiwiZXhwIjoyMDYxMTc4NTY2fQ.s1RYh4_ElBSJnqRX_FTq7dBUvGUlg1eARD6iPAwCIoQ';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// 处理GitHub Issues留言提交
+// 处理留言提交
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -59,15 +59,21 @@ async function loadMessages() {
       const messageDiv = document.createElement('div');
       messageDiv.className = 'message-item';
       messageDiv.innerHTML = `
-        <div class="message-header">\n          <span class="username">👤 ${issue.user.login}</span>
-          <span class="timestamp">⏰ ${new Date(issue.created_at).toLocaleString()}</span>
+        <div class="message-header">
+          <span class="username">👤 ${message.name}</span>
+          <span class="timestamp">⏰ ${new Date(message.created_at).toLocaleString()}</span>
         </div>
-        <div class="message-content">💬 ${issue.body}</div>
+        <div class="message-content">💬 ${message.content}</div>
       `;
       messagesContainer.appendChild(messageDiv);
     });
   } catch (error) {
-    messagesContainer.innerHTML = '留言加载失败，请稍后刷新';
+    console.error('Error:', error);
+    if (error.message.includes('requested path is invalid')) {
+      messagesContainer.innerHTML = JSON.stringify({ "error": "requested path is invalid" });
+    } else {
+      messagesContainer.innerHTML = '留言加载失败，请稍后刷新';
+    }
   }
 }
 
