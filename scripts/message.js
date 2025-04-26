@@ -1,10 +1,7 @@
-// 引入 Supabase 客户端
-import { createClient } from '@supabase/supabase-js';
-
-// 初始化 Supabase 客户端
-const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NTYwMjU2NiwiZXhwIjoyMDYxMTc4NTY2fQ.s1RYh4_ElBSJnqRX_FTq7dBUvGUlg1eARD6iPAwCIoQ';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// JSONBin.io 配置
+const JSONBIN_BIN_ID = '680C700D8561E97A5007DE7D';
+const JSONBIN_API_KEY = '$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y';
+const JSONBIN_ENDPOINT = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
 
 // 处理留言提交
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
@@ -17,13 +14,30 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
   try {
     console.log('尝试提交留言:', { name, contact, content });
     // 替换本地存储逻辑，将新留言插入到 Supabase
-    const { data, error } = await supabase
-      .from('messages')
-      .insert([{ name: name, contact: contact, content: content, created_at: new Date() }]);
+    // 获取现有消息
+    const getResponse = await fetch(JSONBIN_ENDPOINT, {
+      headers: {
+        'X-Master-Key': `${'$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y'}`
+      }
+    });
+    const { record: { messages: existingMessages } } = await getResponse.json();
 
-    if (error) {
-      throw error;
-    }
+    const response = await fetch(JSONBIN_ENDPOINT, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': `${'$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y'}`
+      },
+      body: JSON.stringify({
+        messages: [...existingMessages, {
+          name,
+          contact,
+          content,
+          created_at: new Date().toISOString()
+        }]
+      })
+    });
+    const data = await response.json();
 
     console.log('留言提交成功:', data);
     alert('留言提交成功！🎉');
@@ -46,14 +60,12 @@ async function loadMessages() {
   try {
     console.log('尝试加载留言');
     // 从 Supabase 获取留言
-    const { data: messages, error } = await supabase
-      .from('messages')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      throw error;
-    }
+    const response = await fetch(JSONBIN_ENDPOINT, {
+      headers: {
+        'X-Master-Key': `${'$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y'}`
+      }
+    });
+    const { record: { messages } } = await response.json();
 
     console.log('留言加载成功:', messages);
     const messagesContainer = document.querySelector('.messages');
