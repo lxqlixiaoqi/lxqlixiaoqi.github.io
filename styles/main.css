@@ -8,7 +8,6 @@ body {
 
 h1, h2, h3 {
   color: #d81b60;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-out;
 }
 
@@ -26,17 +25,6 @@ h1, h2, h3 {
 nav {
   background-color: rgba(255, 240, 245, 0.9);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
 }
 
 button {
@@ -330,42 +318,7 @@ footer {
   transform: translateY(-5px);
 }
 
-.photo-grid {
-  padding: 40px 20px;
-  background: linear-gradient(45deg, #fff0f5 0%, #ffe4e1 100%);
-}
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background: linear-gradient(145deg, #fff0f5 0%, #ffe6eb 100%);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(255,105,180,0.2);
-  transition: transform 0.3s ease;
-  min-height: 300px;
-  position: relative;
-}
-
-.card:hover {
-  transform: translateY(-5px) rotate(2deg);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 15px;
-}
 
 .message-board {
   padding: 40px 20px;
@@ -485,7 +438,6 @@ textarea {
 /* 倒计时数字样式 */
 .countdown-number {
   font-size: 2.5em;
-  text-shadow: 2px 2px 3px rgba(255,105,180,0.2);
 }
 
 /* 日记本输入框特效 */
@@ -637,11 +589,100 @@ textarea {
 /* 倒计时数字样式 */
 .countdown-number {
   font-size: 2.5em;
-  text-shadow: 2px 2px 3px rgba(255,105,180,0.2);
 }
 
 /* 日记本输入框特效 */
 .diary-entry {
   background: rgba(255,255,255,0.9);
   backdrop-filter: blur(5px);
+}
+
+/* 网格布局系统 */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* 卡片样式 */
+.photo-card {
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 5px 15px rgba(255,105,180,0.2),
+    0 10px 30px rgba(255,105,180,0.1),
+    0 15px 45px rgba(255,105,180,0.05);
+  transition: transform 0.3s ease;
+}
+
+.photo-card:hover {
+  transform: translateZ(10px) rotateY(5deg);
+}
+
+/* 视差动画效果 */
+@keyframes parallax {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100vh); }
+}
+
+.photo-card:nth-child(1) { animation: parallax 10s linear infinite; will-change: transform; }
+.photo-card:nth-child(2) { animation: parallax 12s linear infinite; will-change: transform; }
+.photo-card:nth-child(3) { animation: parallax 14s linear infinite; will-change: transform; }
+/* 星座运势样式 */
+.horoscope-container {
+  background: rgba(255, 240, 245, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.horoscope-container h2 {
+  color: #ff6b88;
+  margin-bottom: 15px;
+}
+
+.horoscope-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.horoscope-container input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ffb6c1;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.horoscope-container button {
+  background: linear-gradient(45deg, #ff6b88, #ff8e53);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.horoscope-container button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 107, 136, 0.4);
+}
+
+.fortune-box {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-text {
+  color: #ff6b88;
+  font-size: 1.1em;
+  font-weight: 500;
 }

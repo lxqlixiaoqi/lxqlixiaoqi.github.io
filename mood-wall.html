@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心情日记墙</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .mood-wall {
+            padding: 2rem;
+            background: rgba(255, 240, 245, 0.9);
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        .mood-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255,105,180,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mood-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255,105,180,0.2);
+        }
+        
+        .mood-date {
+            color: #ff69b4;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mood-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .mood-emoji {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .mood-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(255,105,180,0.1);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        
+        .emoji-picker {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .emoji-option {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .emoji-option:hover {
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .mood-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mood-form {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sakura-container"></div>
+    <div class="heart-container"></div>
+    
+    <div class="mood-wall">
+        <h1>心情日记墙</h1>
+        <p>记录你的每日心情，分享生活点滴</p>
+        
+        <div class="mood-form">
+            <h2>写下今日心情</h2>
+            <div class="emoji-picker">
+                <span class="emoji-option">😊</span>
+                <span class="emoji-option">😢</span>
+                <span class="emoji-option">😡</span>
+                <span class="emoji-option">😍</span>
+                <span class="emoji-option">😴</span>
+                <span class="emoji-option">🤔</span>
+            </div>
+            <textarea placeholder="今天感觉如何？发生了什么特别的事情吗？"></textarea>
+            <button class="save-button">保存心情</button>
+        </div>
+        
+        <div class="mood-grid">
+            <!-- 心情卡片将通过JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <script src="scripts/sakura.js"></script>
+    <script src="scripts/fun-effects.js"></script>
+    <script src="scripts/mood-wall.js"></script>
+</body>
+</html>

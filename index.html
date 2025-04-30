@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="sakura.js"></script>
     <script src="scripts/message.js"></script>
+    <script src="scripts/horoscope.js"></script>
 </head>
 <body>
 <div class="veil-overlay"></div>
@@ -18,12 +19,13 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="gallery.html">照片墙</a></li>
             <li><a href="diary.html">日记📖</a></li>
+            <li><a href="mood-wall.html">心情日记</a></li>
         </ul>
     </nav>
     <main>
         <div class="welcome-container">
-  <h1 class="name-title">欢迎<span id="dynamicName">晓琪</span>的website🎈</h1>
-  <p class="name-input-hint">点击名字开启魔法特效✨</p>
+  <h1 class="name-title">欢迎来到<span id="dynamicName">晓琪</span>的website🎈</h1>
+
   <div class="sparkle-container"></div>
 </div>
 <p class="welcome-text">这里是专属魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
@@ -36,18 +38,7 @@
           <div class="countdown-number">9.15</div>
           <p>天</p>
         </section>
-        <section class="photo-grid">
-            <h2>精彩瞬间📸</h2>
-            <div class="grid-container">
-                <div class="photo-card">
-                    <img src="placeholder1.jpg" alt="美好回忆" loading="lazy">
-                    <div class="card-content">
-                        <h3 class="photo-title">校园时光</h3>
-                        <p class="photo-description">青葱岁月的点点滴滴</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <section class="timeline-container">
             <h2>成长时间线📅</h2>
             <div class="timeline">
@@ -58,6 +49,15 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section class="horoscope-container">
+            <h2>专属星座运势✨</h2>
+            <form id="horoscopeForm">
+                <label for="birthDate">输入你的生日:</label>
+                <input type="date" id="birthDate" required>
+                <button type="submit">查看运势🔮</button>
+            </form>
+            <div id="zodiacResult"></div>
         </section>
         <section class="message-board">
             <h2>留言板💌</h2>
