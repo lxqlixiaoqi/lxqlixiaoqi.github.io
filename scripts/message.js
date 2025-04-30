@@ -1,8 +1,3 @@
-// JSONBin.io 配置
-const JSONBIN_BIN_ID = '680C700D8561E97A5007DE7D';
-const JSONBIN_API_KEY = '$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y';
-const JSONBIN_ENDPOINT = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-
 // 处理留言提交
 const messageForm = document.getElementById('messageForm');
 if (messageForm) {
@@ -16,12 +11,7 @@ if (messageForm) {
   try {
     console.log('尝试提交留言:', { name, contact, content });
     // 替换本地存储逻辑，将新留言插入到 Supabase
-    // 获取现有消息
-    const getResponse = await fetch(JSONBIN_ENDPOINT, {
-      headers: {
-        'X-Master-Key': `${'$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y'}`
-      }
-    });
+    
     const { data, error } = await supabase
       .from('messages')
       .insert([{
