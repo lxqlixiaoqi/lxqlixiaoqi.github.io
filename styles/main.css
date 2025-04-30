@@ -251,23 +251,34 @@ footer {
 }
 
 .message-item {
-  padding: 15px;
-  margin: 10px 0;
+  padding: 20px;
+  margin: 15px 0;
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #ffe6f4;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.1);
+  transition: all 0.3s ease;
+}
+
+.message-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.15);
 }
 
 .message-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   color: #ff69b4;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 .message-content {
-  color: #666;
-  line-height: 1.5;
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.05em;
+  margin: 10px 0;
 }
 
 /* 时间线模块样式 */

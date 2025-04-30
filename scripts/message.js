@@ -27,14 +27,33 @@ if (messageForm) {
     }
 
     console.log('留言提交成功:', data);
-    alert('留言提交成功！🎉');
+    // 显示更丰富的成功反馈
+      const successMsg = document.createElement('div');
+      successMsg.className = 'submit-success';
+      successMsg.innerHTML = '✨ 留言已成功提交！';
+      messageForm.appendChild(successMsg);
+      
+      // 3秒后自动移除成功提示
+      setTimeout(() => {
+        successMsg.remove();
+      }, 3000);
+      
       e.target.reset();
-    // 确保在异步操作完成后重新加载留言
-    await loadMessages();
-  } catch (error) {
-    console.error('提交留言时出错:', error);
-    alert('提交失败，请稍后重试');
-  }
+      await loadMessages();
+    } catch (error) {
+      console.error('提交留言时出错:', error);
+      
+      // 显示更详细的错误提示
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'submit-error';
+      errorMsg.innerHTML = `❌ 提交失败: ${error.message}`;
+      messageForm.appendChild(errorMsg);
+      
+      // 5秒后自动移除错误提示
+      setTimeout(() => {
+        errorMsg.remove();
+      }, 5000);
+    }
 });
 }
 
@@ -61,11 +80,14 @@ async function loadMessages() {
     
     data.forEach(message => {
       const messageElement = document.createElement('div');
-      messageElement.className = 'message';
+      messageElement.className = 'message-item';
       messageElement.innerHTML = `
-        <h3>${message.name}</h3>
-        <p>${message.content}</p>
-        <small>${new Date(message.created_at).toLocaleString()}</small>
+        <div class="message-header">
+          <span>${message.name}</span>
+          <small>${message.contact ? `联系方式: ${message.contact}` : ''}</small>
+        </div>
+        <div class="message-content">${message.content}</div>
+        <small class="message-time">${new Date(message.created_at).toLocaleString()}</small>
       `;
       messagesContainer.appendChild(messageElement);
     });
