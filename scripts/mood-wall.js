@@ -1,14 +1,18 @@
 // 初始化Supabase客户端
-let supabase;
-
-window.addEventListener('DOMContentLoaded', () => {
-  const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
-  supabase = supabase.createClient(supabaseUrl, supabaseKey);
-  
-  // 初始化加载
-  loadMoods();
+const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey, {
+  global: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT'
+    }
+  }
 });
+
+// 初始化加载
+window.addEventListener('DOMContentLoaded', loadMoods);
 
 // 加载历史心情记录
 async function loadMoodHistory() {

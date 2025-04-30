@@ -1,7 +1,15 @@
 // 初始化Supabase客户端
 const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(supabaseUrl, supabaseKey, {
+  global: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT'
+    }
+  }
+});
 
 // 加载历史日记
 async function loadDiaryHistory() {
@@ -59,6 +67,9 @@ document.querySelector('.save-button').addEventListener('click', async () => {
   const content = quill.root.innerHTML;
   const weather = document.getElementById('weather').value;
   const mood = document.getElementById('mood').value;
+  
+  // 确保内容以HTML格式存储
+  const htmlContent = quill.root.innerHTML;
 
   // 添加元素存在性检查
   if(!document.querySelector('.save-button')) {
@@ -74,11 +85,16 @@ document.querySelector('.save-button').addEventListener('click', async () => {
     }
 
     // 保存日记到Supabase
+    // 清理Quill生成的HTML内容，移除不必要的样式和类
+    const cleanHtmlContent = htmlContent
+      .replace(/class=".*?"/g, '')
+      .replace(/style=".*?"/g, '');
+
     const { data, error } = await supabase
       .from('diaries')
       .insert([
         {
-          content,
+          content: cleanHtmlContent,
           weather,
           mood,
           created_at: new Date().toISOString()
@@ -90,52 +106,14 @@ document.querySelector('.save-button').addEventListener('click', async () => {
       throw new Error(`保存失败: ${error.message}`);
     }
 
-    if (!updateResponse.ok) {
-      const errorData = await updateResponse.json();
-      const errorMap = {
-        400: '请求格式错误，请检查日记内容',
-        401: 'API密钥无效',
-        403: '存储空间不足或权限限制',
-        404: '日记存储空间不存在',
-        413: '日记内容超出存储限制',
-        'Content-Type': '需要设置 Content-Type 为 application/json',
-        'Invalid Bin Id': '提供的 Bin ID 无效',
-        'Bin cannot be blank': '请求体需要包含 JSON 数据',
-        'Schema Doc Validation Mismatch': 'JSON 数据与 Schema 文档不匹配'
-      };
-      throw new Error(errorMap[updateResponse.status] || errorMap[errorData.message] || `服务器错误: ${updateResponse.status}`);
-    }
-
     alert('日记保存成功！✨');
-    window.location.reload();
+    quill.setContents([]); // 清空编辑器内容
+    document.getElementById('weather').value = '';
+    document.getElementById('mood').value = '';
+    loadDiaries(); // 刷新日记列表
   } catch (error) {
-    console.error('详细错误日志:', {
-      message: error.message,
-      stack: error.stack,
-      requestHeaders: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
-        'X-Bin-Versioning': 'false'
-      },
-      responseStatus: error.response?.status,
-      responseHeaders: error.response?.headers
-    });
-    console.error('完整错误信息:', {
-  message: error.message,
-  stack: error.stack,
-  requestInfo: error.request
-});
-alert(`魔法失效啦！✨\n错误原因: ${error.message}\n请截图控制台联系管理员`);
-    console.error('请求元数据:', {
-      url: DIARY_ENDPOINT,
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
-        'X-Bin-Versioning': 'false'
-      },
-      payload_size: `${JSON.stringify(body).length} bytes`
-    });
+    console.error('保存日记时出错:', error);
+    alert(`保存失败: ${error.message}`);
   }
 });
 
