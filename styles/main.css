@@ -242,10 +242,12 @@ footer {
 
 .messages {
   margin-top: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+  padding: 20px;
+  background: rgba(255, 240, 245, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+  border: 2px solid #ff69b4;
+  animation: pulse 2s infinite;
 }
 
 .message-item {
@@ -341,9 +343,10 @@ textarea {
 
 .messages {
   display: grid;
-  gap: 15px;
-  max-width: 600px;
-  margin: 20px auto;
+  gap: 20px;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 20px;
 }
 
 /* 星星样式 */
@@ -492,9 +495,10 @@ textarea {
 
 .messages {
   display: grid;
-  gap: 15px;
-  max-width: 600px;
-  margin: 20px auto;
+  gap: 20px;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 20px;
 }
 
 /* 星星样式 */
