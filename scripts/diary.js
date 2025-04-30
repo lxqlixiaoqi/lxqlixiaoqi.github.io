@@ -1,4 +1,9 @@
-// JSONBin.io 日记配置
+// 初始化Supabase客户端
+const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// 表情配置
 const weatherEmoji = {
   sunny: '☀️',
   cloudy: '☁️',
@@ -12,10 +17,6 @@ const moodEmoji = {
   angry: '😠',
   calm: '😌'
 };
-
-const DIARY_BIN_ID = '680c72658561e97a5007df6e';  // ← 替换为实际Bin ID
-const DIARY_API_KEY = '$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGXspf/y'; // ← 替换为实际Secret Key
-const DIARY_ENDPOINT = `https://api.jsonbin.io/v3/b/${DIARY_BIN_ID}`;
 
 // 初始化富文本编辑器
 if (typeof quill === 'undefined') {
@@ -47,44 +48,22 @@ document.querySelector('.save-button').addEventListener('click', async () => {
       return;
     }
 
-    // 获取现有日记（添加超时机制）
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
-    
-    const response = await fetch(DIARY_ENDPOINT, {
-      headers: {'X-Master-Key': `${DIARY_API_KEY}`},
-      signal: controller.signal
-    });
-    clearTimeout(timeoutId);
-
-    // 添加HTTP状态检查
-    if(!response.ok) {
-      const errorData = await response.text();
-      console.error('API请求失败:', {
-        status: response.status,
-        headers: response.headers,
-        errorData
-      });
-      throw new Error(`API请求失败: ${response.status}`);
-    }
-
-    const { record: { diaries } } = await response.json();
-
-    // 添加新日记
-    const updateResponse = await fetch(DIARY_ENDPOINT, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': DIARY_API_KEY,
-        'X-Bin-Versioning': 'false'
-      },
-      body: JSON.stringify({
+    // 保存日记到Supabase
+    const { data, error } = await supabase
+      .from('diaries')
+      .insert([
+        {
           content,
           weather,
           mood,
           created_at: new Date().toISOString()
-        })
-    });
+        }
+      ]);
+      
+    if (error) {
+      console.error('保存失败:', error);
+      throw new Error(`保存失败: ${error.message}`);
+    }
 
     if (!updateResponse.ok) {
       const errorData = await updateResponse.json();
@@ -138,34 +117,17 @@ alert(`魔法失效啦！✨\n错误原因: ${error.message}\n请截图控制台
 // 加载历史日记
 async function loadDiaries() {
   try {
-    const response = await fetch(`${DIARY_ENDPOINT}/latest?meta=false`, {
-      headers: {
-        'X-Master-Key': DIARY_API_KEY,
-        'Content-Type': 'application/json',
-        'X-Bin-Meta': 'false'
-      }
-    });
-    
-    if (!response.ok) {
-      const errorBody = await response.text();
-      const errorMap = {
-        400: 'API请求失败',
-        401: '认证失败',
-        403: '权限不足',
-        404: '日记不存在'
-      };
-      console.error('获取日记失败:', {
-        status: response.status,
-        headers: Object.fromEntries(response.headers.entries()),
-        errorBody
-      });
-      throw new Error(errorMap[response.status] || `API请求失败: ${response.status} ${response.statusText}`);
+    const { data, error } = await supabase
+      .from('diaries')
+      .select('*')
+      .order('created_at', { ascending: false });
+      
+    if (error) {
+      console.error('获取日记失败:', error);
+      throw new Error(`获取日记失败: ${error.message}`);
     }
     
-    const data = await response.json();
-    if (!data?.record) throw new Error('无效响应格式');
-
-    const diaries = data.record.diaries;
+    const diaries = data;
     const container = document.querySelector('.diary-list');
     diaries.reverse().forEach(diary => {
       const card = document.createElement('div');
