@@ -4,7 +4,9 @@ const JSONBIN_API_KEY = '$2a$10$9u9AY94zM2cw7CG4tHCk8uHyPoAd5jyUKSiWVKPhGBPZiKGX
 const JSONBIN_ENDPOINT = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
 
 // 处理留言提交
-document.getElementById('messageForm').addEventListener('submit', async (e) => {
+const messageForm = document.getElementById('messageForm');
+if (messageForm) {
+  messageForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const name = document.getElementById('name').value;
@@ -36,7 +38,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
 
     console.log('留言提交成功:', data);
     alert('留言提交成功！🎉');
-    e.target.reset();
+      e.target.reset();
     // 确保在异步操作完成后重新加载留言
     await loadMessages();
   } catch (error) {
@@ -44,6 +46,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     alert('提交失败，请稍后重试');
   }
 });
+}
 
 
 
