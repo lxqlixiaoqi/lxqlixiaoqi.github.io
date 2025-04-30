@@ -53,5 +53,35 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
 
 
 
+// 加载并显示所有留言
+async function loadMessages() {
+  try {
+    const { data, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+      
+    if (error) throw error;
+    
+    const messagesContainer = document.querySelector('.messages');
+    messagesContainer.innerHTML = '';
+    
+    data.forEach(message => {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message';
+      messageElement.innerHTML = `
+        <h3>${message.name}</h3>
+        <p>${message.content}</p>
+        <small>${new Date(message.created_at).toLocaleString()}</small>
+      `;
+      messagesContainer.appendChild(messageElement);
+    });
+  } catch (error) {
+    console.error('加载留言时出错:', error);
+  }
+}
+
+// 页面加载时初始化留言
+window.addEventListener('DOMContentLoaded', loadMessages);
+
 // 注意：实际部署时需要配置CORS代理并保护令牌安全
-// 删除多

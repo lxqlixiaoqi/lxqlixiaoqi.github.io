@@ -3,6 +3,30 @@ const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+// 加载历史心情记录
+async function loadMoodHistory() {
+  const { data, error } = await supabase
+    .from('moods')
+    .select('*')
+    .order('created_at', { ascending: false });
+    
+  if (!error && data) {
+    const historyContainer = document.querySelector('.mood-history');
+    if (historyContainer) {
+      historyContainer.innerHTML = data.map(mood => 
+        `<div class="mood-item">
+          <div class="mood-date">${new Date(mood.created_at).toLocaleString()}</div>
+          <div class="mood-emoji">${mood.emoji}</div>
+          <div class="mood-text">${mood.text}</div>
+        </div>`
+      ).join('');
+    }
+  }
+}
+
+// 页面加载时获取历史记录
+window.addEventListener('load', loadMoodHistory);
+
 // 心情日记墙交互逻辑
 const moodForm = document.querySelector('.mood-form');
 const moodGrid = document.querySelector('.mood-grid');

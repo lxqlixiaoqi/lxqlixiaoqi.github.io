@@ -3,6 +3,31 @@ const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+// 加载历史日记
+async function loadDiaryHistory() {
+  const { data, error } = await supabase
+    .from('diaries')
+    .select('*')
+    .order('created_at', { ascending: false });
+    
+  if (!error && data) {
+    const historyContainer = document.querySelector('.diary-history');
+    if (historyContainer) {
+      historyContainer.innerHTML = data.map(diary => 
+        `<div class="diary-item">
+          <div class="diary-date">${new Date(diary.created_at).toLocaleString()}</div>
+          <div class="diary-weather">${weatherEmoji[diary.weather] || ''}</div>
+          <div class="diary-mood">${moodEmoji[diary.mood] || ''}</div>
+          <div class="diary-content">${diary.content}</div>
+        </div>`
+      ).join('');
+    }
+  }
+}
+
+// 页面加载时获取历史记录
+window.addEventListener('load', loadDiaryHistory);
+
 // 表情配置
 const weatherEmoji = {
   sunny: '☀️',
