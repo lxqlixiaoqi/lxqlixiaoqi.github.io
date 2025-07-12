@@ -1,38 +1,56 @@
-// 初始化Supabase客户端
-const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey, {
-  global: {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT'
-    }
-  }
+// 引入 MySQL 连接库
+const mysql = require('mysql2/promise');
+
+// 创建 MySQL 连接池
+const pool = mysql.createPool({    
+    host: 'sql309.infinityfree.com',
+    user: 'if0_39452447',
+    password: 'wyz831201',
+    database: 'if0_39452447_lxqdata',
+    port: 3306
 });
+
+// 初始化时创建 moods 表
+(async () => {
+    try {
+        await pool.execute(`
+            CREATE TABLE IF NOT EXISTS moods (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                emoji VARCHAR(10) NOT NULL,
+                text TEXT NOT NULL,
+                created_at DATETIME NOT NULL
+            )
+        `);
+        console.log('moods 表创建成功或已存在');
+    } catch (error) {
+        console.error('创建 moods 表时出错:', error);
+    }
+})();
 
 // 初始化加载
 window.addEventListener('DOMContentLoaded', loadMoods);
 
 // 加载历史心情记录
 async function loadMoodHistory() {
-  const { data, error } = await supabase
-    .from('moods')
-    .select('*')
-    .order('created_at', { ascending: false });
-    
-  if (!error && data) {
-    const historyContainer = document.querySelector('.mood-history');
-    if (historyContainer) {
-      historyContainer.innerHTML = data.map(mood => 
-        `<div class="mood-item">
-          <div class="mood-date">${new Date(mood.created_at).toLocaleString()}</div>
-          <div class="mood-emoji">${mood.emoji}</div>
-          <div class="mood-text">${mood.text}</div>
-        </div>`
-      ).join('');
+    try {
+        const [rows] = await pool.execute(
+            'SELECT * FROM moods ORDER BY created_at DESC'
+        );
+        if (rows) {
+            const historyContainer = document.querySelector('.mood-history');
+            if (historyContainer) {
+                historyContainer.innerHTML = rows.map(mood => 
+                    `<div class="mood-item">
+                      <div class="mood-date">${new Date(mood.created_at).toLocaleString()}</div>
+                      <div class="mood-emoji">${mood.emoji}</div>
+                      <div class="mood-text">${mood.text}</div>
+                    </div>`
+                ).join('');
+            }
+        }
+    } catch (error) {
+        console.error('加载心情记录时出错:', error);
     }
-  }
 }
 
 // 页面加载时获取历史记录
@@ -60,24 +78,20 @@ emojiOptions.forEach(option => {
 saveButton.addEventListener('click', async () => {
     const moodText = textarea.value.trim();
     if (moodText) {
-        // 保存到Supabase
-        const { data, error } = await supabase
-            .from('moods')
-            .insert([
-                { 
-                    emoji: selectedEmoji, 
-                    text: moodText,
-                    created_at: new Date().toISOString()
-                }
-            ]);
-            
-        if (!error) {
-            addMoodCard(selectedEmoji, moodText);
-            textarea.value = '';
-            
-            // 触发爱心粒子效果
-            createHeartParticles();
-        } else {
+        try {
+            const created_at = new Date().toISOString();
+            // 保存到 MySQL
+            const [result] = await pool.execute(
+                'INSERT INTO moods (emoji, text, created_at) VALUES (?, ?, ?)',
+                [selectedEmoji, moodText, created_at]
+            );
+            if (result) {
+                addMoodCard(selectedEmoji, moodText);
+                textarea.value = '';
+                // 触发爱心粒子效果
+                createHeartParticles();
+            }
+        } catch (error) {
             console.error('保存失败:', error);
         }
     }
@@ -130,24 +144,27 @@ function createHeartParticles() {
     }
 }
 
-// 从Supabase加载心情
+// 从 MySQL 加载心情
 async function loadMoods() {
-    const { data, error } = await supabase
-        .from('moods')
-        .select('*')
-        .order('created_at', { ascending: false });
-        
-    if (!error && data.length > 0) {
-        data.forEach(mood => {
-            addMoodCard(mood.emoji, mood.text);
-        });
-    } else {
+    try {
+        const [rows] = await pool.execute(
+            'SELECT * FROM moods ORDER BY created_at DESC'
+        );
+        if (rows.length > 0) {
+            rows.forEach(mood => {
+                addMoodCard(mood.emoji, mood.text);
+            });
+        } else {
+            // 默认示例心情
+            addMoodCard('😊', '今天天气真好，心情愉悦！');
+            addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
+            addMoodCard('🤔', '思考人生中...');
+        }
+    } catch (error) {
+        console.error('加载心情时出错:', error);
         // 默认示例心情
         addMoodCard('😊', '今天天气真好，心情愉悦！');
         addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
         addMoodCard('🤔', '思考人生中...');
     }
 }
-
-// 初始化加载
-window.addEventListener('DOMContentLoaded', loadMoods);

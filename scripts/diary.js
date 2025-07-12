@@ -1,36 +1,55 @@
-// 初始化Supabase客户端
-const supabaseUrl = 'https://xlifqkkeewtsejxrrabg.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsaWZxa2tlZXd0c2VqeHJyYWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDI1NjYsImV4cCI6MjA2MTE3ODU2Nn0.n8L-yTNGd4W82Ax7M9_6MdfcH73nRSx5zW6kzrDw5Hc';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey, {
-  global: {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT'
-    }
-  }
+// 引入 MySQL 连接库
+const mysql = require('mysql2/promise');
+
+// 创建 MySQL 连接池
+const pool = mysql.createPool({
+    host: 'sql309.infinityfree.com',
+    user: 'if0_39452447',
+    password: 'wyz831201',
+    database: 'if0_39452447_lxqdata',
+    port: 3306
 });
+
+// 初始化时创建 diaries 表
+(async () => {
+    try {
+        await pool.execute(`
+            CREATE TABLE IF NOT EXISTS diaries (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                content TEXT NOT NULL,
+                weather VARCHAR(50) NOT NULL,
+                mood VARCHAR(50) NOT NULL,
+                created_at DATETIME NOT NULL
+            )
+        `);
+        console.log('diaries 表创建成功或已存在');
+    } catch (error) {
+        console.error('创建 diaries 表时出错:', error);
+    }
+})();
 
 // 加载历史日记
 async function loadDiaryHistory() {
-  const { data, error } = await supabase
-    .from('diaries')
-    .select('*')
-    .order('created_at', { ascending: false });
-    
-  if (!error && data) {
-    const historyContainer = document.querySelector('.diary-history');
-    if (historyContainer) {
-      historyContainer.innerHTML = data.map(diary => 
-        `<div class="diary-item">
-          <div class="diary-date">${new Date(diary.created_at).toLocaleString()}</div>
-          <div class="diary-weather">${weatherEmoji[diary.weather] || ''}</div>
-          <div class="diary-mood">${moodEmoji[diary.mood] || ''}</div>
-          <div class="diary-content">${diary.content}</div>
-        </div>`
-      ).join('');
+    try {
+        const [rows] = await pool.execute(
+            'SELECT * FROM diaries ORDER BY created_at DESC'
+        );
+        if (rows) {
+            const historyContainer = document.querySelector('.diary-history');
+            if (historyContainer) {
+                historyContainer.innerHTML = rows.map(diary => 
+                    `<div class="diary-item">
+                      <div class="diary-date">${new Date(diary.created_at).toLocaleString()}</div>
+                      <div class="diary-weather">${weatherEmoji[diary.weather] || ''}</div>
+                      <div class="diary-mood">${moodEmoji[diary.mood] || ''}</div>
+                      <div class="diary-content">${diary.content}</div>
+                    </div>`
+                ).join('');
+            }
+        }
+    } catch (error) {
+        console.error('加载历史日记时出错:', error);
     }
-  }
 }
 
 // 页面加载时获取历史记录
@@ -55,9 +74,7 @@ const moodEmoji = {
 if (typeof quill === 'undefined') {
   var quill = new Quill('#editor', {
     theme: 'snow',
-    modules: {
-      toolbar: '#toolbar'
-    },
+    modules: { toolbar: '#toolbar' },
     placeholder: '记录属于你的魔法时刻...✨'
   });
 }
@@ -84,33 +101,25 @@ document.querySelector('.save-button').addEventListener('click', async () => {
       return;
     }
 
-    // 保存日记到Supabase
     // 清理Quill生成的HTML内容，移除不必要的样式和类
     const cleanHtmlContent = htmlContent
       .replace(/class=".*?"/g, '')
       .replace(/style=".*?"/g, '');
 
-    const { data, error } = await supabase
-      .from('diaries')
-      .insert([
-        {
-          content: cleanHtmlContent,
-          weather,
-          mood,
-          created_at: new Date().toISOString()
-        }
-      ]);
-      
-    if (error) {
-      console.error('保存失败:', error);
-      throw new Error(`保存失败: ${error.message}`);
+    const created_at = new Date().toISOString();
+    // 保存日记到 MySQL
+    const [result] = await pool.execute(
+      'INSERT INTO diaries (content, weather, mood, created_at) VALUES (?, ?, ?, ?)',
+      [cleanHtmlContent, weather, mood, created_at]
+    );
+    
+    if (result) {
+      alert('日记保存成功！✨');
+      quill.setContents([]); // 清空编辑器内容
+      document.getElementById('weather').value = '';
+      document.getElementById('mood').value = '';
+      loadDiaries(); // 刷新日记列表
     }
-
-    alert('日记保存成功！✨');
-    quill.setContents([]); // 清空编辑器内容
-    document.getElementById('weather').value = '';
-    document.getElementById('mood').value = '';
-    loadDiaries(); // 刷新日记列表
   } catch (error) {
     console.error('保存日记时出错:', error);
     alert(`保存失败: ${error.message}`);
@@ -120,17 +129,11 @@ document.querySelector('.save-button').addEventListener('click', async () => {
 // 加载历史日记
 async function loadDiaries() {
   try {
-    const { data, error } = await supabase
-      .from('diaries')
-      .select('*')
-      .order('created_at', { ascending: false });
-      
-    if (error) {
-      console.error('获取日记失败:', error);
-      throw new Error(`获取日记失败: ${error.message}`);
-    }
+    const [rows] = await pool.execute(
+      'SELECT * FROM diaries ORDER BY created_at DESC'
+    );
     
-    const diaries = data;
+    const diaries = rows;
     const container = document.querySelector('.diary-list');
     diaries.reverse().forEach(diary => {
       const card = document.createElement('div');
@@ -148,14 +151,7 @@ async function loadDiaries() {
   } catch (error) {
     console.error('加载失败:', {
       message: error.message,
-      stack: error.stack,
-      url: `${DIARY_ENDPOINT}/latest?meta=false`,
-      method: 'GET',
-      headers: {
-        'X-Master-Key': '***'+DIARY_API_KEY.slice(-6),
-        'Content-Type': 'application/json',
-        'X-Bin-Meta': 'false'
-      }
+      stack: error.stack
     });
   }
 }
