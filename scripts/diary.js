@@ -106,7 +106,7 @@ document.querySelector('.save-button').addEventListener('click', async () => {
       .replace(/class=".*?"/g, '')
       .replace(/style=".*?"/g, '');
 
-    const created_at = new Date().toISOString();
+    const created_at = new Date().toISOString().slice(0, 19).replace('T', ' '); // 格式化为YYYY-MM-DD HH:MM:SS
     // 发送到PHP后端保存
     const response = await fetch('/save-diary.php', {
       method: 'POST',
