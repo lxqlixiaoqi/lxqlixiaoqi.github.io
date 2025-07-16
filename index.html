@@ -1,105 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>晓琪的网站</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="sakura.js"></script>
-    <script src="scripts/message.js"></script>
-    <script src="scripts/horoscope.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LXQ's Space</title>
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-<div class="veil-overlay"></div>
-    <nav>
-        <ul>
-            <li><a href="index.html">首页</a></li>
-            <li><a href="about.html">关于</a></li>
-            <li><a href="gallery.html">照片墙</a></li>
-            <li><a href="diary.html">日记📖</a></li>
-            <li><a href="mood-wall.html">心情墙</a></li>
-        </ul>
-    </nav>
-    <main>
-        <div class="welcome-container">
-  <h1 class="name-title">欢迎来到<span id="dynamicName">晓琪</span>的website🎈</h1>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">蘑菇的小站</a>
+      <div class="nav-links">
+        <a href="index.html">主页</a>
+        <a href="diary.html">日记</a>
+        <a href="mood-wall.html">心情墙</a>
+        <a href="about.html">关于</a>
+      </div>
+    </div>
+  </nav>
 
-  <div class="sparkle-container"></div>
-</div>
-<p class="welcome-text">这里是专属魔法空间，愿你在 18 岁的旅程中，如同繁星般璀璨✨</p>
-        <div class="heart-container"></div>
-        <div class="star-container"></div>
-        <div class="sakura-container"></div>
-        <!-- 新增倒计时模块 -->
-        <section class="countdown-container">
-          <h2>生日倒计时⏳</h2>
-          <div class="countdown-number">加载中...loading...</div>
-          <p>天</p>
-        </section>
-        
-        <section class="timeline-container">
-            <h2>成长时间线📅</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>2007</h3>
-                        <p>...........。。。。。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="horoscope-container">
-            <h2>专属星座运势✨</h2>
-            <form id="horoscopeForm">
-                <label for="birthDate">输入你的生日:</label>
-                <input type="date" id="birthDate" required>
-                <button type="submit">查看运势🔮</button>
-            </form>
-            <div id="zodiacResult"></div>
-        </section>
-        <section class="message-board">
-            <h2>留言板💌</h2>
-            <form id="messageForm">
-                <input type="text" id="name" placeholder="你的姓名" required>
-                <input type="text" id="contact" placeholder="联系方式（电话、QQ、微信均可，选填）">
-                <textarea id="content" placeholder="留下你的祝福..." required></textarea>
-                <button type="submit">发送爱心💖</button>
-            </form>
-            <div class="messages"></div>
-        </section>
+  <!-- 主内容 -->
+  <main class="container">
+    <section class="welcome-card">
+      <h1>欢迎来到蘑菇的小站呀～</h1>
+      <p>这里记录蘑菇的生活碎片、心情故事和日常思考～</p>
+    </section>
 
-
-        
-    </main>
-    <footer>
-        <p>©年糕 2025 送给蘑菇的 18 岁生日礼物</p>
-    </footer>
-<!-- 在body底部新增互动元素容器 -->
-<div class="emojis-container"></div>
-<div id="mascot">🐰</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-<script src="scripts/fun-effects.js"></script>
-<script>
-    function updateCountdown() {
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        let targetDate = new Date(currentYear, 8, 15); // 9月是第8个月（0索引）
-        if (currentDate > targetDate) {
-            targetDate = new Date(currentYear + 1, 8, 15);
-        }
-        const timeDiff = targetDate - currentDate;
-        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-        const countdownElement = document.querySelector('.countdown-number');
-        if (countdownElement) {
-            countdownElement.textContent = daysLeft;
-        }
-    }
-    // 页面加载时更新倒计时
-    window.addEventListener('load', updateCountdown);
-    // 每天更新一次倒计时
-    setInterval(updateCountdown, 24 * 60 * 60 * 1000);
-</script>
+    <section class="latest-content">
+      <h2>最近更新</h2>
+      <div class="card-grid">
+        <div class="content-card">
+          <h3>新日记：周末的午后</h3>
+          <p>阳光透过窗户洒在桌上，泡一杯茶，读半本书...</p>
+        </div>
+        <div class="content-card">
+          <h3>心情墙：今天很开心！</h3>
+          <p>和朋友一起吃了火锅，聊了很多有趣的事～</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
