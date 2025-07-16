@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LXQ's Space</title>
+  <title>留言板</title>
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -22,26 +22,21 @@
     </div>
   </nav>
 
-  <!-- 主内容 -->
+  <!-- 留言板内容 -->
   <main class="container">
-    <section class="welcome-card">
-      <h1>欢迎来到蘑菇的小站呀～</h1>
-      <p>这里记录蘑菇的生活碎片、心情故事和日常思考～</p>
-    </section>
+    <section class="message-board">
+      <h1>给蘑菇的留言</h1>
+      <div class="messages" id="messages-container"></div>
 
-    <section class="latest-content">
-      <h2>最近更新</h2>
-      <div class="card-grid">
-        <div class="content-card">
-          <h3>新日记：周末的午后</h3>
-          <p>阳光透过窗户洒在桌上，泡一杯茶，读半本书...</p>
-        </div>
-        <div class="content-card">
-          <h3>心情墙：今天很开心！</h3>
-          <p>和朋友一起吃了火锅，聊了很多有趣的事～</p>
-        </div>
-      </div>
+      <form id="messageForm" class="message-form">
+        <input type="text" id="name" placeholder="你的名字" required>
+        <input type="text" id="contact" placeholder="联系方式（选填）">
+        <textarea id="content" placeholder="想说的话" required></textarea>
+        <button type="submit" class="save-button">发送留言</button>
+      </form>
     </section>
   </main>
+
+  <script src="scripts/message.js"></script>
 </body>
 </html>

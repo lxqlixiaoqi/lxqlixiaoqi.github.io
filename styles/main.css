@@ -814,10 +814,10 @@ textarea {
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
+  font-family: 'Pacifico', cursive;
+  color: #e91e63;
+  background: linear-gradient(135deg, #fff4f9, #ffe4e1);
+  line-height: 1.8;
 }
 
 /* 容器限制最大宽度，居中显示 */
@@ -829,8 +829,8 @@ body {
 
 /* 导航栏样式 */
 .navbar {
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: rgba(255, 240, 245, 0.95);
+  box-shadow: 0 2px 10px rgba(255, 105, 180, 0.15);
   padding: 1rem 0;
   position: fixed;
   top: 0;
@@ -845,10 +845,11 @@ body {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  color: #3498db;
+  color: #ff85a2;
   text-decoration: none;
+  text-shadow: 0 2px 4px rgba(255, 133, 162, 0.2);
 }
 
 .nav-links {
@@ -857,13 +858,29 @@ body {
 }
 
 .nav-links a {
-  color: #333;
+  color: #ff85a2;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ff85a2;
+  transition: width 0.3s;
 }
 
 .nav-links a:hover {
-  color: #3498db;
+  color: #ff69b4;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 /* 内容卡片样式 */
@@ -872,30 +889,58 @@ main {
 }
 
 .welcome-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
   margin: 2rem 0;
+  text-align: center;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E%3Cg fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ff85a2%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.66l-1.41 1.41 2.83 2.83 1.41-1.41-2.83-2.83zm0 8.48l-1.41 1.41 2.83 2.83 1.41-1.41-2.83-2.83z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+}
+
+.welcome-card h1 {
+  color: #ff85a2;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.welcome-card p {
+  color: #ff69b4;
+  font-size: 1.2rem;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  gap: 2.5rem;
+  margin: 3rem 0;
 }
 
 .content-card {
   background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.3s;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(255, 105, 180, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 250, 0.95));
 }
 
 .content-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) rotate(2deg);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2);
+}
+
+.content-card h3 {
+  color: #ff69b4;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.content-card p {
+  color: #ff85a2;
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
 
 /* 响应式调整 */
@@ -906,15 +951,7 @@ main {
   .card-grid {
     grid-template-columns: 1fr;
   }
-}
-.logo {
-  color: #ff85a2; /* 蘑菇粉主色 */
-}
-
-.nav-links a:hover {
-  color: #ff85a2;
-}
-
-.welcome-card h1 {
-  color: #ff85a2; /* 标题同步主色 */
+  .welcome-card h1 {
+    font-size: 2rem;
+  }
 }
