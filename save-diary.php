@@ -1,4 +1,7 @@
 <?php
+// 关闭错误显示，避免非JSON内容污染响应
+error_reporting(0);
+ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 // 引入集中配置

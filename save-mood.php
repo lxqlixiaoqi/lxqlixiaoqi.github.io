@@ -1,12 +1,18 @@
 <?php
+// 关闭错误显示，避免非JSON内容污染响应
+error_reporting(0);
+ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
-// 数据库配置（与日记、留言共用）
-$host = 'sql309.infinityfree.com';
-$user = 'if0_39452447';
-$password = 'wyz831201';
-$database = 'if0_39452447_lxqdata';
-$port = 3306;
+// 引入集中配置
+require_once 'config.php';
+
+// 从config.php获取数据库配置
+$host = DB_HOST;
+$user = DB_USER;
+$password = DB_PASS;
+$database = DB_NAME;
+$port = DB_PORT;
 
 // 创建连接
 $conn = new mysqli($host, $user, $password, $database, $port);
@@ -18,6 +24,10 @@ if ($conn->connect_error) {
 
 // 获取前端提交的心情数据
 $data = json_decode(file_get_contents('php://input'), true);
+// 验证JSON解析是否成功
+if (!$data) {
+    die(json_encode(['success' => false, 'error' => '接收数据格式错误']));
+}
 $emoji = $conn->real_escape_string($data['emoji']);
 $text = $conn->real_escape_string($data['text']);
 $created_at = $conn->real_escape_string($data['created_at']);

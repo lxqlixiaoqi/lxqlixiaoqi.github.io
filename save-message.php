@@ -1,4 +1,7 @@
 <?php
+// 关闭错误显示，避免非JSON内容污染响应
+error_reporting(0);
+ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 // 引入集中配置
@@ -21,8 +24,14 @@ if ($conn->connect_error) {
 
 // 获取前端提交的留言数据
 $data = json_decode(file_get_contents('php://input'), true);
+// 验证JSON解析是否成功
+if (!$data) {
+    die(json_encode(['success' => false, 'error' => '接收数据格式错误']));
+}
 $content = $conn->real_escape_string($data['content']);
 $name = $conn->real_escape_string($data['name']);
+// 检查contact字段是否存在，不存在则设为空
+$contact = isset($data['contact']) ? $conn->real_escape_string($data['contact']) : '';
 $created_at = $conn->real_escape_string($data['created_at']);
 
 // 插入留言数据（假设留言表名为messages）

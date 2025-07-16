@@ -14,19 +14,6 @@
             max-width: 1200px;
         }
         
-  <nav class="navbar">
-    <div class="container">
-      <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
-      <div class="nav-links">
-        <a href="index.html">主页</a>
-        <a href="diary.html">日记</a>
-        <a href="mood-wall.html">心情墙</a>
-        <a href="gallery.html">照片墙</a>
-        <a href="message.html">留言板</a>
-        <a href="about.html">关于</a>
-      </div>
-    </div>
-  </nav>
         .mood-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -114,42 +101,57 @@
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="diary.html">日记</a>
+                <a href="mood-wall.html">心情墙</a>
+                <a href="gallery.html">照片墙</a>
+                <a href="message.html">留言板</a>
+                <a href="about.html">关于</a>
+            </div>
+        </div>
+    </nav>
+
     <main>
         <section class="mood-history"></section>
-    <div class="sakura-container"></div>
-    <div class="heart-container"></div>
+        <div class="sakura-container"></div>
+        <div class="heart-container"></div>
     
-    <div class="mood-wall">
-        <h1>心情日记墙 🌈</h1>
-<div class="existing-moods">
-  <h3>最近的心情记录：</h3>
-  <div class="mood-item">
-    <p class="mood-content">今天和蘑菇一起看了日落，超幸福～</p>
-    <p class="mood-time">2024-03-16</p>
-    <div class="mood-icon">☀️</div>
-  </div>
-</div>
-        <p>记录你的每日心情，分享生活点滴</p>
-        
-        <div class="mood-form">
-            <h2>写下今日心情</h2>
-            <div class="emoji-picker">
-                <span class="emoji-option">😊</span>
-                <span class="emoji-option">😢</span>
-                <span class="emoji-option">😡</span>
-                <span class="emoji-option">😍</span>
-                <span class="emoji-option">😴</span>
-                <span class="emoji-option">🤔</span>
+        <div class="mood-wall">
+            <h1>心情日记墙 🌈</h1>
+            <div class="existing-moods">
+                <h3>最近的心情记录：</h3>
+                <div class="mood-item">
+                    <p class="mood-content">今天超幸福～</p>
+                    <p class="mood-time">2024-03-16</p>
+                    <div class="mood-icon">☀️</div>
+                </div>
             </div>
-            <textarea placeholder="今天感觉如何？发生了什么特别的事情吗？"></textarea>
-            <button class="save-button">保存心情</button>
+            <p>记录你的每日心情，分享生活点滴</p>
+            
+            <div class="mood-form">
+                <h2>写下今日心情</h2>
+                <div class="emoji-picker">
+                    <span class="emoji-option">😊</span>
+                    <span class="emoji-option">😢</span>
+                    <span class="emoji-option">😡</span>
+                    <span class="emoji-option">😍</span>
+                    <span class="emoji-option">😴</span>
+                    <span class="emoji-option">🤔</span>
+                </div>
+                <textarea placeholder="今天感觉如何？发生了什么特别的事情吗？"></textarea>
+                <button class="save-button">保存心情</button>
+            </div>
+            
+            <div class="mood-grid">
+                <!-- 心情卡片将通过JavaScript动态生成 -->
+            </div>
         </div>
-        
-        <div class="mood-grid">
-            <!-- 心情卡片将通过JavaScript动态生成 -->
-        </div>
-    </div>
-    
+    </main>
+
     <script src="scripts/sakura.js"></script>
     <script src="scripts/fun-effects.js"></script>
     <script src="scripts/mood-wall.js"></script>
