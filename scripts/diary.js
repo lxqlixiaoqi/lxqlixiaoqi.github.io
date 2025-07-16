@@ -107,18 +107,27 @@ document.querySelector('.save-button').addEventListener('click', async () => {
       .replace(/style=".*?"/g, '');
 
     const created_at = new Date().toISOString();
-    // 保存日记到 MySQL
-    const [result] = await pool.execute(
-      'INSERT INTO diaries (content, weather, mood, created_at) VALUES (?, ?, ?, ?)',
-      [cleanHtmlContent, weather, mood, created_at]
-    );
-    
-    if (result) {
+    // 发送到PHP后端保存
+    const response = await fetch('/save-diary.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        content: cleanHtmlContent,
+        weather: weather,
+        mood: mood,
+        created_at: created_at
+      })
+    });
+
+    const data = await response.json();
+    if (data.success) {
       alert('日记保存成功！✨');
       quill.setContents([]); // 清空编辑器内容
       document.getElementById('weather').value = '';
       document.getElementById('mood').value = '';
       loadDiaries(); // 刷新日记列表
+    } else {
+      alert(`保存失败: ${data.error}`);
     }
   } catch (error) {
     console.error('保存日记时出错:', error);
