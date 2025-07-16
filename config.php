@@ -1,5 +1,5 @@
 <?php
-// 数据库配置
+// 数据库配置（根据用户提供的MySQL信息设置）
 define('DB_HOST', 'sql309.infinityfree.com');
 define('DB_USER', 'if0_39452447');
 define('DB_PASS', 'wyz831201');

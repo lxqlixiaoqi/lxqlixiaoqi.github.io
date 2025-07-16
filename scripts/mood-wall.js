@@ -3,26 +3,27 @@ window.addEventListener('DOMContentLoaded', loadMoods);
 
 // 从后端加载心情
 async function loadMoods() {
-    try {
-        const response = await fetch('/load-moods.php');
-        const rows = await response.json();
-        if (rows.length > 0) {
-            rows.forEach(mood => {
-                addMoodCard(mood.emoji, mood.text);
-            });
-        } else {
-            // 默认示例心情
-            addMoodCard('😊', '今天天气真好，心情愉悦！');
-            addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
-            addMoodCard('🤔', '思考人生中...');
-        }
-    } catch (error) {
-        console.error('加载心情时出错:', error);
-        // 默认示例心情
-        addMoodCard('😊', '今天天气真好，心情愉悦！');
-        addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
-        addMoodCard('🤔', '思考人生中...');
+  try {
+    const response = await fetch('/load-moods.php');
+    const moods = await response.json();
+    const container = document.querySelector('.mood-grid');
+    if (moods.length > 0) {
+      moods.forEach(mood => {
+        addMoodCard(mood.emoji, mood.text);
+      });
+    } else {
+      // 默认示例心情
+      addMoodCard('😊', '今天天气真好，心情愉悦！');
+      addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
+      addMoodCard('🤔', '思考人生中...');
     }
+  } catch (error) {
+    console.error('加载心情记录失败:', error);
+    // 默认示例心情
+    addMoodCard('😊', '今天天气真好，心情愉悦！');
+    addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
+    addMoodCard('🤔', '思考人生中...');
+  }
 }
 
 // 页面加载时获取历史记录

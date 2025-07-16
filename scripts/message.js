@@ -56,7 +56,28 @@ if (messageForm) {
     });
 }
 
-// 加载并显示所有留言
+async function loadMessages() {
+  try {
+    const response = await fetch('/load-messages.php');
+    const messages = await response.json();
+    const container = document.getElementById('messages-container');
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'message-item';
+      div.innerHTML = `
+        <h4>${msg.name}</h4>
+        <p>${msg.content}</p>
+        <small>${msg.created_at}</small>
+      `;
+      container.appendChild(div);
+    });
+  } catch (error) {
+    console.error('加载留言失败:', error);
+  }
+}
+
+// 页面加载时执行
+window.addEventListener('DOMContentLoaded', loadMessages);
 async function loadMessages() {
     try {
         // 从后端获取所有留言

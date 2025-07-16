@@ -1,12 +1,15 @@
 <?php
 header('Content-Type: application/json');
 
-// 数据库配置（与日记共用）
-$host = 'sql309.infinityfree.com';
-$user = 'if0_39452447';
-$password = 'wyz831201';
-$database = 'if0_39452447_lxqdata';
-$port = 3306;
+// 引入集中配置
+require_once 'config.php';
+
+// 从config.php获取数据库配置
+$host = DB_HOST;
+$user = DB_USER;
+$password = DB_PASS;
+$database = DB_NAME;
+$port = DB_PORT;
 
 // 创建连接
 $conn = new mysqli($host, $user, $password, $database, $port);
