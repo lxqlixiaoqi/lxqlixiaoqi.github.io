@@ -10,7 +10,7 @@
   <!-- 导航栏 -->
   <nav class="navbar">
     <div class="container">
-      <a href="index.html" class="logo">蘑菇的小站</a>
+      <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
       <div class="nav-links">
         <a href="index.html">主页</a>
         <a href="diary.html">日记</a>
@@ -25,30 +25,69 @@
   <!-- 主内容 -->
   <main class="container">
     <section class="welcome-card card">
-      <h1>蘑菇的小站 ✨</h1>
-      <p class="site-intro">这里记录着我们的点滴回忆：<br>从第一次约会的樱花雨，到生日时的蘑菇蛋糕，每段故事都值得被珍藏。</p>
+      <h1>蘑菇的小站 🌸</h1>
+<div class="sakura-fall"></div>
+      <p class="site-intro">这里记录着你的专属回忆：<br>樱花季的漫步、生日的惊喜蛋糕，每段温暖都值得被好好收藏。</p>
     </section>
 
     <!-- 新增照片墙入口 -->
     <div class="content-card card">
-      <h2>📸 我们的回忆墙</h2>
-      <p>点击查看恋爱以来的温馨瞬间 ❤️</p>
+      <h2>📸 回忆墙</h2>
+      <p❤️</p>
       <a href="gallery.html" class="cta-button">进入照片墙</a>
     </div>
 
     <section class="latest-content">
-      <h2>最近更新</h2>
+      <h2>最近更新 & 小惊喜</h2>
       <div class="card-grid">
+        <div class="content-card cute-card">
+          <h3>⏳ 生日倒计时</h3>
+          <p>9月15日生日还有：<span class="countdown">15天</span></p>
+        </div>
+        <div class="content-card cute-card">
+          <h3>🌸 今日小确幸</h3>
+          <p class="random-quote">。。。。。。</p>
+        </div>
+        <div class="content-card cute-card">
+          <h3>📦 回忆盲盒</h3>
+          <p>点击抽取我们的专属回忆 ➡️</p>
+          <button class="cute-btn">抽一抽</button>
+        </div>
+        <div class="content-card cute-card">
+          <h3>😊 今日心情</h3>
+          <p class="mood-emoji">☁️</p>
+          <p>天气晴，和你一起的日子都是晴天～</p>
+        </div>
         <div class="content-card">
-          <h3>新日记：周末的午后</h3>
+          <h3>今日小记：周末的阳光</h3>
           <p>阳光透过窗户洒在桌上，泡一杯茶，读半本书...</p>
         </div>
         <div class="content-card">
-          <h3>心情墙：今天很开心！</h3>
+          <h3>心情墙：今天的小确幸～</h3>
           <p>和朋友一起吃了火锅，聊了很多有趣的事～</p>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    // 动态计算生日倒计时
+    document.addEventListener('DOMContentLoaded', function() {
+      const targetDate = new Date(new Date().getFullYear(), 8, 15); // 9月（0-based月份为8）15日
+      const today = new Date();
+
+      // 如果当前日期已过今年生日，计算到明年
+      if (today > targetDate) {
+        targetDate.setFullYear(targetDate.getFullYear() + 1);
+      }
+
+      // 计算天数差
+      const timeDiff = targetDate - today;
+      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+      // 更新页面显示
+      document.querySelector('.countdown').textContent = `${daysLeft}天`;
+    });
+  </script>
 </body>
 </html>
