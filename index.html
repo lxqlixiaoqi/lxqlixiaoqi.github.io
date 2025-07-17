@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LXQ's Space</title>
   <link rel="stylesheet" href="styles/main.css">
+<style>
+.daily-wallpaper {
+  margin: 1rem 0;
+  text-align: center;
+}
+.wallpaper-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+  border: 2px solid #ff69b4;
+}
+</style>
 </head>
 <body>
   <!-- 导航栏 -->
@@ -22,12 +35,23 @@
     </div>
   </nav>
 
+<!-- 透明度调节侧边栏 -->
+<div class="opacity-control">
+    <label for="opacityRange">内容透明度</label>
+    <input type="range" id="opacityRange" min="0" max="1" step="0.1" value="0.8">
+</div>
+
   <!-- 主内容 -->
   <main class="container">
     <section class="welcome-card card">
       <h1>蘑菇的小站 🌸</h1>
 <div class="sakura-fall"></div>
       <p class="site-intro">这里记录着你的专属回忆：<br>樱花季的漫步、生日的惊喜蛋糕，每段温暖都值得被好好收藏。</p>
+      <div class="daily-poem">
+        <h3 class="poem-title">每日诗词</h3>
+        <div id="poem-sentence" class="poem-sentence">正在加载今日诗词...</div>
+        <div id="poem-info" class="poem-info"></div>
+      </div>
     </section>
 
     <!-- 新增照片墙入口 -->
@@ -82,7 +106,16 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
+    // 加载每日诗词
+    jinrishici.load(function(result) {
+        const sentence = document.getElementById('poem-sentence');
+        const info = document.getElementById('poem-info');
+        sentence.textContent = result.data.content;
+        info.textContent = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
+    });
+
     // 加载信件内容
     async function loadLetter() {
         const response = await fetch('letter.md');
@@ -91,17 +124,24 @@
     }
     loadLetter();
 
-    // 今日鼓励语句
-    const encourageQuotes = [
-        '今天的你也在努力生活，超棒的！',
-        '每一步小进步都值得被肯定～',
-        '你比自己想象中更强大哦！',
-        '今天的阳光和你的笑容一样温暖～'
-    ];
+    // 今日鼓励语句（来自一言API）
     function updateEncourage() {
-        const randomIndex = Math.floor(Math.random() * encourageQuotes.length);
-        document.querySelector('.encourage-quote').textContent = encourageQuotes[randomIndex];
+        fetch('https://v1.hitokoto.cn?encode=json&charset=utf-8')
+            .then(response => response.json())
+            .then(data => {
+                const quoteElement = document.querySelector('.encourage-quote');
+                quoteElement.textContent = data.hitokoto;
+                if (data.from) {
+                    quoteElement.innerHTML += `<br><small>—— ${data.from}</small>`;
+                }
+            })
+            .catch(error => {
+                console.error('获取一言失败:', error);
+                document.querySelector('.encourage-quote').textContent = '今天的你也在闪闪发光哦～'; // 默认备用语句
+            });
     }
+
+  
 
     // 动态计算生日倒计时
     document.addEventListener('DOMContentLoaded', function() {
@@ -121,5 +161,6 @@
       document.querySelector('.countdown').textContent = `${daysLeft}天`;
     });
   </script>
+  <script src="scripts/common.js"></script
 </body>
 </html>
