@@ -39,19 +39,23 @@
 
     <section class="latest-content">
       <h2>最近更新 & 小惊喜</h2>
+      <div class="letter-section">
+        <h3>给你的信 📮</h3>
+        <div class="letter-content" id="letterContent"></div>
+      </div>
       <div class="card-grid">
-        <div class="content-card cute-card">
-          <h3>⏳ 生日倒计时</h3>
-          <p>9月15日生日还有：<span class="countdown">15天</span></p>
+        <div class="content-card cute-card birthday-countdown">
+          <h2>🎂 生日倒计时</h2>
+          <p class="big-text">9月15日还有：<span class="countdown">15天</span></p>
         </div>
         <div class="content-card cute-card">
           <h3>🌸 今日小确幸</h3>
           <p class="random-quote">。。。。。。</p>
         </div>
         <div class="content-card cute-card">
-          <h3>📦 回忆盲盒</h3>
-          <p>点击抽取我们的专属回忆 ➡️</p>
-          <button class="cute-btn">抽一抽</button>
+          <h3>✨ 今日鼓励</h3>
+          <p class="encourage-quote">今天的你也在闪闪发光哦～</p>
+          <button class="cute-btn" onclick="updateEncourage()">换一句</button>
         </div>
         <div class="content-card cute-card">
           <h3>😊 今日心情</h3>
@@ -59,18 +63,46 @@
           <p>天气晴，和你一起的日子都是晴天～</p>
         </div>
         <div class="content-card">
-          <h3>今日小记：周末的阳光</h3>
-          <p>阳光透过窗户洒在桌上，泡一杯茶，读半本书...</p>
+          <h3>📖 最近日记</h3>
+          <p>点击查看最新日记 ➡️</p>
+          <a href="diary.html" class="cta-button">进入日记</a>
         </div>
         <div class="content-card">
-          <h3>心情墙：今天的小确幸～</h3>
-          <p>和朋友一起吃了火锅，聊了很多有趣的事～</p>
+          <h3>💬 最新留言</h3>
+          <p>看看大家的暖心留言 ➡️</p>
+          <a href="message.html" class="cta-button">进入留言板</a>
+        </div>
+        <div class="content-card">
+          <h3>🌈 今日心情</h3>
+          <p>查看心情墙的温暖记录 ➡️</p>
+          <a href="mood-wall.html" class="cta-button">进入心情墙</a>
         </div>
       </div>
     </section>
   </main>
 
-  <script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    // 加载信件内容
+    async function loadLetter() {
+        const response = await fetch('letter.md');
+        const mdContent = await response.text();
+        document.getElementById('letterContent').innerHTML = marked.parse(mdContent);
+    }
+    loadLetter();
+
+    // 今日鼓励语句
+    const encourageQuotes = [
+        '今天的你也在努力生活，超棒的！',
+        '每一步小进步都值得被肯定～',
+        '你比自己想象中更强大哦！',
+        '今天的阳光和你的笑容一样温暖～'
+    ];
+    function updateEncourage() {
+        const randomIndex = Math.floor(Math.random() * encourageQuotes.length);
+        document.querySelector('.encourage-quote').textContent = encourageQuotes[randomIndex];
+    }
+
     // 动态计算生日倒计时
     document.addEventListener('DOMContentLoaded', function() {
       const targetDate = new Date(new Date().getFullYear(), 8, 15); // 9月（0-based月份为8）15日
