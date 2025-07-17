@@ -34,10 +34,14 @@ $name = $conn->real_escape_string($data['name']);
 $contact = isset($data['contact']) ? $conn->real_escape_string($data['contact']) : '';
 $created_at = $conn->real_escape_string($data['created_at']);
 
-// 插入留言数据（假设留言表名为messages）
-$sql = "INSERT INTO messages (name, contact, content, created_at) VALUES ('$name', '$contact', '$content', '$created_at')";
+// 预处理插入留言数据（假设留言表名为messages）
+$stmt = $conn->prepare("INSERT INTO messages (name, contact, content, created_at) VALUES (?, ?, ?, ?)");
+if (!$stmt) {
+    die(json_encode(['success' => false, 'error' => '预处理语句失败: ' . $conn->error]));
+}
+$stmt->bind_param("ssss", $name, $contact, $content, $created_at);
 
-if ($conn->query($sql) === TRUE) {
+if ($stmt->execute() === TRUE) {
     echo json_encode(['success' => true, 'message' => '留言保存成功']);
 } else {
     echo json_encode(['success' => false, 'error' => '保存失败: ' . $conn->error]);

@@ -32,10 +32,11 @@ $emoji = $conn->real_escape_string($data['emoji']);
 $text = $conn->real_escape_string($data['text']);
 $created_at = $conn->real_escape_string($data['created_at']);
 
-// 插入心情数据（假设心情表名为moods）
-$sql = "INSERT INTO moods (emoji, text, created_at) VALUES ('$emoji', '$text', '$created_at')";
+// 预处理插入心情数据（假设心情表名为moods）
+$stmt = $conn->prepare("INSERT INTO moods (emoji, text, created_at) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $emoji, $text, $created_at);
 
-if ($conn->query($sql) === TRUE) {
+if ($stmt->execute() === TRUE) {
     echo json_encode(['success' => true, 'message' => '心情保存成功']);
 } else {
     echo json_encode(['success' => false, 'error' => '保存失败: ' . $conn->error]);

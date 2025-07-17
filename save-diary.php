@@ -27,6 +27,9 @@ $created_at = $conn->real_escape_string($data['created_at']);
 
 // 插入数据
 $stmt = $conn->prepare("INSERT INTO diaries (content, weather, mood, created_at) VALUES (?, ?, ?, ?)");
+if (!$stmt) {
+    die(json_encode(['success' => false, 'error' => '预处理语句失败: ' . $conn->error]));
+}
 $stmt->bind_param("ssss", $content, $weather, $mood, $created_at);
 
 if ($stmt->execute() === TRUE) {
