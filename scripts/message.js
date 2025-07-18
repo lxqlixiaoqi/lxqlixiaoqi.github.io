@@ -7,19 +7,20 @@ if (messageForm) {
         const name = document.getElementById('name').value;
         const contact = document.getElementById('contact').value;
         const content = document.getElementById('content').value;
-        const created_at = new Date().toISOString();
+        // 移除前端生成的时间戳，使用数据库默认值
 
         try {
             console.log('尝试提交留言:', { name, contact, content });
             // 发送到PHP后端保存
             const response = await fetch('/save-message.php', {
+                mode: 'cors',
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     name: name,
                     contact: contact,
                     content: content,
-                    created_at: created_at
+                    // 移除created_at字段，由数据库自动生成
                 })
             });
 
@@ -59,9 +60,12 @@ if (messageForm) {
 async function loadMessages() {
     try {
         // 从后端获取所有留言
-        const response = await fetch('load-messages.php');
-        if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-        const rows = await response.json();
+        const response = await fetch('load-messages.php', { mode: 'cors' });
+        if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(`HTTP错误: ${response.status} - ${errorText}`);
+          }
+          const rows = await response.json();
 
         const messagesContainer = document.querySelector('.messages');
         if (!messagesContainer) {
@@ -89,11 +93,14 @@ async function loadMessages() {
             messagesContainer.appendChild(messageElement);
         });
     } catch (error) {
-        console.error('加载留言时出错:', error);
-        const messagesContainer = document.querySelector('.messages');
-        if (messagesContainer) {
-            messagesContainer.innerHTML = `<div class="error-message">加载留言失败: ${error.message}</div>`;
-        }
+        console.error('加载留言失败:', error);
+    const messagesContainer = document.querySelector('.messages');
+    if (messagesContainer) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'load-error';
+        errorDiv.textContent = `加载失败: ${error.message}`;
+        messagesContainer.prepend(errorDiv);
+    }
     }
 }
 

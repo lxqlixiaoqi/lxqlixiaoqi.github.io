@@ -1,8 +1,15 @@
 <?php
+// 临时启用错误报告用于调试
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // 引入配置文件
 require_once 'config.php';
 
-// 设置响应头为JSON
+// 设置CORS和响应头
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
 try {
@@ -11,7 +18,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // 查询所有留言，按创建时间倒序
-    $stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");
+    $stmt = $pdo->query("SELECT id, name, contact, content, created_at FROM messages ORDER BY created_at DESC");
     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // 返回留言数据
