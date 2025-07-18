@@ -14,28 +14,6 @@
             max-width: 1200px;
         }
         
-        .mood-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
-        }
-        
-        .mood-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(255,105,180,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mood-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255,105,180,0.2);
-        }
-        
         .mood-date {
             color: #ff69b4;
             font-size: 0.9rem;
@@ -88,23 +66,14 @@
         .emoji-option:hover {
             transform: scale(1.2);
         }
-        
-        @media (max-width: 768px) {
-            .mood-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .mood-form {
-                padding: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
-            <div class="nav-links">
+            <button class="menu-toggle">☰</button>
+<div class="nav-links">
                 <a href="index.html">主页</a>
                 <a href="diary.html">日记</a>
                 <a href="mood-wall.html">心情墙</a>
@@ -155,6 +124,15 @@
     <script src="scripts/sakura.js"></script>
     <script src="scripts/fun-effects.js"></script>
     <script src="scripts/mood-wall.js"></script>
+<script>
+// 移动端菜单切换
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+</script>
 <script>
 // UA检测并应用对应布局
 function detectDeviceAndApplyLayout() {

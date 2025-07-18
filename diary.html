@@ -16,15 +16,15 @@
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
-      <div class="nav-links">
+      <button class="menu-toggle">☰</button>
+<div class="nav-links">
         <a href="index.html">主页</a>
         <a href="diary.html">日记</a>
         <a href="mood-wall.html">心情墙</a>
         <a href="gallery.html">照片墙</a>
         <a href="message.html">留言板</a>
         <a href="about.html">关于</a>
-            <li><a href="diary.html">日记📖</a></li>
-        </ul>
+        </div>
     </nav>
     <main class="diary-container">
     <section class="diary-history"></section>
@@ -83,6 +83,15 @@
         if (savedContent) quill.root.innerHTML = savedContent;
     </script>
     <script src="scripts/diary.js"></script>
+<script>
+// 移动端菜单切换
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+</script>
     <script src="scripts/fun-effects.js"></script>
 <script>
 // UA检测并应用对应布局

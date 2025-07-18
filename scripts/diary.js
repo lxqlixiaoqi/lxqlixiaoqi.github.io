@@ -1,108 +1,146 @@
-// 初始化加载
-window.addEventListener('DOMContentLoaded', loadMoods);
+// 初始化日记编辑器
+window.addEventListener('DOMContentLoaded', () => {
+    initDiaryEditor();
+    loadDiaries();
+});
 
-// 从后端加载心情
-async function loadMoods() {
+// 初始化富文本编辑器
+function initDiaryEditor() {
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: { toolbar: '#toolbar' },
+        placeholder: '记录属于你的魔法时刻...✨'
+    });
+
+    // 自动保存到本地存储
+    quill.on('text-change', () => {
+        localStorage.setItem('diaryDraft', quill.root.innerHTML);
+    });
+
+    // 加载草稿
+    const draft = localStorage.getItem('diaryDraft');
+    if (draft) quill.root.innerHTML = draft;
+
+    return quill;
+}
+
+// 从后端加载日记
+async function loadDiaries() {
     try {
-        const response = await fetch('/load-moods.php');
-        const rows = await response.json();
-        if (rows.length > 0) {
-            rows.forEach(mood => {
-                addMoodCard(mood.emoji, mood.text);
-            });
+        const response = await fetch('load-diary.php');
+        const diaries = await response.json();
+        const container = document.querySelector('.diary-list-container .diary-list');
+        container.innerHTML = ''; // 清空现有内容
+
+        if (diaries.length > 0) {
+            diaries.forEach(diary => addDiaryEntry(container, diary));
         } else {
-            // 默认示例心情
-            addMoodCard('😊', '今天天气真好，心情愉悦！');
-            addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
-            addMoodCard('🤔', '思考人生中...');
+            container.innerHTML = '<div class="empty-state">还没有日记呢～开始记录你的第一篇日记吧！</div>';
         }
     } catch (error) {
-        console.error('加载心情时出错:', error);
-        // 默认示例心情
-        addMoodCard('😊', '今天天气真好，心情愉悦！');
-        addMoodCard('😢', '遇到了一些小挫折，但我会加油的！');
-        addMoodCard('🤔', '思考人生中...');
+        console.error('加载日记失败:', error);
+        showNotification('加载日记失败，请稍后重试');
     }
 }
 
-// 页面加载时获取历史记录
-window.addEventListener('load', loadMoodHistory);
+// 保存日记
+async function saveDiary() {
+    const quill = window.diaryQuill || initDiaryEditor();
+    const content = quill.root.innerHTML;
+    const weather = document.getElementById('weather').value;
+    const mood = document.getElementById('mood').value;
 
-// 心情日记墙交互逻辑
-const moodForm = document.querySelector('.mood-form');
-const moodGrid = document.querySelector('.mood-grid');
-const emojiOptions = document.querySelectorAll('.emoji-option');
-const textarea = moodForm.querySelector('textarea');
-const saveButton = moodForm.querySelector('.save-button');
-
-let selectedEmoji = '😊';
-
-// 选择表情
-emojiOptions.forEach(option => {
-    option.addEventListener('click', () => {
-        selectedEmoji = option.textContent;
-        emojiOptions.forEach(opt => opt.style.transform = 'scale(1)');
-        option.style.transform = 'scale(1.3)';
-    });
-});
-
-// 保存心情
-saveButton.addEventListener('click', async () => {
-    const moodText = textarea.value.trim();
-    if (moodText) {
-        try {
-            const created_at = new Date().toISOString();
-            // 发送到PHP后端保存
-            const response = await fetch('/save-mood.php', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    emoji: selectedEmoji,
-                    text: moodText,
-                    created_at: created_at
-                })
-            });
-            const data = await response.json();
-            if (data.success) {
-                addMoodCard(selectedEmoji, moodText);
-                textarea.value = '';
-                // 触发爱心粒子效果
-                createHeartParticles();
-            }
-        } catch (error) {
-            console.error('保存失败:', error);
-        }
+    if (!content.trim()) {
+        showNotification('日记内容不能为空哦～');
+        return;
     }
-});
 
-// 添加心情卡片
-function addMoodCard(emoji, text) {
-    const now = new Date();
-    const dateStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
-    
-    const moodCard = document.createElement('div');
-    moodCard.className = 'mood-card';
-    moodCard.innerHTML = `
-        <div class="mood-card-content">
-            <div class="mood-emoji">${emoji}</div>
-            <div class="mood-date">${dateStr}</div>
-            <div class="mood-content">${text}</div>
+    try {
+        const response = await fetch('save-diary.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                content: content,
+                weather: weather,
+                mood: mood,
+                created_at: new Date().toISOString()
+            })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            const container = document.querySelector('.diary-list-container .diary-list');
+            addDiaryEntry(container, data.diary);
+            quill.root.innerHTML = '';
+            localStorage.removeItem('diaryDraft');
+            showNotification('日记保存成功！');
+            createSparkleEffect();
+        }
+    } catch (error) {
+        console.error('保存日记失败:', error);
+        showNotification('保存失败，请检查网络连接');
+    }
+}
+
+// 添加日记条目到页面
+function addDiaryEntry(container, diary) {
+    const diaryCard = document.createElement('div');
+    diaryCard.className = 'diary-card';
+    diaryCard.innerHTML = `
+        <div class="diary-metadata">
+            <span class="diary-date">${formatDate(diary.created_at)}</span>
+            <span class="diary-weather">${getWeatherEmoji(diary.weather)}</span>
+            <span class="diary-mood">${getMoodEmoji(diary.mood)}</span>
         </div>
+        <div class="diary-content">${diary.content}</div>
     `;
-    
-    // 添加动画效果
-    moodCard.style.opacity = '0';
-    moodCard.style.transform = 'translateY(20px)';
-    
-    moodGrid.prepend(moodCard);
-    
-    // 触发动画
+
+    // 添加入场动画
+    diaryCard.style.opacity = '0';
+    diaryCard.style.transform = 'translateY(20px)';
+    container.prepend(diaryCard);
+
     setTimeout(() => {
-        moodCard.style.transition = 'all 0.5s ease';
-        moodCard.style.opacity = '1';
-        moodCard.style.transform = 'translateY(0)';
+        diaryCard.style.transition = 'all 0.5s ease';
+        diaryCard.style.opacity = '1';
+        diaryCard.style.transform = 'translateY(0)';
     }, 10);
 }
+
+// 工具函数：格式化日期
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')} ${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
+}
+
+// 工具函数：获取天气表情
+function getWeatherEmoji(weather) {
+    const map = {
+        'sunny': '☀️', 'cloudy': '☁️', 'rainy': '🌧️', 'snowy': '❄️'
+    };
+    return map[weather] || '🌈';
+}
+
+// 工具函数：获取心情表情
+function getMoodEmoji(mood) {
+    const map = {
+        'happy': '😊', 'sad': '😢', 'angry': '😠', 'calm': '😌'
+    };
+    return map[mood] || '😐';
+}
+
+// 显示通知
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'diary-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// 绑定保存按钮事件
+document.querySelector('.save-button').addEventListener('click', saveDiary);
 
 // 创建爱心粒子效果
 function createHeartParticles() {

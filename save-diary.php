@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 require_once 'config.php';
 
 // 创建连接
-$conn = new mysqli($host, $user, $password, $database, $port);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 // 检查连接
 if ($conn->connect_error) {
@@ -33,7 +33,14 @@ if (!$stmt) {
 $stmt->bind_param("ssss", $content, $weather, $mood, $created_at);
 
 if ($stmt->execute() === TRUE) {
-    echo json_encode(['success' => true, 'message' => '日记保存成功']);
+    $lastId = $conn->insert_id;
+    $selectSql = "SELECT content, weather, mood, created_at FROM diaries WHERE id = ?";
+    $selectStmt = $conn->prepare($selectSql);
+    $selectStmt->bind_param("i", $lastId);
+    $selectStmt->execute();
+    $result = $selectStmt->get_result();
+    $diary = $result->fetch_assoc();
+    echo json_encode(['success' => true, 'diary' => $diary]);
 } else {
     echo json_encode(['success' => false, 'error' => '保存失败: ' . $conn->error]);
 }

@@ -146,7 +146,14 @@
     display: none;
     flex-direction: column;
     width: 100%;
-  }
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(255, 240, 245, 0.95);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    z-index: 1000;
+}
   
   .navbar .nav-links.active {
     display: flex;
@@ -247,7 +254,35 @@
   .card-grid {
     grid-template-columns: 1fr;
     gap: 16px;
-  }
+}
+
+/* 移动端卡片样式优化 */
+@media (max-width: 480px) {
+    .card {
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(255,105,180,0.15);
+    }
+    
+    .mood-card, .diary-card {
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(255,105,180,0.1);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.mood-card:hover, .diary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255,105,180,0.2);
+}
+    
+    .content-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+}
 }
 
 h1, h2, h3 {
@@ -941,10 +976,25 @@ textarea {
 }
 
 /* 网格布局系统 */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+.mood-wall .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 }
 
 /* 卡片样式 */
@@ -1069,6 +1119,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -1147,10 +1198,30 @@ main {
 }
 
 .desktop-layout .card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 3rem 0;
+}
+
+.diary-list-container .diary-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 480px) {
+    .diary-list-container .diary-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .desktop-layout .card-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 }
 
 .mobile-layout .card-grid {
