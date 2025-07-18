@@ -18,7 +18,7 @@ function createMushroom() {
 }
 
 // 定时创建蘑菇
-setInterval(createMushroom, 150); // 调整生成频率
+setInterval(createMushroom, 100); // 调整生成频率
 
 // 页面加载完成后开始蘑菇雨
 window.addEventListener('load', () => {

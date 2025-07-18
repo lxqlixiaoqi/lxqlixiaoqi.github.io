@@ -58,7 +58,7 @@
 .desktop-layout body {
   font-family: 'Pacifico', cursive;
   color: #e91e63;
-  background: #fff4f9 url('girl.jpeg') no-repeat center center;
+  background: #fff4f9 url('../girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   line-height: 1.8;
@@ -66,10 +66,58 @@
   margin: 0;
 }
 
+/* Gallery page styles */
+.gallery .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery .photo-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: static !important;
+  animation: none !important;
+}
+
+.gallery .photo-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery .card-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery .card-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.gallery .card-content p {
+  margin: 0;
+  color: #666;
+  flex-grow: 1;
+}
+
 .mobile-layout body {
   font-family: 'Pacifico', cursive;
   color: #e91e63;
-  background: #fff4f9 url('girl.jpeg') no-repeat center center;
+  background: #fff4f9 url('../girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: scroll;
   line-height: 1.8;
