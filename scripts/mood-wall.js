@@ -65,7 +65,7 @@ saveButton.addEventListener('click', async () => {
             });
             const data = await response.json();
             if (data.success) {
-                addMoodCard(selectedEmoji, moodText);
+                addMoodCard(data.mood.emoji, data.mood.text, data.mood.created_at);
                 textarea.value = '';
                 // 触发爱心粒子效果
                 createHeartParticles();
@@ -77,9 +77,8 @@ saveButton.addEventListener('click', async () => {
 });
 
 // 添加心情卡片
-function addMoodCard(emoji, text) {
-    const now = new Date();
-    const dateStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+function addMoodCard(emoji, text, created_at) {
+    const dateStr = formatDate(created_at);
     
     const moodCard = document.createElement('div');
     moodCard.className = 'mood-card';
@@ -101,6 +100,12 @@ function addMoodCard(emoji, text) {
         moodCard.style.opacity = '1';
         moodCard.style.transform = 'translateY(0)';
     }, 10);
+}
+
+// 工具函数：格式化日期
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')} ${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
 }
 
 // 创建爱心粒子效果

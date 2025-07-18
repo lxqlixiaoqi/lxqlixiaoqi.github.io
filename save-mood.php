@@ -37,7 +37,14 @@ $stmt = $conn->prepare("INSERT INTO moods (emoji, text, created_at) VALUES (?, ?
 $stmt->bind_param("sss", $emoji, $text, $created_at);
 
 if ($stmt->execute() === TRUE) {
-    echo json_encode(['success' => true, 'message' => '心情保存成功']);
+    $lastId = $conn->insert_id;
+    $selectSql = "SELECT emoji, text, created_at FROM moods WHERE id = ?";
+    $selectStmt = $conn->prepare($selectSql);
+    $selectStmt->bind_param("i", $lastId);
+    $selectStmt->execute();
+    $result = $selectStmt->get_result();
+    $mood = $result->fetch_assoc();
+    echo json_encode(['success' => true, 'mood' => $mood]);
 } else {
     echo json_encode(['success' => false, 'error' => '保存失败: ' . $conn->error]);
 }

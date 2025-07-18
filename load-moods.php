@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 }
 
 // 查询心情数据
-$sql = "SELECT * FROM moods ORDER BY created_at DESC";
+$sql = "SELECT emoji, text, created_at FROM moods ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 $moods = [];
