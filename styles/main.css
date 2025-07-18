@@ -55,12 +55,23 @@
     -webkit-appearance: slider-vertical;
     appearance: slider-vertical;
 }
-body {
+.desktop-layout body {
   font-family: 'Pacifico', cursive;
   color: #e91e63;
-  background: #fff4f9 url('fallback-bg.jpg') no-repeat center center;
+  background: #fff4f9 url('girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
+  line-height: 1.8;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-layout body {
+  font-family: 'Pacifico', cursive;
+  color: #e91e63;
+  background: #fff4f9 url('girl.jpeg') no-repeat center center;
+  background-size: cover;
+  background-attachment: scroll;
   line-height: 1.8;
   padding: 0;
   margin: 0;
@@ -182,12 +193,12 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
-  
-  @media (max-width: 480px) {
-    .card-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -980,7 +991,11 @@ textarea {
 body {
   font-family: 'Pacifico', cursive;
   color: #e91e63;
-  background: linear-gradient(135deg, #fff4f9, #ffe4e1);
+  background-image: url('girl.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   line-height: 1.8;
 }
 
@@ -1083,10 +1098,17 @@ main {
   font-size: 1.2rem;
 }
 
-.card-grid {
+.desktop-layout .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2.5rem;
+  margin: 3rem 0;
+}
+
+.mobile-layout .card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
   margin: 3rem 0;
 }
 

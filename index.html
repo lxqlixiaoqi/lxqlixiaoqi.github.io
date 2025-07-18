@@ -80,8 +80,8 @@
           <p class="random-quote">。。。。。。</p>
         </div>
         <div class="content-card cute-card">
-          <h3>✨ 今日鼓励</h3>
-          <p class="encourage-quote">今天的你也在闪闪发光哦～</p>
+          <h3>✨ 一言</h3>
+          <p class="encourage-quote">晓琪，今天的你也在闪闪发光哦～</p>
           <button class="cute-btn" onclick="updateEncourage()">换一句</button>
         </div>
         <div class="content-card cute-card">
@@ -176,6 +176,43 @@ const navLinks = document.querySelector('.nav-links');
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
+</script>
+<script>
+// UA检测并应用对应布局
+function detectDeviceAndApplyLayout() {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const html = document.documentElement;
+  
+  if (isMobile) {
+    html.classList.add('mobile-layout');
+    html.classList.remove('desktop-layout');
+    // 移动设备额外优化
+    optimizeMobileExperience();
+  } else {
+    html.classList.add('desktop-layout');
+    html.classList.remove('mobile-layout');
+  }
+}
+
+// 移动设备体验优化
+function optimizeMobileExperience() {
+  // 调整视口设置
+  const viewport = document.querySelector('meta[name="viewport"]');
+  if (viewport) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+  }
+  
+  // 确保蘑菇雨效果适应竖屏
+  if (window.MushroomRainSystem) {
+    MushroomRainSystem.config.MAX_INSTANCES = 20;
+    MushroomRainSystem.config.BASE_SPEED = 1.2;
+  }
+}
+
+// 初始化检测
+document.addEventListener('DOMContentLoaded', detectDeviceAndApplyLayout);
+// 窗口大小变化时重新检测
+window.addEventListener('resize', detectDeviceAndApplyLayout);
 </script>
 <script src="scripts/sakura.js"></script>
 </body>
