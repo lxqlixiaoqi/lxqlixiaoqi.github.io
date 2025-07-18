@@ -7,11 +7,18 @@
     left: 0;
     transform: translateY(-50%) translateX(-100%);
     background: rgba(255, 255, 255, 0.9);
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     z-index: 1000;
     transition: transform 0.3s ease;
+}
+
+.opacity-control input[type="range"] {
+    width: 16px;
+    height: 120px;
+    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
 }
 
 .opacity-control.active {
@@ -72,15 +79,30 @@ body {
     margin: 16px 0;
   }
   
+  .navbar .menu-toggle {
+    display: block;
+  }
+  
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .navbar .nav-links.active {
+    display: flex;
+  }
+  
   nav ul {
     flex-direction: column;
     align-items: stretch;
     padding: 0 16px;
+    margin-top: 16px;
   }
   
   nav ul li {
     display: block;
-    margin: 12px 0;
+    margin: 8px 0;
   }
   
   nav ul li a {
@@ -156,9 +178,16 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .grid-container {
+  .grid-container.card-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 }
 
@@ -205,10 +234,12 @@ a:hover {
 }
 
 /* 按钮样式 */
-button {
+button, .cta-button {
   background-color: #ff69b4;
   color: white;
-  padding: 10px 20px;
+  padding: 14px 24px;
+  min-width: 48px;
+  min-height: 48px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -222,6 +253,15 @@ button:hover {
 nav {
   background-color: #fff0f5;
   padding: 10px;
+}
+
+.navbar .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #e91e63;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 nav ul {
@@ -257,8 +297,8 @@ footer {
   z-index: 998;
 }
 
-/* 樱花雨样式 */
-.sakura-container {
+/* 蘑菇雨样式 */
+.mushroom-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -266,14 +306,45 @@ footer {
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+  z-index: 1000;
+  background: transparent;
 }
 
-.sakura {
+.mushroom-particle {
   position: absolute;
-  font-size: inherit;
-  animation: sakura-fall linear infinite, sakura-wind ease-in-out alternate infinite;
-  opacity: 0.8; 
-  box-shadow: 0 0 5px rgba(255, 192, 203, 0.5); /* 添加阴影 */
+  background-size: contain;
+  animation: mushroom-fall linear infinite, mushroom-wind ease-in-out alternate infinite;
+  opacity: 0.9; 
+  box-shadow: 0 0 8px rgba(255, 158, 181, 0.6); /* 蘑菇阴影 */
+}
+
+@keyframes mushroom-fall {
+  0% {
+    top: -5%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.2;
+  }
+}
+
+@keyframes mushroom-wind {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(15px) rotate(8deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateX(-15px) rotate(-8deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
 }
 
 @keyframes sakura-fall {
@@ -324,6 +395,16 @@ footer {
 
 
 /* 每日诗词样式 */
+.sakura-fall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 .daily-poem {
   background: rgba(255, 255, 255, 0.8); /* 白色半透明背景，alpha=0.8 */
   border: 2px solid #ff69b4;
@@ -933,6 +1014,15 @@ body {
   color: #ff85a2;
   text-decoration: none;
   text-shadow: 0 2px 4px rgba(255, 133, 162, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  margin-right: 0.5rem;
 }
 
 .nav-links {
