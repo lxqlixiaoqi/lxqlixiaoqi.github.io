@@ -57,35 +57,23 @@ if (messageForm) {
 }
 
 async function loadMessages() {
-  try {
-    const response = await fetch('/load-messages.php');
-    const messages = await response.json();
-    const container = document.getElementById('messages-container');
-    messages.forEach(msg => {
-      const div = document.createElement('div');
-      div.className = 'message-item';
-      div.innerHTML = `
-        <h4>${msg.name}</h4>
-        <p>${msg.content}</p>
-        <small>${msg.created_at}</small>
-      `;
-      container.appendChild(div);
-    });
-  } catch (error) {
-    console.error('加载留言失败:', error);
-  }
-}
-
-// 页面加载时执行
-window.addEventListener('DOMContentLoaded', loadMessages);
-async function loadMessages() {
     try {
         // 从后端获取所有留言
-        const response = await fetch('/load-messages.php');
+        const response = await fetch('load-messages.php');
+        if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
         const rows = await response.json();
 
         const messagesContainer = document.querySelector('.messages');
+        if (!messagesContainer) {
+            console.error('未找到留言容器元素');
+            return;
+        }
         messagesContainer.innerHTML = '';
+
+        if (!rows.length) {
+            messagesContainer.innerHTML = '<div class="no-messages">暂无留言，快来添加第一条留言吧~</div>';
+            return;
+        }
 
         rows.forEach(message => {
             const messageElement = document.createElement('div');
@@ -102,6 +90,10 @@ async function loadMessages() {
         });
     } catch (error) {
         console.error('加载留言时出错:', error);
+        const messagesContainer = document.querySelector('.messages');
+        if (messagesContainer) {
+            messagesContainer.innerHTML = `<div class="error-message">加载留言失败: ${error.message}</div>`;
+        }
     }
 }
 
