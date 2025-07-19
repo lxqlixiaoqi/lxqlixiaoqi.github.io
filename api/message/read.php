@@ -1,4 +1,13 @@
 <?php
+// 捕获致命错误
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => '服务器内部错误']);
+    }
+});
 error_reporting(0);
 ini_set('display_errors', 0);
 // 留言板加载接口

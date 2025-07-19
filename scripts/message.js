@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (contentType?.includes('text/plain')) {
                     const text = await response.text();
                     result = { success: true, data: text };
+                } else if (contentType?.includes('application/x-httpd-php')) {
+                    const text = await response.text();
+                    try {
+                        result = JSON.parse(text); // 尝试从PHP错误中解析JSON
+                    } catch {
+                        result = { success: false, error: `服务器错误: ${text}` };
+                    }
                 } else {
                     const text = await response.text();
                     result = { success: false, error: `不支持的响应类型: ${contentType || '未指定'}` };
