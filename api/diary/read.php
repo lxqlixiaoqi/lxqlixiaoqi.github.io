@@ -38,4 +38,7 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => '服务器异常，请联系管理员']);
-}"}]}}}
+} finally {
+    // 关闭数据库连接
+    $pdo = null;
+}

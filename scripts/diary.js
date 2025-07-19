@@ -17,12 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/diary/read.php', { mode: 'cors' });
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-            // 校验响应类型是否为JSON
+            // 根据Content-Type解析响应（支持JSON/文本/XML等格式）
+            let result;
             const contentType = response.headers.get('Content-Type');
-            if (!contentType || !contentType.includes('application/json')) {
-                throw new Error('接收到非JSON格式响应');
+            try {
+                if (contentType?.includes('application/json')) {
+                    result = await response.json();
+                } else if (contentType?.includes('text/xml')) {
+                    const xmlText = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                    result = { success: true, data: xmlDoc };
+                } else if (contentType?.includes('text/plain')) {
+                    const text = await response.text();
+                    result = { success: true, data: text };
+                } else {
+                    const text = await response.text();
+                    result = { success: false, error: `不支持的响应类型: ${contentType || '未指定'}` };
+                }
+            } catch (parseError) {
+                const text = await response.text();
+                result = { success: false, error: `解析失败（${contentType || '未知类型'}）: ${parseError.message} - ${text.substring(0, 100)}...` };
             }
-            const result = await response.json();
 
             if (!result.success) throw new Error(result.error || '加载日记失败');
 
