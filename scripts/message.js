@@ -1,108 +1,208 @@
-// 处理留言提交
-const messageForm = document.getElementById('messageForm');
-if (messageForm) {
-    messageForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    // 加载留言
+    loadMessages();
 
-        const name = document.getElementById('name').value;
-        const contact = document.getElementById('contact').value;
-        const content = document.getElementById('content').value;
-        // 移除前端生成的时间戳，使用数据库默认值
+    // 提交留言按钮事件
+    document.querySelector('.message-submit').addEventListener('click', submitMessage);
+
+    // 加载留言函数
+    async function loadMessages() {
+        try {
+            const response = await fetch('/api/message/read.php', { mode: 'cors' });
+            if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+            const result = await response.json();
+
+            if (result.success && result.data.length > 0) {
+                renderMessages(result.data);
+            } else {
+                document.querySelector('.message-list').innerHTML = '<p>暂无留言，成为第一个留言的人吧！</p>';
+            }
+        } catch (error) {
+            console.error('加载留言失败:', error);
+            document.querySelector('.message-list').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
+        }
+    }
+
+    // 提交留言函数
+    async function submitMessage() {
+        const nameInput = document.getElementById('message-name');
+        const contentInput = document.getElementById('message-content');
+        const name = nameInput.value.trim();
+        const content = contentInput.value.trim();
+
+        if (!name || !content) {
+            showNotification('请输入您的姓名和留言内容', 'error');
+            return;
+        }
 
         try {
-            console.log('尝试提交留言:', { name, contact, content });
-            // 发送到PHP后端保存
-            const response = await fetch('/save-message.php', {
-                mode: 'cors',
+            const response = await fetch('/api/message/create.php', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    name: name,
-                    contact: contact,
-                    content: content,
-                    // 移除created_at字段，由数据库自动生成
-                })
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, content })
             });
 
-            const data = await response.json();
-            console.log('留言提交成功:', data);
-            if (!data.success) throw new Error(data.error);
-            // 显示更丰富的成功反馈
-            const successMsg = document.createElement('div');
-            successMsg.className = 'submit-success';
-            successMsg.innerHTML = '✨ 留言已成功提交！';
-            messageForm.appendChild(successMsg);
+            const result = await response.json();
 
-            // 3秒后自动移除成功提示
-            setTimeout(() => {
-                successMsg.remove();
-            }, 3000);
-
-            e.target.reset();
-            await loadMessages();
+            if (result.success) {
+                // 显示成功提示
+                showNotification('留言发布成功！', 'success');
+                // 清空输入框
+                nameInput.value = '';
+                contentInput.value = '';
+                // 重新加载留言列表
+                loadMessages();
+                // 添加动画效果
+                createMessageEffect();
+            } else {
+                throw new Error(result.error || '发布留言失败');
+            }
         } catch (error) {
-            console.error('提交留言时出错:', error);
-
-            // 显示更详细的错误提示
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'submit-error';
-            errorMsg.innerHTML = `❌ 提交失败: ${error.message}`;
-            messageForm.appendChild(errorMsg);
-
-            // 5秒后自动移除错误提示
-            setTimeout(() => {
-                errorMsg.remove();
-            }, 5000);
+            console.error('发布留言失败:', error);
+            showNotification(`发布失败: ${error.message}`, 'error');
         }
-    });
-}
+    }
 
-async function loadMessages() {
-    try {
-        // 从后端获取所有留言
-        const response = await fetch('load-messages.php', { mode: 'cors' });
-        if (!response.ok) {
-              const errorText = await response.text();
-              throw new Error(`HTTP错误: ${response.status} - ${errorText}`);
-          }
-          const rows = await response.json();
+    // 渲染留言列表
+    function renderMessages(messages) {
+        const messageList = document.querySelector('.message-list');
+        messageList.innerHTML = '';
 
-        const messagesContainer = document.querySelector('.messages');
-        if (!messagesContainer) {
-            console.error('未找到留言容器元素');
-            return;
-        }
-        messagesContainer.innerHTML = '';
-
-        if (!rows.length) {
-            messagesContainer.innerHTML = '<div class="no-messages">暂无留言，快来添加第一条留言吧~</div>';
-            return;
-        }
-
-        rows.forEach(message => {
-            const messageElement = document.createElement('div');
-            messageElement.className = 'message-item';
-            messageElement.innerHTML = `
-                <div class="message-header">
-                    <span>${message.name}</span>
-                    <small>${message.contact ? `联系方式: ${message.contact}` : ''}</small>
+        messages.forEach(message => {
+            const messageCard = document.createElement('div');
+            messageCard.className = 'message-card card';
+            messageCard.innerHTML = `
+                <div class='message-header'>
+                    <span class='message-author'>${escapeHtml(message.name)}</span>
+                    <span class='message-date'>${formatDate(message.created_at)}</span>
                 </div>
-                <div class="message-content">${message.content}</div>
-                <small class="message-time">${new Date(message.created_at).toLocaleString()}</small>
+                <div class='message-content'>${escapeHtml(message.content)}</div>
+                <div class='message-divider'></div>
             `;
-            messagesContainer.appendChild(messageElement);
+            messageList.appendChild(messageCard);
         });
-    } catch (error) {
-        console.error('加载留言失败:', error);
-    const messagesContainer = document.querySelector('.messages');
-    if (messagesContainer) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'load-error';
-        errorDiv.textContent = `加载失败: ${error.message}`;
-        messagesContainer.prepend(errorDiv);
     }
-    }
-}
 
-// 页面加载时初始化留言
-window.addEventListener('DOMContentLoaded', loadMessages);
+    // 辅助函数：格式化日期
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    // 辅助函数：转义HTML
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // 辅助函数：显示通知
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => notification.classList.add('show'), 10);
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // 创建留言提交动画效果
+    function createMessageEffect() {
+        const effectContainer = document.createElement('div');
+        effectContainer.className = 'message-effect';
+        effectContainer.innerHTML = '✉️';
+        effectContainer.style.left = '50%';
+        effectContainer.style.top = '50%';
+        document.body.appendChild(effectContainer);
+
+        setTimeout(() => effectContainer.remove(), 1500);
+    }
+});
+
+// 添加样式
+const style = document.createElement('style');
+style.textContent = `
+    .notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        color: white;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+    .notification.show {
+        transform: translateX(0);
+    }
+    .notification.success { background-color: #4CAF50; }
+    .notification.error { background-color: #F44336; }
+
+    .message-list {
+        margin-top: 20px;
+    }
+    .message-card {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .message-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #eee;
+    }
+    .message-author {
+        font-weight: bold;
+        color: #333;
+    }
+    .message-date {
+        font-size: 0.8em;
+        color: #666;
+    }
+    .message-content {
+        line-height: 1.6;
+        color: #444;
+    }
+    .message-divider {
+        margin-top: 10px;
+        border-top: 1px dashed #eee;
+    }
+
+    .message-effect {
+        position: fixed;
+        font-size: 5em;
+        pointer-events: none;
+        animation: message-float 1.5s ease-out forwards;
+        z-index: 1001;
+    }
+
+    @keyframes message-float {
+        0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+        50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(0.8) translateY(-100px); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
