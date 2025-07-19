@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/diary/read.php', { mode: 'cors' });
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+            // 校验响应类型是否为JSON
+            const contentType = response.headers.get('Content-Type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('接收到非JSON格式响应');
+            }
             const result = await response.json();
 
             if (!result.success) throw new Error(result.error || '加载日记失败');

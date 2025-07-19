@@ -34,8 +34,11 @@ try {
     echo '{"success": true, "data": ' . $jsonData . '}';
 } catch (PDOException $e) {
     http_response_code(500);
-    echo '{"success": false, "error": "数据库错误: ' . addslashes($e->getMessage()) . '"}';
+    echo json_encode(['success' => false, 'error' => '数据加载失败，请稍后重试']);
 } catch (Exception $e) {
     http_response_code(500);
-    echo '{"success": false, "error": "服务器错误: ' . addslashes($e->getMessage()) . '"}';
+    echo json_encode(['success' => false, 'error' => '服务器异常，请联系管理员']);
+} finally {
+    // 关闭数据库连接
+    $pdo = null;
 }

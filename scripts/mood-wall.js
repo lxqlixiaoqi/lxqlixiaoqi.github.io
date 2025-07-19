@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/mood/read.php', { mode: 'cors' });
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+            // 校验响应类型是否为JSON
+            const contentType = response.headers.get('Content-Type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('接收到非JSON格式响应');
+            }
             const result = await response.json();
             if (!result.success) throw new Error(result.error || '加载心情失败');
 
