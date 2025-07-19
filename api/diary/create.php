@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+ini_set('display_errors', 0);
 // 日记创建接口
 require_once '../../config.php';
 
@@ -49,11 +51,19 @@ try {
     $diary = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // 返回成功响应
-    echo json_encode([
-        'success' => true,
-        'message' => '日记创建成功',
-        'data' => $diary
-    ]);
+    // 使用MySQL JSON函数返回新创建的日记
+    // 使用MySQL JSON函数返回新创建的日记
+    // 获取新创建的日记ID
+    $diaryId = $pdo->lastInsertId();
+    
+    // 使用MySQL JSON函数返回新创建的日记
+    $stmt = $pdo->prepare("SELECT JSON_OBJECT('id', id, 'content', content, 'weather', weather, 'mood', mood, 'created_at', created_at) AS diary_json FROM diaries WHERE id = ?");
+    $stmt->execute([$diaryId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $jsonData = $result['diary_json'] ?? '{}';
+
+    // 直接输出JSON数据
+    echo '{"success": true, "message": "日记创建成功", "data": ' . $jsonData . '}';
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => '数据库错误: ' . $e->getMessage()]);

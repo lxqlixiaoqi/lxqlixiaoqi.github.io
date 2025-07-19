@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/mood/read.php', { mode: 'cors' });
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
             const result = await response.json();
+            if (!result.success) throw new Error(result.error || '加载心情失败');
 
-            if (result.success && result.data.length > 0) {
+            if (result.data.length > 0) {
                 renderMoodWall(result.data);
             } else {
                 document.querySelector('.mood-wall').innerHTML = '<p>暂无心情记录，分享你的心情吧！</p>';

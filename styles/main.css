@@ -1,64 +1,9 @@
 /* 基础样式 */
 
-/* 透明度调节侧边栏 */
-.opacity-control {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%) translateX(-100%);
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0.5rem;
-    border-radius: 0 8px 8px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.opacity-control input[type="range"] {
-    width: 16px;
-    height: 120px;
-    -webkit-appearance: slider-vertical;
-    appearance: slider-vertical;
-}
-
-.opacity-control.active {
-    transform: translateY(-50%) translateX(0);
-}
-
-.opacity-control .toggle-btn {
-    position: absolute;
-    right: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    width: 30px;
-    height: 50px;
-    border-radius: 0 8px 8px 0;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.opacity-control label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 0.9rem;
-}
-
-.opacity-control input[type="range"] {
-    width: 20px;
-    height: 150px;
-    -webkit-appearance: slider-vertical;
-    appearance: slider-vertical;
-}
 .desktop-layout body {
   font-family: 'Pacifico', cursive;
   color: #e91e63;
-  background: #fff4f9 url('../girl.jpeg') no-repeat center center;
+  background: #fff4f9 url('/girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   line-height: 1.8;

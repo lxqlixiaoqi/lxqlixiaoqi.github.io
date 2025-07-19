@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+ini_set('display_errors', 0);
 // 留言板加载接口
 require_once '../../config.php';
 
@@ -23,18 +25,17 @@ try {
     );
 
     // 查询留言数据（按创建时间倒序）
-    $stmt = $pdo->query("SELECT id, name, contact, content, created_at FROM messages ORDER BY created_at DESC");
-    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // 使用MySQL JSON函数直接生成JSON
+    $stmt = $pdo->query("SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'name', name, 'contact', contact, 'content', content, 'created_at', created_at)) AS messages_json FROM messages ORDER BY created_at DESC");
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $jsonData = $result['messages_json'] ?? '[]';
 
-    // 返回成功响应
-    echo json_encode([
-        'success' => true,
-        'data' => $messages
-    ]);
+    // 直接输出JSON数据
+    echo '{"success": true, "data": ' . $jsonData . '}';
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => '数据库错误: ' . $e->getMessage()]);
+    echo '{"success": false, "error": "数据库错误: ' . addslashes($e->getMessage()) . '"}';
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => '服务器错误: ' . $e->getMessage()]);
+    echo '{"success": false, "error": "服务器错误: ' . addslashes($e->getMessage()) . '"}';
 }

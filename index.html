@@ -37,13 +37,6 @@
     </div>
   </nav>
 
-<!-- 透明度调节侧边栏 -->
-    <div class="opacity-control">
-      <button class="toggle-btn">≡</button>
-      <label for="opacityRange">内容不透明度</label>
-      <input type="range" id="opacityRange" min="0" max="1" step="0.1" value="0.8" orient="vertical">
-    </div>
-
   <!-- 主内容 -->
   <main class="container">
     <section class="welcome-card card">
@@ -109,12 +102,46 @@
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script>
     // 加载每日诗词
-    jinrishici.load(function(result) {
+    function loadDailyPoem() {
+        // 检查API是否加载成功
+        if (typeof jinrishici === 'undefined') {
+            showPoemError('诗词API加载失败');
+            return;
+        }
+
+        jinrishici.load(function(result) {
+            try {
+                const sentence = document.getElementById('poem-sentence');
+                const info = document.getElementById('poem-info');
+                
+                if (result.status !== 'success' || !result.data) {
+                    throw new Error('诗词数据格式错误');
+                }
+                
+                sentence.textContent = result.data.content || '未能获取诗句';
+                info.textContent = result.data.origin ? 
+                    `【${result.data.origin.dynasty || '未知朝代'}】${result.data.origin.author || '未知作者'}《${result.data.origin.title || '无题'}》` : 
+                    '未知诗词信息';
+            } catch (error) {
+                console.error('诗词解析失败:', error);
+                showPoemError('诗词加载失败，请刷新页面重试');
+            }
+        }, function(error) {
+            console.error('诗词API调用失败:', error);
+            showPoemError('获取诗词失败，网络连接可能有问题');
+        });
+    }
+
+    // 显示诗词加载错误
+    function showPoemError(message) {
         const sentence = document.getElementById('poem-sentence');
         const info = document.getElementById('poem-info');
-        sentence.textContent = result.data.content;
-        info.textContent = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
-    });
+        sentence.textContent = message;
+        info.textContent = '—— 每日诗词服务';
+    }
+
+    // 执行加载
+    loadDailyPoem();
 
     // 加载信件内容
     async function loadLetter() {

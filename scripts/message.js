@@ -2,8 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 加载留言
     loadMessages();
 
-    // 提交留言按钮事件
-    document.querySelector('.message-submit').addEventListener('click', submitMessage);
+    // 表单提交事件
+    document.getElementById('messageForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitMessage();
+    });
 
     // 加载留言函数
     async function loadMessages() {
@@ -12,21 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
             const result = await response.json();
 
-            if (result.success && result.data.length > 0) {
-                renderMessages(result.data);
-            } else {
-                document.querySelector('.message-list').innerHTML = '<p>暂无留言，成为第一个留言的人吧！</p>';
-            }
+        if (!result.success) throw new Error(result.error || '加载失败');
+        if (result.data.length > 0) {
+            renderMessages(result.data);
+        } else {
+            document.getElementById('messages-container').innerHTML = '<p>暂无留言，成为第一个留言的人吧！</p>';
+        }
         } catch (error) {
             console.error('加载留言失败:', error);
-            document.querySelector('.message-list').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
+            document.getElementById('messages-container').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
         }
     }
 
     // 提交留言函数
     async function submitMessage() {
-        const nameInput = document.getElementById('message-name');
-        const contentInput = document.getElementById('message-content');
+        const nameInput = document.getElementById('name');
+        const contentInput = document.getElementById('content');
         const name = nameInput.value.trim();
         const content = contentInput.value.trim();
 
@@ -40,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 mode: 'cors',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, content })
+                body: JSON.stringify({ name, contact: document.getElementById('contact').value.trim(), content })
             });
 
             const result = await response.json();

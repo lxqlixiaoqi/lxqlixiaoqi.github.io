@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
             const result = await response.json();
 
-            if (result.success && result.data.length > 0) {
+            if (!result.success) throw new Error(result.error || '加载日记失败');
+
+            if (result.data.length > 0) {
                 renderDiaryList(result.data);
             } else {
                 document.querySelector('.diary-list').innerHTML = '<p>暂无日记记录，开始创建你的第一篇日记吧！</p>';

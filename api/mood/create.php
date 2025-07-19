@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+ini_set('display_errors', 0);
 // 心情墙创建接口
 require_once '../../config.php';
 
@@ -48,11 +50,17 @@ try {
     $mood = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // 返回成功响应
-    echo json_encode([
-        'success' => true,
-        'message' => '心情发布成功',
-        'data' => $mood
-    ]);
+    // 获取新创建的心情ID
+    $moodId = $pdo->lastInsertId();
+    
+    // 使用MySQL JSON函数返回新创建的心情
+    $stmt = $pdo->prepare("SELECT JSON_OBJECT('id', id, 'emoji', emoji, 'text', text, 'created_at', created_at) AS mood_json FROM moods WHERE id = ?");
+    $stmt->execute([$moodId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $jsonData = $result['mood_json'] ?? '{}';
+
+    // 直接输出JSON数据
+    echo '{"success": true, "message": "心情添加成功", "data": ' . $jsonData . '}';
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => '数据库错误: ' . $e->getMessage()]);
