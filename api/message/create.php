@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// 获取POST数据
+// 接收并校验数据（防空值和空字符串）
 $data = json_decode(file_get_contents('php://input'), true);
-
-// 验证必填字段
-if (!isset($data['name']) || !isset($data['content'])) {
+$data['name'] = trim($data['name'] ?? '');
+$data['content'] = trim($data['content'] ?? '');
+if (empty($data['name']) || empty($data['content'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => '姓名和留言内容不能为空']);
     exit;

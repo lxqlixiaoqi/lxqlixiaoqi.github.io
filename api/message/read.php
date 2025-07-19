@@ -33,9 +33,15 @@ try {
     // 直接输出JSON数据
     echo '{"success": true, "data": ' . $jsonData . '}';
 } catch (PDOException $e) {
+    // 记录详细错误日志（使用config.php配置的日志路径）
+    error_log("[数据库错误] {$e->getMessage()} 行号: {$e->getLine()}", 3, __DIR__.'/../../php_errors.log');
     http_response_code(500);
-    echo '{"success": false, "error": "数据库错误: ' . addslashes($e->getMessage()) . '"}';
+    echo json_encode(['success' => false, 'error' => '数据加载失败，请稍后重试']);
 } catch (Exception $e) {
+    error_log("[服务器错误] {$e->getMessage()} 行号: {$e->getLine()}", 3, __DIR__.'/../../php_errors.log');
     http_response_code(500);
-    echo '{"success": false, "error": "服务器错误: ' . addslashes($e->getMessage()) . '"}';
+    echo json_encode(['success' => false, 'error' => '服务器异常，请联系管理员']);
+} finally {
+    // 关闭数据库连接
+    $pdo = null;
 }
