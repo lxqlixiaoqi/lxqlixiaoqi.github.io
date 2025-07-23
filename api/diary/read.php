@@ -1,44 +1,36 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
-// 日记加载接口
-require_once '../../config.php';
+/**
+ * 日记数据读取接口
+ * 从diaries表获取所有日记并返回JSON格式数据
+ */
 
-// 设置CORS和响应头
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-header('Content-Type: application/json');
-
-// 处理预检请求
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
+// 包含数据库连接工具
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/database/db_connect.php';
 
 try {
-    // 连接数据库
-    $pdo = new PDO(
-        "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8mb4",
-        DB_USER,
-        DB_PASS,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    // 获取数据库连接
+    $db = getDB();
 
     // 查询日记数据（按创建时间倒序）
-    // 使用MySQL JSON函数直接生成JSON
-    $stmt = $pdo->query("SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'content', content, 'weather', weather, 'mood', mood, 'created_at', created_at)) AS diary_json FROM diaries ORDER BY created_at DESC");
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $jsonData = $result['diary_json'] ?? '[]';
+    $stmt = $db->query('SELECT id, content, weather, mood, created_at FROM diaries ORDER BY created_at DESC');
+    $diaries = $stmt->fetchAll();
 
-    // 直接输出JSON数据
-    echo '{"success": true, "data": ' . $jsonData . '}';
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'error' => '数据加载失败，请稍后重试']);
+    // 返回成功响应
+    http_response_code(200);
+    echo json_encode([
+        'success' => true,
+        'data' => $diaries,
+        'count' => count($diaries)
+    ]);
 } catch (Exception $e) {
+    // 记录错误日志
+    error_log('日记读取错误: ' . $e->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . '/php_errors.log');
+
+    // 返回错误响应
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => '服务器异常，请联系管理员']);
-} finally {
-    // 关闭数据库连接
-    $pdo = null;
+    echo json_encode([
+        'success' => false,
+        'error' => '无法加载日记数据',
+        'details' => $e->getMessage()
+    ]);
 }

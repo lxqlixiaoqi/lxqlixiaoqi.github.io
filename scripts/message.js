@@ -13,42 +13,218 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/message/read.php', { mode: 'cors' });
             if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-            // 根据Content-Type解析响应（支持JSON/文本/XML等格式）
-            let result;
-            const contentType = response.headers.get('Content-Type');
-            try {
-                if (contentType?.includes('application/json')) {
-                    result = await response.json();
-                } else if (contentType?.includes('text/xml')) {
-                    const xmlText = await response.text();
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                    result = { success: true, data: xmlDoc };
-                } else if (contentType?.includes('text/plain')) {
-                    const text = await response.text();
-                    result = { success: true, data: text };
-                } else if (contentType?.includes('application/x-httpd-php')) {
-                    const text = await response.text();
-                    try {
-                        result = JSON.parse(text); // 尝试从PHP错误中解析JSON
-                    } catch {
-                        result = { success: false, error: `服务器错误: ${text}` };
-                    }
-                } else {
-                    const text = await response.text();
-                    result = { success: false, error: `不支持的响应类型: ${contentType || '未指定'}` };
-                }
-            } catch (parseError) {
-                const text = await response.text();
-                result = { success: false, error: `解析失败（${contentType || '未知类型'}）: ${parseError.message} - ${text.substring(0, 100)}...` };
+            /**
+ * 留言板API交互模块
+ * 重构版：使用新的API端点获取和提交留言
+ */
+
+// API端点URL
+const API_URL = {
+    GET_MESSAGES: '/api/message/read.php',
+    CREATE_MESSAGE: '/api/message/create.php'
+};
+
+/**
+ * 获取所有留言
+ * @returns {Promise<Array>} 留言列表
+ */
+async function fetchMessages() {
+    try {
+        const response = await fetch(API_URL.GET_MESSAGES);
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error('获取留言失败:', result.error);
+            showError(result.error || '获取留言失败，请重试');
+            return [];
+        }
+
+        return result.data || [];
+    } catch (error) {
+        console.error('获取留言网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return [];
+    }
+}
+
+/**
+ * 提交新留言
+ * @param {Object} message 留言数据
+ * @returns {Promise<boolean>} 是否提交成功
+ */
+async function submitMessage(message) {
+    try {
+        const response = await fetch(API_URL.CREATE_MESSAGE, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error('提交留言失败:', result.error);
+            showError(result.error || '提交留言失败，请重试');
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('提交留言网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return false;
+    }
+}
+
+// 页面加载时获取并显示留言
+document.addEventListener('DOMContentLoaded', async () => {
+    const messages = await fetchMessages();
+    renderMessages(messages);
+
+    // 绑定表单提交事件
+    const messageForm = document.getElementById('messageForm');
+    if (messageForm) {
+        messageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const message = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                content: document.getElementById('content').value
+            };
+
+            // 简单验证
+            if (!message.name || !message.content) {
+                showError('姓名和留言内容不能为空');
+                return;
             }
 
-        if (!result.success) throw new Error(result.error || '加载失败');
-        if (result.data.length > 0) {
-            renderMessages(result.data);
-        } else {
-            document.getElementById('messages-container').innerHTML = '<p>暂无留言，成为第一个留言的人吧！</p>';
-        }
+            // 提交留言
+            const success = await submitMessage(message);
+            if (success) {
+                // 重置表单
+                messageForm.reset();
+                // 重新加载留言列表
+                const messages = await fetchMessages();
+                renderMessages(messages);
+                showSuccess('留言发布成功！');
+            }
+        });
+    }
+});
+
+/**
+ * 渲染留言列表
+ * @param {Array} messages 留言数据数组
+ */
+function renderMessages(messages) {
+    const container = document.getElementById('messages-container');
+    if (!container) return;
+
+    if (messages.length === 0) {
+        container.innerHTML = '<div class="no-messages">暂无留言，成为第一个留言的人吧！</div>';
+        return;
+    }
+
+    container.innerHTML = messages.map(msg => `
+        <div class="message-item">
+            <div class="message-header">
+                <h3>${escapeHtml(msg.name)}</h3>
+                <time>${formatDate(msg.created_at)}</time>
+            </div>
+            ${msg.contact ? `<div class="message-contact">${escapeHtml(msg.contact)}</div>` : ''}
+            <div class="message-content">${escapeHtml(msg.content)}</div>
+        </div>
+    `).join('');
+}
+
+/**
+ * 显示错误消息
+ * @param {string} text 错误文本
+ */
+function showError(text) {
+    const errorEl = document.getElementById('error-message') || createMessageElement('error-message');
+    errorEl.textContent = text;
+    errorEl.style.display = 'block';
+    setTimeout(() => errorEl.style.display = 'none', 5000);
+}
+
+/**
+ * 显示成功消息
+ * @param {string} text 成功文本
+ */
+function showSuccess(text) {
+    const successEl = document.getElementById('success-message') || createMessageElement('success-message');
+    successEl.textContent = text;
+    successEl.style.display = 'block';
+    setTimeout(() => successEl.style.display = 'none', 3000);
+}
+
+/**
+ * 创建消息元素
+ * @param {string} id 元素ID
+ * @returns {HTMLElement} 创建的元素
+ */
+function createMessageElement(id) {
+    const el = document.createElement('div');
+    el.id = id;
+    el.className = id.includes('error') ? 'alert error' : 'alert success';
+    el.style.position = 'fixed';
+    el.style.bottom = '20px';
+    el.style.left = '50%';
+    el.style.transform = 'translateX(-50%)';
+    el.style.padding = '10px 20px';
+    el.style.borderRadius = '4px';
+    el.style.color = 'white';
+    el.style.zIndex = '1000';
+    el.style.display = 'none';
+    document.body.appendChild(el);
+    return el;
+}
+
+/**
+ * HTML转义函数
+ * @param {string} text 原始文本
+ * @returns {string} 转义后的文本
+ */
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * 日期格式化函数
+ * @param {string} dateStr 日期字符串
+ * @returns {string} 格式化后的日期
+ */
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// 工具函数：检查并创建所需的DOM元素
+function initMessageBoard() {
+    // 可以在这里添加初始化逻辑
+}
+
+// 初始化留言板
+initMessageBoard();
+            // 直接显示服务器返回的原始内容
+            const text = await response.text();
+            const messageContainer = document.getElementById('messages-container');
+            messageContainer.textContent = text;
+            messageContainer.style.whiteSpace = 'pre-wrap';
+            messageContainer.style.fontFamily = 'monospace';
         } catch (error) {
             console.error('加载留言失败:', error);
             document.getElementById('messages-container').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;

@@ -1,150 +1,323 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 加载心情数据
-    loadMoods();
+/**
+ * 心情墙API交互模块
+ * 重构版：使用新的API端点获取和提交心情
+ */
 
-    // 提交心情按钮事件
-    document.querySelector('.mood-submit').addEventListener('click', submitMood);
+// API端点URL
+const API_URL = {
+    GET_MOODS: '/api/mood/read.php',
+    CREATE_MOOD: '/api/mood/create.php'
+};
 
-    // 加载心情函数
-    async function loadMoods() {
-        try {
-            const response = await fetch('/api/mood/read.php', { mode: 'cors' });
-            if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-            // 根据Content-Type解析响应（支持JSON/文本/XML等格式）
-            let result;
-            const contentType = response.headers.get('Content-Type');
-            try {
-                if (contentType?.includes('application/json')) {
-                    result = await response.json();
-                } else if (contentType?.includes('text/xml')) {
-                    const xmlText = await response.text();
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                    result = { success: true, data: xmlDoc };
-                } else if (contentType?.includes('text/plain')) {
-                    const text = await response.text();
-                    result = { success: true, data: text };
-                } else {
-                    const text = await response.text();
-                    result = { success: false, error: `不支持的响应类型: ${contentType || '未指定'}` };
-                }
-            } catch (parseError) {
-                const text = await response.text();
-                result = { success: false, error: `解析失败（${contentType || '未知类型'}）: ${parseError.message} - ${text.substring(0, 100)}...` };
-            }
-            if (!result.success) throw new Error(result.error || '加载心情失败');
+/**
+ * 获取所有心情
+ * @returns {Promise<Array>} 心情列表
+ */
+async function fetchMoods() {
+    try {
+        const response = await fetch(API_URL.GET_MOODS);
+        const result = await response.json();
 
-            if (result.data.length > 0) {
-                renderMoodWall(result.data);
-            } else {
-                document.querySelector('.mood-wall').innerHTML = '<p>暂无心情记录，分享你的心情吧！</p>';
-            }
-        } catch (error) {
-            console.error('加载心情失败:', error);
-            document.querySelector('.mood-wall').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
+        if (!result.success) {
+            console.error('获取心情失败:', result.error);
+            showError(result.error || '获取心情失败，请重试');
+            return [];
         }
+
+        return result.data || [];
+    } catch (error) {
+        console.error('获取心情网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return [];
     }
+}
 
-    // 提交心情函数
-    async function submitMood() {
-        const content = document.getElementById('mood-content').value.trim();
-        const moodType = document.querySelector('input[name="mood-type"]:checked')?.value;
-
-        if (!content || !moodType) {
-            showNotification('请输入心情内容并选择心情类型', 'error');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/mood/create.php', {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content, mood_type: moodType })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                // 显示成功提示
-                showNotification('心情发布成功！', 'success');
-                // 清空输入框
-                document.getElementById('mood-content').value = '';
-                // 重新加载心情墙
-                loadMoods();
-                // 添加动画效果
-                createMoodEffect(moodType);
-            } else {
-                throw new Error(result.error || '发布心情失败');
-            }
-        } catch (error) {
-            console.error('发布心情失败:', error);
-            showNotification(`发布失败: ${error.message}`, 'error');
-        }
-    }
-
-    // 渲染心情墙
-    function renderMoodWall(moods) {
-        const moodWall = document.querySelector('.mood-wall');
-        moodWall.innerHTML = '';
-
-        moods.forEach(mood => {
-            const moodCard = document.createElement('div');
-            moodCard.className = `mood-card card ${getMoodClass(mood.mood_type)}`;
-            moodCard.innerHTML = `
-                <div class='mood-header'>
-                    <span class='mood-emoji'>${getMoodEmoji(mood.mood_type)}</span>
-                    <span class='mood-date'>${formatDate(mood.created_at)}</span>
-                </div>
-                <div class='mood-content'>${escapeHtml(mood.content)}</div>
-            `;
-            moodWall.appendChild(moodCard);
+/**
+ * 提交新心情
+ * @param {Object} mood 心情数据
+ * @returns {Promise<boolean>} 是否提交成功
+ */
+async function submitMood(mood) {
+    try {
+        const response = await fetch(API_URL.CREATE_MOOD, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(mood)
         });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error('提交心情失败:', result.error);
+            showError(result.error || '提交心情失败，请重试');
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('提交心情网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return false;
+    }
+}
+
+/**
+ * 渲染心情墙
+ * @param {Array} moods 心情数据数组
+ */
+function renderMoodWall(moods) {
+    const container = document.getElementById('moods-container');
+    if (!container) return;
+
+    if (moods.length === 0) {
+        container.innerHTML = '<div class="no-moods">暂无心情记录，分享你的心情吧！</div>';
+        return;
     }
 
-    // 辅助函数：获取心情表情
-    function getMoodEmoji(moodType) {
-        const moodMap = {
-            'happy': '😊',
-            'sad': '😢',
-            'angry': '😠',
-            'excited': '🎉',
-            'worried': '😟',
-            'calm': '😌'
-        };
-        return moodMap[moodType] || '😐';
-    }
+    // 按创建时间降序排序（最新的在前）
+    moods.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-    // 辅助函数：获取心情卡片样式类
-    function getMoodClass(moodType) {
-        const classMap = {
-            'happy': 'mood-happy',
-            'sad': 'mood-sad',
-            'angry': 'mood-angry',
-            'excited': 'mood-excited',
-            'worried': 'mood-worried',
-            'calm': 'mood-calm'
-        };
-        return classMap[moodType] || '';
-    }
+    container.innerHTML = moods.map(mood => `
+        <div class="mood-item" style="animation-delay: ${Math.random() * 0.5}s">
+            <div class="mood-emoji">${getMoodEmoji(mood.mood_type)}</div>
+            <div class="mood-content">${escapeHtml(mood.content)}</div>
+            <div class="mood-meta">
+                <span class="mood-author">${escapeHtml(mood.author || '匿名')}</span>
+                <time>${formatDate(mood.created_at)}</time>
+            </div>
+        </div>
+    `).join('');
+}
 
-    // 辅助函数：格式化日期
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('zh-CN', {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+/**
+ * 根据心情类型获取对应的表情
+ * @param {string} moodType 心情类型
+ * @returns {string} 表情符号
+ */
+function getMoodEmoji(moodType) {
+    const moodMap = {
+        'happy': '😊',
+        'sad': '😢',
+        'angry': '😠',
+        'calm': '😌',
+        'excited': '🎉',
+        'worried': '😟',
+        'surprised': '😲',
+        'tired': '😴'
+    };
+    return moodMap[moodType] || '😐';
+}
+
+/**
+ * 页面加载时初始化心情墙功能
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+    // 获取并渲染心情列表
+    const moods = await fetchMoods();
+    renderMoodWall(moods);
+
+    // 绑定心情提交表单事件
+    const moodForm = document.getElementById('moodForm');
+    if (moodForm) {
+        moodForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const mood = {
+                mood_type: document.getElementById('mood-type').value,
+                content: document.getElementById('mood-content').value,
+                author: document.getElementById('mood-author').value || '匿名'
+            };
+
+            // 简单验证
+            if (!mood.mood_type || !mood.content) {
+                showError('请选择心情类型并输入心情内容');
+                return;
+            }
+
+            // 提交心情
+            const success = await submitMood(mood);
+            if (success) {
+                // 重置表单
+                moodForm.reset();
+                // 重新加载并渲染心情列表
+                const moods = await fetchMoods();
+                renderMoodWall(moods);
+                showSuccess('心情发布成功！');
+            }
         });
-    }
-// 辅助函数：转义HTML
-    function escapeHtml(text) {
-        return text
-             .replace(/&/g, '&amp;')
-             .replace(/</g, '&lt;')
-             .replace(/>/g, '&gt;')
-             .replace(/"/g, '&quot;')
-             .replace(/'/g, '&#039;');
     }
 });
+
+/**
+ * 显示错误消息
+ * @param {string} text 错误文本
+ */
+function showError(text) {
+    const errorEl = document.getElementById('error-message') || createMessageElement('error-message');
+    errorEl.textContent = text;
+    errorEl.style.display = 'block';
+    setTimeout(() => errorEl.style.display = 'none', 5000);
+}
+
+/**
+ * 显示成功消息
+ * @param {string} text 成功文本
+ */
+function showSuccess(text) {
+    const successEl = document.getElementById('success-message') || createMessageElement('success-message');
+    successEl.textContent = text;
+    successEl.style.display = 'block';
+    setTimeout(() => successEl.style.display = 'none', 3000);
+}
+
+/**
+ * 创建消息元素
+ * @param {string} id 元素ID
+ * @returns {HTMLElement} 创建的元素
+ */
+function createMessageElement(id) {
+    const el = document.createElement('div');
+    el.id = id;
+    el.className = id.includes('error') ? 'alert error' : 'alert success';
+    el.style.position = 'fixed';
+    el.style.bottom = '20px';
+    el.style.left = '50%';
+    el.style.transform = 'translateX(-50%)';
+    el.style.padding = '10px 20px';
+    el.style.borderRadius = '4px';
+    el.style.color = 'white';
+    el.style.zIndex = '1000';
+    el.style.display = 'none';
+    document.body.appendChild(el);
+    return el;
+}
+
+/**
+ * HTML转义函数
+ * @param {string} text 原始文本
+ * @returns {string} 转义后的文本
+ */
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * 日期格式化函数
+ * @param {string} dateStr 日期字符串
+ * @returns {string} 格式化后的日期
+ */
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// 初始化心情墙
+function initMoodWall() {
+    // 添加基础样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .moods-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .mood-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .mood-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .mood-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .mood-content {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .mood-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .no-moods {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 1.2rem;
+        }
+        .mood-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .submit-button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .submit-button:hover {
+            background: #3367d6;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// 启动心情墙功能
+initMoodWall();

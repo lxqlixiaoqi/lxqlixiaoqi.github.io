@@ -1,205 +1,214 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 初始化Quill编辑器
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: { toolbar: '#toolbar' },
-        placeholder: '记录属于你的魔法时刻...✨'
-    });
+/**
+ * 日记API交互模块
+ * 重构版：使用新的API端点获取和提交日记
+ */
 
-    // 加载已保存的日记
-    loadDiaries();
+// API端点URL
+const API_URL = {
+    GET_DIARIES: '/api/diary/read.php',
+    CREATE_DIARY: '/api/diary/create.php'
+};
 
-    // 保存日记按钮事件
-    document.querySelector('.save-button').addEventListener('click', saveDiary);
+/**
+ * 获取所有日记
+ * @returns {Promise<Array>} 日记列表
+ */
+async function fetchDiaries() {
+    try {
+        const response = await fetch(API_URL.GET_DIARIES);
+        const result = await response.json();
 
-    // 加载日记函数
-    async function loadDiaries() {
-        try {
-            const response = await fetch('/api/diary/read.php', { mode: 'cors' });
-            if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-            // 根据Content-Type解析响应（支持JSON/文本/XML等格式）
-            let result;
-            const contentType = response.headers.get('Content-Type');
-            try {
-                if (contentType?.includes('application/json')) {
-                    result = await response.json();
-                } else if (contentType?.includes('text/xml')) {
-                    const xmlText = await response.text();
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                    result = { success: true, data: xmlDoc };
-                } else if (contentType?.includes('text/plain')) {
-                    const text = await response.text();
-                    result = { success: true, data: text };
-                } else {
-                    const text = await response.text();
-                    result = { success: false, error: `不支持的响应类型: ${contentType || '未指定'}` };
-                }
-            } catch (parseError) {
-                const text = await response.text();
-                result = { success: false, error: `解析失败（${contentType || '未知类型'}）: ${parseError.message} - ${text.substring(0, 100)}...` };
-            }
-
-            if (!result.success) throw new Error(result.error || '加载日记失败');
-
-            if (result.data.length > 0) {
-                renderDiaryList(result.data);
-            } else {
-                document.querySelector('.diary-list').innerHTML = '<p>暂无日记记录，开始创建你的第一篇日记吧！</p>';
-            }
-        } catch (error) {
-            console.error('加载日记失败:', error);
-            document.querySelector('.diary-list').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
+        if (!result.success) {
+            console.error('获取日记失败:', result.error);
+            showError(result.error || '获取日记失败，请重试');
+            return [];
         }
+
+        return result.data || [];
+    } catch (error) {
+        console.error('获取日记网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return [];
     }
+}
 
-    // 保存日记函数
-    async function saveDiary() {
-        const content = quill.root.innerHTML;
-        const weather = document.getElementById('weather').value;
-        const mood = document.getElementById('mood').value;
-
-        if (!content.trim()) {
-            alert('日记内容不能为空哦！');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/diary/create.php', {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content, weather, mood })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                // 显示成功提示
-                showNotification('日记保存成功！', 'success');
-                // 清空编辑器
-                quill.root.innerHTML = '';
-                // 重新加载日记列表
-                loadDiaries();
-            } else {
-                throw new Error(result.error || '保存日记失败');
-            }
-        } catch (error) {
-            console.error('保存日记失败:', error);
-            showNotification(`保存失败: ${error.message}`, 'error');
-        }
-    }
-
-    // 渲染日记列表
-    function renderDiaryList(diaries) {
-        const diaryList = document.querySelector('.diary-list');
-        diaryList.innerHTML = '';
-
-        diaries.forEach(diary => {
-            const diaryCard = document.createElement('div');
-            diaryCard.className = 'diary-card card';
-            diaryCard.innerHTML = `
-                <div class='diary-header'>
-                    <span class='diary-date'>${formatDate(diary.created_at)}</span>
-                    <span class='diary-weather'>${getWeatherEmoji(diary.weather)}</span>
-                    <span class='diary-mood'>${getMoodEmoji(diary.mood)}</span>
-                </div>
-                <div class='diary-content'>${diary.content}</div>
-            `;
-            diaryList.appendChild(diaryCard);
+/**
+ * 提交新日记
+ * @param {Object} diary 日记数据
+ * @returns {Promise<boolean>} 是否提交成功
+ */
+async function submitDiary(diary) {
+    try {
+        const response = await fetch(API_URL.CREATE_DIARY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(diary)
         });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error('提交日记失败:', result.error);
+            showError(result.error || '提交日记失败，请重试');
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('提交日记网络错误:', error);
+        showError('网络错误，无法连接到服务器');
+        return false;
+    }
+}
+
+/**
+ * 渲染日记列表
+ * @param {Array} diaries 日记数据数组
+ */
+function renderDiaries(diaries) {
+    const container = document.getElementById('diaries-container');
+    if (!container) return;
+
+    if (diaries.length === 0) {
+        container.innerHTML = '<div class="no-diaries">暂无日记记录，开始记录你的第一篇日记吧！</div>';
+        return;
     }
 
-    // 辅助函数：格式化日期
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+    // 按创建时间降序排序（最新的在前）
+    diaries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    container.innerHTML = diaries.map(diary => `
+        <div class="diary-item">
+            <div class="diary-header">
+                <h2>${escapeHtml(diary.title)}</h2>
+                <time>${formatDate(diary.created_at)}</time>
+            </div>
+            <div class="diary-content">${escapeHtml(diary.content)}</div>
+            <div class="diary-meta">
+                <span class="diary-author">作者: ${escapeHtml(diary.author || '匿名')}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+/**
+ * 页面加载时初始化日记功能
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+    // 获取并渲染日记列表
+    const diaries = await fetchDiaries();
+    renderDiaries(diaries);
+
+    // 绑定日记提交表单事件
+    const diaryForm = document.getElementById('diaryForm');
+    if (diaryForm) {
+        diaryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const diary = {
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value,
+                author: document.getElementById('author').value || '匿名'
+            };
+
+            // 简单验证
+            if (!diary.title || !diary.content) {
+                showError('标题和内容不能为空');
+                return;
+            }
+
+            // 提交日记
+            const success = await submitDiary(diary);
+            if (success) {
+                // 重置表单
+                diaryForm.reset();
+                // 重新加载并渲染日记列表
+                const diaries = await fetchDiaries();
+                renderDiaries(diaries);
+                showSuccess('日记保存成功！');
+            }
         });
-    }
-
-    // 辅助函数：获取天气表情
-    function getWeatherEmoji(weather) {
-        const weatherMap = {
-            'sunny': '☀️ 晴天',
-            'cloudy': '☁️ 多云',
-            'rainy': '🌧️ 雨天',
-            'snowy': '❄️ 雪天'
-        };
-        return weatherMap[weather] || weather || '🌈 未知';
-    }
-
-    // 辅助函数：获取心情表情
-    function getMoodEmoji(mood) {
-        const moodMap = {
-            'happy': '😊 开心',
-            'sad': '😢 难过',
-            'angry': '😠 生气',
-            'calm': '😌 平静'
-        };
-        return moodMap[mood] || mood || '😐 平常';
-    }
-
-    // 辅助函数：显示通知
-    function showNotification(message, type) {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 10);
-
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
     }
 });
 
-// 添加通知样式
-const style = document.createElement('style');
-style.textContent = `
-    .notification {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 20px;
-        border-radius: 8px;
-        color: white;
-        transform: translateX(120%);
-        transition: transform 0.3s ease;
-        z-index: 1000;
-    }
-    .notification.show {
-        transform: translateX(0);
-    }
-    .notification.success {
-        background-color: #4CAF50;
-    }
-    .notification.error {
-        background-color: #F44336;
-    }
-    .diary-card {
-        margin-bottom: 15px;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .diary-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        font-size: 0.9em;
-        color: #666;
-    }
-    .diary-content {
-        line-height: 1.6;
-    }
-`;
-document.head.appendChild(style);
+/**
+ * 显示错误消息
+ * @param {string} text 错误文本
+ */
+function showError(text) {
+    const errorEl = document.getElementById('error-message') || createMessageElement('error-message');
+    errorEl.textContent = text;
+    errorEl.style.display = 'block';
+    setTimeout(() => errorEl.style.display = 'none', 5000);
+}
+
+/**
+ * 显示成功消息
+ * @param {string} text 成功文本
+ */
+function showSuccess(text) {
+    const successEl = document.getElementById('success-message') || createMessageElement('success-message');
+    successEl.textContent = text;
+    successEl.style.display = 'block';
+    setTimeout(() => successEl.style.display = 'none', 3000);
+}
+
+/**
+ * 创建消息元素
+ * @param {string} id 元素ID
+ * @returns {HTMLElement} 创建的元素
+ */
+function createMessageElement(id) {
+    const el = document.createElement('div');
+    el.id = id;
+    el.className = id.includes('error') ? 'alert error' : 'alert success';
+    el.style.position = 'fixed';
+    el.style.bottom = '20px';
+    el.style.left = '50%';
+    el.style.transform = 'translateX(-50%)';
+    el.style.padding = '10px 20px';
+    el.style.borderRadius = '4px';
+    el.style.color = 'white';
+    el.style.zIndex = '1000';
+    el.style.display = 'none';
+    document.body.appendChild(el);
+    return el;
+}
+
+/**
+ * HTML转义函数
+ * @param {string} text 原始文本
+ * @returns {string} 转义后的文本
+ */
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * 日期格式化函数
+ * @param {string} dateStr 日期字符串
+ * @returns {string} 格式化后的日期
+ */
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// 初始化日记功能
+function initDiary() {
+    // 可以在这里添加额外的初始化逻辑
+}
+
+// 启动日记功能
+initDiary();
