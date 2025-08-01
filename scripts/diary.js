@@ -15,6 +15,15 @@ const API_URL = {
  */
 async function fetchDiaries() {
     try {
+        const response = await fetch('/api/diary/read.php');
+        const rawResponse = await response.text();
+        renderDiaries(rawResponse);
+    } catch (error) {
+        console.error('获取日记失败:', error);
+        document.getElementById('diaryContainer').innerHTML = `<div class="error-message">加载失败: ${error.message}</div>`;
+    }
+}
+    try {
         const response = await fetch(API_URL.GET_DIARIES);
         const result = await response.json();
 
@@ -67,7 +76,36 @@ async function submitDiary(diary) {
  * 渲染日记列表
  * @param {Array} diaries 日记数据数组
  */
-function renderDiaries(diaries) {
+function renderDiaries(rawResponse) {
+    const diaryContainer = document.getElementById('diaryContainer');
+    if (!diaryContainer) return;
+
+    // 创建用于显示原始响应的容器
+    const preElement = document.createElement('pre');
+    preElement.className = 'raw-response';
+    preElement.textContent = rawResponse;
+
+    // 清空容器并添加原始响应
+    diaryContainer.innerHTML = '';
+    diaryContainer.appendChild(preElement);
+
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .raw-response {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            color: #333;
+        }
+    `;
+    document.head.appendChild(style);
+}
     const container = document.getElementById('diaries-container');
     if (!container) return;
 

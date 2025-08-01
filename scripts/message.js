@@ -1,19 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 加载留言
-    loadMessages();
-
-    // 表单提交事件
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        submitMessage();
-    });
-
-    // 加载留言函数
-    async function loadMessages() {
-        try {
-            const response = await fetch('/api/message/read.php', { mode: 'cors' });
-            if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
-            /**
+/**
  * 留言板API交互模块
  * 重构版：使用新的API端点获取和提交留言
  */
@@ -31,19 +16,12 @@ const API_URL = {
 async function fetchMessages() {
     try {
         const response = await fetch(API_URL.GET_MESSAGES);
-        const result = await response.json();
-
-        if (!result.success) {
-            console.error('获取留言失败:', result.error);
-            showError(result.error || '获取留言失败，请重试');
-            return [];
-        }
-
-        return result.data || [];
+        // 获取原始响应文本，不进行JSON解析
+        const rawResponse = await response.text();
+        return rawResponse;
     } catch (error) {
         console.error('获取留言网络错误:', error);
-        showError('网络错误，无法连接到服务器');
-        return [];
+        return '获取数据失败: ' + error.message;
     }
 }
 
@@ -52,8 +30,19 @@ async function fetchMessages() {
  * @param {Object} message 留言数据
  * @returns {Promise<boolean>} 是否提交成功
  */
-async function submitMessage(message) {
-    try {
+async function submitMessage() {
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const content = document.getElementById('content').value.trim();
+
+    // 简单验证
+    if (!name || !content) {
+        showError('姓名和留言内容不能为空');
+        return false;
+    }
+
+    const message = { name, contact, content };
+  try {
         const response = await fetch(API_URL.CREATE_MESSAGE, {
             method: 'POST',
             headers: {
@@ -79,65 +68,101 @@ async function submitMessage(message) {
 }
 
 // 页面加载时获取并显示留言
-document.addEventListener('DOMContentLoaded', async () => {
-    const messages = await fetchMessages();
-    renderMessages(messages);
-
-    // 绑定表单提交事件
-    const messageForm = document.getElementById('messageForm');
-    if (messageForm) {
-        messageForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const message = {
-                name: document.getElementById('name').value,
-                contact: document.getElementById('contact').value,
-                content: document.getElementById('content').value
-            };
-
-            // 简单验证
-            if (!message.name || !message.content) {
-                showError('姓名和留言内容不能为空');
-                return;
-            }
-
-            // 提交留言
-            const success = await submitMessage(message);
-            if (success) {
-                // 重置表单
-                messageForm.reset();
-                // 重新加载留言列表
-                const messages = await fetchMessages();
-                renderMessages(messages);
-                showSuccess('留言发布成功！');
-            }
-        });
-    }
-});
+// 页面加载完成后初始化
+ document.addEventListener('DOMContentLoaded', async () => { 
+     // 获取并显示留言
+     const rawResponse = await fetchMessages();
+     renderMessages(rawResponse);
+ 
+     // 绑定表单提交事件
+     const messageForm = document.getElementById('messageForm');
+     if (messageForm) {
+         messageForm.addEventListener('submit', async (e) => {
+             e.preventDefault();
+             submitMessage();
+         });
+     }
+ });
 
 /**
  * 渲染留言列表
- * @param {Array} messages 留言数据数组
+ * @param {string} rawResponse 原始响应文本
  */
-function renderMessages(messages) {
-    const container = document.getElementById('messages-container');
-    if (!container) return;
+function renderMessages(rawResponse) {
+    try {
+        // 尝试解析JSON
+        const messages = JSON.parse(rawResponse);
+        const messageContainer = document.getElementById('message-container');
 
-    if (messages.length === 0) {
-        container.innerHTML = '<div class="no-messages">暂无留言，成为第一个留言的人吧！</div>';
-        return;
+        if (!messageContainer) return;
+
+        // 清空容器
+        messageContainer.innerHTML = '';
+
+        // 检查是否有留言数据
+        if (!messages || !Array.isArray(messages) || messages.length === 0) {
+            messageContainer.innerHTML = '<div class="no-message">暂无留言</div>';
+            return;
+        }
+
+        // 渲染每条留言
+        messages.forEach(message => {
+            const messageEl = createMessageElement('message-item');
+            messageEl.innerHTML = `
+                <div class="message-header">
+                    <h3>${escapeHtml(message.name)}</h3>
+                    <span>${formatDate(message.created_at)}</span>
+                </div>
+                <div class="message-content">${escapeHtml(message.content)}</div>
+                ${message.contact ? `<div class="message-contact">联系方式: ${escapeHtml(message.contact)}</div>` : ''}
+            `;
+            messageContainer.appendChild(messageEl);
+        });
+    } catch (error) {
+        console.error('解析留言数据失败:', error);
+        const messageContainer = document.getElementById('message-container');
+        if (messageContainer) {
+            messageContainer.innerHTML = '<div class="error-message">数据加载失败</div>';
+        }
     }
+}
 
-    container.innerHTML = messages.map(msg => `
-        <div class="message-item">
-            <div class="message-header">
-                <h3>${escapeHtml(msg.name)}</h3>
-                <time>${formatDate(msg.created_at)}</time>
-            </div>
-            ${msg.contact ? `<div class="message-contact">${escapeHtml(msg.contact)}</div>` : ''}
-            <div class="message-content">${escapeHtml(msg.content)}</div>
-        </div>
-    `).join('');
+/**
+ * 创建消息元素
+ * @param {string} className 类名
+ * @returns {HTMLElement} 创建的元素
+ */
+function createMessageElement(className) {
+    const element = document.createElement('div');
+    element.className = className;
+    return element;
+}
+
+/**
+ * 格式化日期
+ * @param {string} dateString 日期字符串
+ * @returns {string} 格式化后的日期
+ */
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+/**
+ * 转义HTML特殊字符
+ * @param {string} text 要转义的文本
+ * @returns {string} 转义后的文本
+ */
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 /**
@@ -184,16 +209,17 @@ function createMessageElement(id) {
     return el;
 }
 
-/**
- * HTML转义函数
- * @param {string} text 原始文本
- * @returns {string} 转义后的文本
- */
+/** 
+  * HTML转义函数 
+  * @param {string} text - 需要转义的文本
+  * @returns {string} 转义后的文本
+  */
 function escapeHtml(text) {
     if (!text) return '';
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    return text.replace(/[&<>'"]/g, function(match) {
+        const escapeMap = {'&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;'}
+        return escapeMap[match];
+    });
 }
 
 /**
@@ -219,20 +245,29 @@ function initMessageBoard() {
 
 // 初始化留言板
 initMessageBoard();
-            // 直接显示服务器返回的原始内容
-            const text = await response.text();
-            const messageContainer = document.getElementById('messages-container');
+// 加载留言函数
+async function loadMessages() {
+    try {
+        const response = await fetch(API_URL.GET_MESSAGES);
+        // 直接显示服务器返回的原始内容
+        const text = await response.text();
+        const messageContainer = document.getElementById('messages-container');
+        if (messageContainer) {
             messageContainer.textContent = text;
             messageContainer.style.whiteSpace = 'pre-wrap';
             messageContainer.style.fontFamily = 'monospace';
-        } catch (error) {
-            console.error('加载留言失败:', error);
-            document.getElementById('messages-container').innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
+        }
+    } catch (error) {
+        console.error('加载留言失败:', error);
+        const messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+            messagesContainer.innerHTML = `<p class='error-message'>加载失败: ${error.message}</p>`;
         }
     }
+}
 
-    // 提交留言函数
-    async function submitMessage() {
+// 提交留言函数
+async function submitMessage() {
         const nameInput = document.getElementById('name');
         const contentInput = document.getElementById('content');
         const name = nameInput.value.trim();
@@ -273,24 +308,37 @@ initMessageBoard();
     }
 
     // 渲染留言列表
-    function renderMessages(messages) {
-        const messageList = document.querySelector('.message-list');
-        messageList.innerHTML = '';
+    function renderMessages(rawResponse) {
+    const messageContainer = document.getElementById('messageContainer');
+    if (!messageContainer) return;
 
-        messages.forEach(message => {
-            const messageCard = document.createElement('div');
-            messageCard.className = 'message-card card';
-            messageCard.innerHTML = `
-                <div class='message-header'>
-                    <span class='message-author'>${escapeHtml(message.name)}</span>
-                    <span class='message-date'>${formatDate(message.created_at)}</span>
-                </div>
-                <div class='message-content'>${escapeHtml(message.content)}</div>
-                <div class='message-divider'></div>
-            `;
-            messageList.appendChild(messageCard);
-        });
-    }
+    // 创建用于显示原始响应的容器
+    const preElement = document.createElement('pre');
+    preElement.className = 'raw-response';
+    preElement.textContent = rawResponse;
+
+    // 清空容器并添加原始响应
+    messageContainer.innerHTML = '';
+    messageContainer.appendChild(preElement);
+
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .raw-response {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            color: #333;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 
     // 辅助函数：格式化日期
     function formatDate(dateString) {
@@ -339,9 +387,10 @@ initMessageBoard();
 
         setTimeout(() => effectContainer.remove(), 1500);
     }
-});
 
-// 添加样式
+
+
+// 合并样式定义
 const style = document.createElement('style');
 style.textContent = `
     .notification {
@@ -355,48 +404,20 @@ style.textContent = `
         transition: transform 0.3s ease;
         z-index: 1000;
     }
-    .notification.show {
-        transform: translateX(0);
-    }
+    .notification.show { transform: translateX(0); }
     .notification.success { background-color: #4CAF50; }
     .notification.error { background-color: #F44336; }
 
-    .message-list {
-        margin-top: 20px;
-    }
-    .message-card {
+    .raw-response {
+        background-color: #f5f5f5;
         padding: 15px;
-        margin-bottom: 15px;
         border-radius: 8px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .message-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .message-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-        border-bottom: 1px solid #eee;
-    }
-    .message-author {
-        font-weight: bold;
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        max-height: 400px;
+        overflow-y: auto;
         color: #333;
-    }
-    .message-date {
-        font-size: 0.8em;
-        color: #666;
-    }
-    .message-content {
-        line-height: 1.6;
-        color: #444;
-    }
-    .message-divider {
-        margin-top: 10px;
-        border-top: 1px dashed #eee;
     }
 
     .message-effect {

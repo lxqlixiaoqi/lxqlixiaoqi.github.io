@@ -34,17 +34,15 @@ try {
     // 获取数据库连接
     $db = getDB();
 
-    // 准备并执行插入语句
-    $stmt = $db->prepare(
-        'INSERT INTO messages (name, contact, content, created_at) 
-        VALUES (:name, :contact, :content, CURRENT_TIMESTAMP())'
-    );
+    // 直接执行插入语句（不使用预处理）
+    $name = $db->quote(trim($input['name']));
+    $contact = isset($input['contact']) ? $db->quote(trim($input['contact'])) : 'NULL';
+    $content = $db->quote(trim($input['content']));
 
-    $stmt->execute([
-        ':name' => trim($input['name']),
-        ':contact' => isset($input['contact']) ? trim($input['contact']) : null,
-        ':content' => trim($input['content'])
-    ]);
+    $db->query(
+        "INSERT INTO messages (name, contact, content, created_at) 
+        VALUES ($name, $contact, $content, CURRENT_TIMESTAMP)"
+    );
 
     // 获取新插入记录的ID
     $newId = $db->lastInsertId();

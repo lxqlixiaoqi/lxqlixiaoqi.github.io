@@ -14,9 +14,20 @@ echo json_encode(['success' => false, 'error' => "PHP错误: $errstr (行$errlin
 exit;
 });
 
-// 数据库配置（根据用户提供的MySQL信息设置）
-define('DB_HOST', 'sql309.infinityfree.com');
-define('DB_USER', 'if0_39452447');
-define('DB_PASS', 'wyz831201');
-define('DB_NAME', 'if0_39452447_lxqdata');
-define('DB_PORT', 3306);
+// Supabase数据库配置
+// 直接连接（适用于长连接应用）
+// define('DB_URL', 'postgresql://postgres:[YOUR-PASSWORD]@db.xlifqkkeewtsejxrrabg.supabase.co:5432/postgres');
+
+// 事务池连接（适用于无状态应用，IPv4兼容）
+define('DB_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com');
+define('DB_USER', 'postgres.xlifqkkeewtsejxrrabg');
+define('DB_PASS', 'wangyuzhen831201'); // 数据库密码
+define('DB_NAME', 'postgres');
+define('DB_PORT', 6543);
+
+// 如需使用会话池连接，取消下面注释并注释上面的事务池配置
+// define('DB_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com');
+// define('DB_USER', 'postgres.xlifqkkeewtsejxrrabg');
+// define('DB_PASS', '[YOUR-PASSWORD]'); // 用户需要替换为实际密码
+// define('DB_NAME', 'postgres');
+// define('DB_PORT', 5432);

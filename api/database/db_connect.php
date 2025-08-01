@@ -15,13 +15,13 @@ class Database {
 
             // 创建PDO连接
             $this->pdo = new PDO(
-                "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8mb4",
-                DB_USER,
-                DB_PASS,
+                "pgsql:host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME.";user=".DB_USER.";password=".DB_PASS,
+                null,
+                null,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false
+                    PDO::ATTR_EMULATE_PREPARES => true
                 ]
             );
         } catch (PDOException $e) {
@@ -53,25 +53,28 @@ class Database {
     /**
      * 执行查询并返回结果
      * @param string $sql SQL语句
-     * @param array $params 参数数组
      * @return array 查询结果
      */
-    public function query($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll();
+    public function query($sql) {
+        return $this->pdo->query($sql)->fetchAll();
     }
 
     /**
      * 执行增删改操作
      * @param string $sql SQL语句
-     * @param array $params 参数数组
      * @return int 受影响的行数
      */
-    public function execute($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->rowCount();
+    public function execute($sql) {
+        return $this->pdo->exec($sql);
+    }
+
+    /**
+     * 转义字符串值
+     * @param string $value 要转义的值
+     * @return string 转义后的值
+     */
+    public function quote($value) {
+        return $this->pdo->quote($value);
     }
 
     /**

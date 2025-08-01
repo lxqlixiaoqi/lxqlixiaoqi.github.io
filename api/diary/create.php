@@ -34,17 +34,15 @@ try {
     // 获取数据库连接
     $db = getDB();
 
-    // 准备并执行插入语句
-    $stmt = $db->prepare(
-        'INSERT INTO diaries (content, weather, mood, created_at) 
-        VALUES (:content, :weather, :mood, CURRENT_TIMESTAMP())'
-    );
+    // 直接执行插入语句（不使用预处理）
+    $content = $db->quote(trim($input['content']));
+    $weather = isset($input['weather']) ? $db->quote(trim($input['weather'])) : 'NULL';
+    $mood = isset($input['mood']) ? $db->quote(trim($input['mood'])) : 'NULL';
 
-    $stmt->execute([
-        ':content' => trim($input['content']),
-        ':weather' => isset($input['weather']) ? trim($input['weather']) : null,
-        ':mood' => isset($input['mood']) ? trim($input['mood']) : null
-    ]);
+    $db->query(
+        "INSERT INTO diaries (content, weather, mood, created_at) 
+        VALUES ($content, $weather, $mood, CURRENT_TIMESTAMP)"
+    );
 
     // 获取新插入记录的ID
     $newId = $db->lastInsertId();
