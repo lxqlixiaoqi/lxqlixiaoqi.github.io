@@ -39,7 +39,7 @@ async function fetchDiaries() {
         showError('网络错误，无法连接到服务器');
         return [];
     }
-}
+
 
 /**
  * 提交新日记
@@ -129,7 +129,7 @@ function renderDiaries(rawResponse) {
             </div>
         </div>
     `).join('');
-}
+
 
 /**
  * 页面加载时初始化日记功能

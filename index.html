@@ -32,6 +32,8 @@
         <a href="mood-wall.html">心情墙</a>
         <a href="gallery.html">照片墙</a>
         <a href="message.html">留言板</a>
+        <a href="doodle.html">可爱涂鸦板</a>
+        <a href="horoscope.html">星座运势</a>
         <a href="about.html">关于</a>
       </div>
     </div>
@@ -75,6 +77,10 @@
           <button class="cute-btn" onclick="updateEncourage()">换一句</button>
         </div>
         <div class="content-card cute-card">
+          <h3>💖 可爱语录</h3>
+          <p id="cute-quote" style="transition: opacity 0.5s ease-in-out;">正在加载可爱能量...</p>
+        </div>
+        <div class="content-card cute-card">
           <h3>😊 今日心情</h3>
           <p class="mood-emoji">☁️</p>
           <p>天气晴，和你一起的日子都是晴天～</p>
@@ -93,6 +99,11 @@
           <h3>🌈 今日心情</h3>
           <p>查看心情墙的温暖记录 ➡️</p>
           <a href="mood-wall.html" class="cta-button">进入心情墙</a>
+        </div>
+        <div class="content-card cute-card">
+          <h3>🎨 可爱涂鸦板</h3>
+          <p>画出你的奇思妙想吧～</p>
+          <a href="doodle.html" class="cta-button">开始涂鸦</a>
         </div>
       </div>
     </section>
@@ -239,5 +250,9 @@ document.addEventListener('DOMContentLoaded', detectDeviceAndApplyLayout);
 window.addEventListener('resize', detectDeviceAndApplyLayout);
 </script>
 <script src="scripts/sakura.js"></script>
+<script src="scripts/cursor-effect.js"></script>
+    <script src="scripts/cute-quote.js"></script>
+    <script src="scripts/theme-switcher.js"></script>
+    <script src="scripts/mushroom-animation.js"></script>
 </body>
 </html>

@@ -1,9 +1,19 @@
 /* 基础样式 */
 
+:root {
+  --primary-color: #ff69b4;
+  --secondary-color: #f8c2d8;
+  --accent-color: #ff8fab;
+  --bg-color: #fff;
+  --text-color: #333;
+  --card-bg-color: rgba(255, 255, 255, 0.9);
+  --border-color: #ff69b4;
+}
+
 .desktop-layout body {
   font-family: 'Pacifico', cursive;
-  color: #e91e63;
-  background: #fff4f9 url('/girl.jpeg') no-repeat center center;
+  color: var(--primary-color);
+  background: var(--bg-color) url('/girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   line-height: 1.8;
@@ -61,8 +71,8 @@
 
 .mobile-layout body {
   font-family: 'Pacifico', cursive;
-  color: #e91e63;
-  background: #fff4f9 url('../girl.jpeg') no-repeat center center;
+  color: var(--primary-color);
+  background: var(--bg-color) url('../girl.jpeg') no-repeat center center;
   background-size: cover;
   background-attachment: scroll;
   line-height: 1.8;
@@ -231,7 +241,7 @@
 }
 
 h1, h2, h3 {
-  color: #d81b60;
+  color: var(--primary-color);
   animation: fadeIn 1s ease-out;
 }
 
@@ -252,7 +262,7 @@ nav {
 }
 
 button {
-  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
   box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
   transition: all 0.3s;
 }
@@ -264,7 +274,7 @@ button:hover {
 
 /* 链接样式 */
 a {
-  color: #ff1493;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -274,7 +284,7 @@ a:hover {
 
 /* 按钮样式 */
 button, .cta-button {
-  background-color: #ff69b4;
+  background-color: var(--primary-color);
   color: white;
   padding: 14px 24px;
   min-width: 48px;
@@ -285,12 +295,12 @@ button, .cta-button {
 }
 
 button:hover {
-  background-color: #ff1493;
+  background-color: var(--accent-color);
 }
 
 /* 导航栏样式 */
 nav {
-  background-color: #fff0f5;
+  background-color: rgba(255, 240, 245, 0.9);
   padding: 10px;
 }
 
@@ -316,7 +326,7 @@ nav ul li {
 
 /* 页脚样式 */
 footer {
-  background-color: #fff0f5;
+  background-color: rgba(255, 240, 245, 0.9);
   text-align: center;
   padding: 20px;
   position: relative;
@@ -445,8 +455,8 @@ footer {
 }
 
 .daily-poem {
-  background: rgba(255, 255, 255, 0.8); /* 白色半透明背景，alpha=0.8 */
-  border: 2px solid #ff69b4;
+  background: var(--card-bg-color);
+  border: 2px solid var(--border-color);
   border-radius: 15px;
   padding: 1.5rem;
   margin: 1.5rem 0;
@@ -455,7 +465,7 @@ footer {
 }
 
 .daily-poem .poem-title {
-  color: #d81b60;
+  color: var(--primary-color);
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 0.8rem;
@@ -464,19 +474,19 @@ footer {
 .daily-poem .poem-sentence {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #e91e63;
+  color: var(--primary-color);
 }
 
 .daily-poem .poem-info {
   font-size: 0.9rem;
-  color: #ff69b4;
+  color: var(--primary-color);
   margin-top: 0.5rem;
 }
 
 /* 日记本专属样式 */
 .diary-container {
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.8); /* 白色半透明背景，alpha=0.8 */
+    background: var(--card-bg-color);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
     z-index: 1; /* 确保内容模块在壁纸之上 */
@@ -484,19 +494,19 @@ footer {
 
 .editor-wrapper {
     min-height: 60vh;
-    border: 2px solid #ffb6c1;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     overflow: hidden;
 }
 
 #toolbar {
-    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-    border-bottom: 1px solid #ffb6c1;
+    background: linear-gradient(135deg, var(--secondary-color), #ffe4e1);
+    border-bottom: 1px solid var(--border-color);
     padding: 0.8rem;
 }
 
 #toolbar button {
-    background: #ff69b4;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 0.5rem 1rem;

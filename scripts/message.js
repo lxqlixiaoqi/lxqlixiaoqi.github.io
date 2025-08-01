@@ -25,47 +25,8 @@ async function fetchMessages() {
     }
 }
 
-/**
- * 提交新留言
- * @param {Object} message 留言数据
- * @returns {Promise<boolean>} 是否提交成功
- */
-async function submitMessage() {
-    const name = document.getElementById('name').value.trim();
-    const contact = document.getElementById('contact').value.trim();
-    const content = document.getElementById('content').value.trim();
-
-    // 简单验证
-    if (!name || !content) {
-        showError('姓名和留言内容不能为空');
-        return false;
-    }
-
-    const message = { name, contact, content };
-  try {
-        const response = await fetch(API_URL.CREATE_MESSAGE, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(message)
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-            console.error('提交留言失败:', result.error);
-            showError(result.error || '提交留言失败，请重试');
-            return false;
-        }
-
-        return true;
-    } catch (error) {
-        console.error('提交留言网络错误:', error);
-        showError('网络错误，无法连接到服务器');
-        return false;
-    }
-}
+// 已删除重复定义的旧submitMessage函数
+// 使用文件下方的增强版submitMessage函数
 
 // 页面加载时获取并显示留言
 // 页面加载完成后初始化
@@ -279,14 +240,44 @@ async function submitMessage() {
         }
 
         try {
-            const response = await fetch('/api/message/create.php', {
+            const messageData = {
+                name: name,
+                contact: document.getElementById('contact').value.trim(),
+                content: content
+            };
+            console.log('提交的JSON数据:', JSON.stringify(messageData));
+
+            const response = await fetch(API_URL.CREATE_MESSAGE, {
                 method: 'POST',
                 mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, contact: document.getElementById('contact').value.trim(), content })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(messageData)
             });
 
-            const result = await response.json();
+            console.log('服务器响应状态:', response.status);
+
+            // 先检查响应状态
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`服务器响应错误: ${response.status} - ${errorText.substring(0, 100)}`);
+            }
+
+            // 尝试以文本形式获取响应，以便处理非JSON响应
+            const text = await response.text();
+            console.log('服务器响应文本:', text);
+            let result;
+
+            try {
+                // 尝试解析为JSON
+                result = JSON.parse(text);
+                console.log('解析后的JSON响应:', result);
+            } catch (jsonError) {
+                // 如果解析失败，将文本作为错误信息抛出
+                throw new Error(`服务器返回非JSON响应: ${text.substring(0, 100)}...`);
+            }
 
             if (result.success) {
                 // 显示成功提示
@@ -389,6 +380,40 @@ async function submitMessage() {
     }
 
 
+
+// 加载留言函数
+async function loadMessages() {
+    try {
+        const response = await fetch(API_URL.GET_MESSAGES);
+        if (!response.ok) {
+            throw new Error(`服务器响应错误: ${response.status}`);
+        }
+        const text = await response.text();
+        renderMessages(text);
+    } catch (error) {
+        console.error('加载留言失败:', error);
+        const messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+            messagesContainer.innerHTML = `<p class='error-message'>加载留言失败: ${error.message}</p>`;
+        }
+    }
+}
+
+// 添加表单提交事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    const messageForm = document.getElementById('messageForm');
+    if (messageForm) {
+        messageForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            submitMessage();
+        });
+    } else {
+        console.error('未找到留言表单元素');
+    }
+
+    // 页面加载时加载留言
+    loadMessages();
+});
 
 // 合并样式定义
 const style = document.createElement('style');

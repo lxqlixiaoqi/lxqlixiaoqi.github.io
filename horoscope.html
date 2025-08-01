@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icon.png" type="image/png">
+  <title>星座运势 - 蘑菇的小站</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .horoscope-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: var(--card-bg-color);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+      border: 2px solid var(--border-color);
+    }
+
+    .zodiac-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .zodiac-card {
+      width: 100px;
+      height: 120px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.1);
+    }
+
+    .zodiac-card:hover {
+      transform: scale(1.05);
+      border-color: var(--primary-color);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+    }
+
+    .zodiac-card .emoji {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .zodiac-card .name {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .birthdate-form {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    #birthDate {
+      padding: 10px;
+      border: 2px solid var(--secondary-color);
+      border-radius: 20px;
+      margin-right: 10px;
+      width: 200px;
+      text-align: center;
+    }
+
+    .submit-btn {
+      padding: 10px 25px;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    .result-container {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    .fortune-box {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: white;
+      border-radius: 10px;
+      border: 2px dashed var(--secondary-color);
+    }
+
+    .fortune-text {
+      font-size: 18px;
+      color: var(--primary-color);
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lucky-element {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .lucky-item {
+      text-align: center;
+    }
+
+    .lucky-title {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .lucky-value {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo"><img src="icon.png" class="logo-icon">蘑菇的小站</a>
+      <button class="menu-toggle">☰</button>
+      <div class="nav-links">
+        <a href="index.html">主页</a>
+        <a href="diary.html">日记</a>
+        <a href="mood-wall.html">心情墙</a>
+        <a href="gallery.html">照片墙</a>
+        <a href="message.html">留言板</a>
+        <a href="doodle.html">可爱涂鸦板</a>
+        <a href="horoscope.html" class="active">星座运势</a>
+        <a href="about.html">关于</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主内容 -->
+  <main class="container">
+    <div class="horoscope-container">
+      <h1>✨ 晓琪的星座运势 ✨</h1>
+      <p>快来看看今天的幸运星座吧！输入你的生日，获取专属运势～</p>
+
+      <div class="birthdate-form">
+        <input type="date" id="birthDate" required>
+        <button class="submit-btn" id="submitBtn">查看运势</button>
+      </div>
+
+      <div class="zodiac-cards" id="zodiacCards">
+        <!-- 星座卡片将通过JS动态生成 -->
+      </div>
+
+      <div class="result-container" id="resultContainer">
+        <h3 id="zodiacSign"></h3>
+        <p id="dateRange"></p>
+        <div class="fortune-box">
+          <p class="fortune-text" id="fortuneText"></p>
+        </div>
+        <div class="lucky-element">
+          <div class="lucky-item">
+            <div class="lucky-title">幸运色</div>
+            <div class="lucky-value" id="luckyColor"></div>
+          </div>
+          <div class="lucky-item">
+            <div class="lucky-title">幸运数字</div>
+            <div class="lucky-value" id="luckyNumber"></div>
+          </div>
+          <div class="lucky-item">
+            <div class="lucky-title">吉时</div>
+            <div class="lucky-value" id="luckyTime"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/common.js"></script>
+  <script src="scripts/horoscope.js"></script>
+  <script src="scripts/theme-switcher.js"></script>
+  <script src="scripts/mushroom-animation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 移动端菜单切换
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      // 初始化蘑菇雨效果
+      const mushroomRain = new MushroomRainSystem();
+      mushroomRain.start();
+
+      // 定义星座数据
+      const zodiacSigns = {
+        '白羊座': { dateRange: '3月21日-4月19日', emoji: '♈' },
+        '金牛座': { dateRange: '4月20日-5月20日', emoji: '♉' },
+        '双子座': { dateRange: '5月21日-6月21日', emoji: '♊' },
+        '巨蟹座': { dateRange: '6月22日-7月22日', emoji: '♋' },
+        '狮子座': { dateRange: '7月23日-8月22日', emoji: '♌' },
+        '处女座': { dateRange: '8月23日-9月22日', emoji: '♍' },
+        '天秤座': { dateRange: '9月23日-10月23日', emoji: '♎' },
+        '天蝎座': { dateRange: '10月24日-11月22日', emoji: '♏' },
+        '射手座': { dateRange: '11月23日-12月21日', emoji: '♐' },
+        '摩羯座': { dateRange: '12月22日-1月19日', emoji: '♑' },
+        '水瓶座': { dateRange: '1月20日-2月18日', emoji: '♒' },
+        '双鱼座': { dateRange: '2月19日-3月20日', emoji: '♓' }
+      };
+
+      // 幸运颜色
+      const luckyColors = [
+        '#ff69b4', '#ff1493', '#ff8c00', '#ffff00',
+        '#00ff00', '#00bfff', '#8a2be2', '#ff6347',
+        '#4682b4', '#3cb371', '#9370db', '#ffd700'
+      ];
+
+      // 生成星座卡片
+      const zodiacCardsContainer = document.getElementById('zodiacCards');
+      for (const sign in zodiacSigns) {
+        const card = document.createElement('div');
+        card.className = 'zodiac-card';
+        card.innerHTML = `
+          <div class="emoji">${zodiacSigns[sign].emoji}</div>
+          <div class="name">${sign}</div>
+        `;
+        card.addEventListener('click', () => {
+          document.getElementById('resultContainer').style.display = 'block';
+          document.getElementById('zodiacSign').textContent = `${sign} ${zodiacSigns[sign].emoji}`;
+          document.getElementById('dateRange').textContent = `日期范围: ${zodiacSigns[sign].dateRange}`;
+          document.getElementById('fortuneText').textContent = getRandomFortune();
+          
+          // 随机生成幸运元素
+          const randomColor = luckyColors[Math.floor(Math.random() * luckyColors.length)];
+          document.getElementById('luckyColor').textContent = randomColor;
+          document.getElementById('luckyColor').style.color = randomColor;
+          document.getElementById('luckyNumber').textContent = Math.floor(Math.random() * 9) + 1;
+          document.getElementById('luckyTime').textContent = `${Math.floor(Math.random() * 12) + 1}点`;
+        });
+        zodiacCardsContainer.appendChild(card);
+      }
+
+      // 提交按钮事件
+      document.getElementById('submitBtn').addEventListener('click', function() {
+        const birthDate = document.getElementById('birthDate').value;
+        if (!birthDate) {
+          alert('请先输入你的生日日期！');
+          return;
+        }
+
+        const [year, month, day] = birthDate.split('-').map(Number);
+        const sign = getZodiacSign(month, day);
+        const signInfo = zodiacSigns[sign];
+        const fortune = getRandomFortune();
+
+        document.getElementById('resultContainer').style.display = 'block';
+        document.getElementById('zodiacSign').textContent = `${sign} ${signInfo.emoji}`;
+        document.getElementById('dateRange').textContent = `日期范围: ${signInfo.dateRange}`;
+        document.getElementById('fortuneText').textContent = fortune;
+
+        // 随机生成幸运元素
+        const randomColor = luckyColors[Math.floor(Math.random() * luckyColors.length)];
+        document.getElementById('luckyColor').textContent = randomColor;
+        document.getElementById('luckyColor').style.color = randomColor;
+        document.getElementById('luckyNumber').textContent = Math.floor(Math.random() * 9) + 1;
+        document.getElementById('luckyTime').textContent = `${Math.floor(Math.random() * 12) + 1}点`;
+      });
+
+      // 为星座卡片添加点击动画
+      document.querySelectorAll('.zodiac-card').forEach(card => {
+        card.addEventListener('click', function() {
+          this.classList.add('active');
+          setTimeout(() => {
+            this.classList.remove('active');
+          }, 300);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
