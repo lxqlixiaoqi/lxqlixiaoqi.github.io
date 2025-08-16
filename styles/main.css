@@ -256,6 +256,26 @@ h1, h2, h3 {
   }
 }
 
+/* 倒计时数字变化动画 */
+@keyframes countdownPulse {
+  0% {
+    transform: scale(1);
+    color: var(--primary-color);
+  }
+  50% {
+    transform: scale(1.2);
+    color: #ff4081;
+  }
+  100% {
+    transform: scale(1);
+    color: var(--primary-color);
+  }
+}
+
+.countdown-animation {
+  animation: countdownPulse 1s ease-in-out;
+}
+
 nav {
   background-color: rgba(255, 240, 245, 0.9);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

@@ -181,26 +181,14 @@
 
   
 
-    // 动态计算生日倒计时
-    document.addEventListener('DOMContentLoaded', function() {
     // 初始化蘑菇雨效果
-    const mushroomRain = new MushroomRainSystem();
-    mushroomRain.start();
-      const targetDate = new Date(new Date().getFullYear(), 8, 15); // 9月（0-based月份为8）15日
-      const today = new Date();
-
-      // 如果当前日期已过今年生日，计算到明年
-      if (today > targetDate) {
-        targetDate.setFullYear(targetDate.getFullYear() + 1);
-      }
-
-      // 计算天数差
-      const timeDiff = targetDate - today;
-      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
-      // 更新页面显示
-      document.querySelector('.countdown').textContent = `${daysLeft}天`;
+    document.addEventListener('DOMContentLoaded', function() {
+      const mushroomRain = new MushroomRainSystem();
+      mushroomRain.start();
     });
+
+    // 引入生日倒计时功能
+    // 倒计时功能已移至单独的countdown.js文件
   </script>
   <script src="scripts/common.js"></script>
   <script>
@@ -254,5 +242,6 @@ window.addEventListener('resize', detectDeviceAndApplyLayout);
     <script src="scripts/cute-quote.js"></script>
     <script src="scripts/theme-switcher.js"></script>
     <script src="scripts/mushroom-animation.js"></script>
+    <script src="scripts/countdown.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 /**
  * 心情墙API交互模块
  * 重构版：使用新的API端点获取和提交心情
+ * 集成JsonUtils安全处理JSON响应
  */
 
 // API端点URL
@@ -9,6 +10,25 @@ const API_URL = {
     CREATE_MOOD: '/api/mood/create.php'
 };
 
+// 等待JsonUtils加载完成
+let jsonUtils = null;
+
+// 监听DOM加载完成事件
+document.addEventListener('DOMContentLoaded', () => {
+    // 确保JsonUtils已加载
+    if (window.JsonUtils) {
+        jsonUtils = new JsonUtils();
+    } else {
+        console.error('JsonUtils未加载，请确保已引入json-utils.js');
+        // 尝试延迟初始化
+        setTimeout(() => {
+            if (window.JsonUtils) {
+                jsonUtils = new JsonUtils();
+            }
+        }, 1000);
+    }
+});
+
 /**
  * 获取所有心情
  * @returns {Promise<Array>} 心情列表
@@ -16,18 +36,26 @@ const API_URL = {
 async function fetchMoods() {
     try {
         const response = await fetch(API_URL.GET_MOODS);
-        const result = await response.json();
-
-        if (!result.success) {
-            console.error('获取心情失败:', result.error);
-            showError(result.error || '获取心情失败，请重试');
-            return [];
+        // 获取原始响应文本
+        const rawResponse = await response.text();
+        
+        // 使用JsonUtils安全解析JSON
+        if (jsonUtils) {
+            const result = jsonUtils.processResponse(rawResponse);
+            return result.data || [];
+        } else {
+            // 回退方案：尝试使用标准JSON解析
+            try {
+                const result = JSON.parse(rawResponse);
+                return result.data || [];
+            } catch (e) {
+                console.error('JSON解析失败，回退到原始数据:', e);
+                return [];
+            }
         }
-
-        return result.data || [];
     } catch (error) {
         console.error('获取心情网络错误:', error);
-        showError('网络错误，无法连接到服务器');
+        showError('获取数据失败: ' + error.message);
         return [];
     }
 }
@@ -47,18 +75,37 @@ async function submitMood(mood) {
             body: JSON.stringify(mood)
         });
 
-        const result = await response.json();
-
-        if (!result.success) {
-            console.error('提交心情失败:', result.error);
-            showError(result.error || '提交心情失败，请重试');
-            return false;
+        // 获取原始响应文本
+        const rawResponse = await response.text();
+        
+        // 使用JsonUtils安全解析JSON
+        if (jsonUtils) {
+            const result = jsonUtils.processResponse(rawResponse);
+            if (!result.success) {
+                console.error('提交心情失败:', result.error);
+                showError(result.error || '提交心情失败，请重试');
+                return false;
+            }
+            return true;
+        } else {
+            // 回退方案：尝试使用标准JSON解析
+            try {
+                const result = JSON.parse(rawResponse);
+                if (!result.success) {
+                    console.error('提交心情失败:', result.error);
+                    showError(result.error || '提交心情失败，请重试');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('JSON解析失败:', e);
+                showError('提交心情失败，服务器响应格式异常');
+                return false;
+            }
         }
-
-        return true;
     } catch (error) {
         console.error('提交心情网络错误:', error);
-        showError('网络错误，无法连接到服务器');
+        showError('获取数据失败: ' + error.message);
         return false;
     }
 }
@@ -114,9 +161,18 @@ function getMoodEmoji(moodType) {
  * 页面加载时初始化心情墙功能
  */
 document.addEventListener('DOMContentLoaded', async () => {
-    // 获取并渲染心情列表
-    const moods = await fetchMoods();
-    renderMoodWall(moods);
+    // 等待JsonUtils初始化完成
+    if (!jsonUtils) {
+        // 如果JsonUtils尚未加载，等待1秒后重试
+        setTimeout(async () => {
+            const moods = await fetchMoods();
+            renderMoodWall(moods);
+        }, 1000);
+    } else {
+        // 获取并渲染心情列表
+        const moods = await fetchMoods();
+        renderMoodWall(moods);
+    }
 
     // 绑定心情提交表单事件
     const moodForm = document.getElementById('moodForm');
@@ -142,13 +198,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // 重置表单
                 moodForm.reset();
                 // 重新加载并渲染心情列表
-                const moods = await fetchMoods();
-                renderMoodWall(moods);
+                if (jsonUtils) {
+                    const moods = await fetchMoods();
+                    renderMoodWall(moods);
+                } else {
+                    setTimeout(async () => {
+                        const moods = await fetchMoods();
+                        renderMoodWall(moods);
+                    }, 1000);
+                }
                 showSuccess('心情发布成功！');
             }
         });
     }
 });
+    
 
 /**
  * 显示错误消息

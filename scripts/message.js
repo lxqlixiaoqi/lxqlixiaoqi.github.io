@@ -1,6 +1,7 @@
 /**
  * 留言板API交互模块
  * 重构版：使用新的API端点获取和提交留言
+ * 集成JsonUtils安全处理JSON响应
  */
 
 // API端点URL
@@ -9,6 +10,25 @@ const API_URL = {
     CREATE_MESSAGE: '/api/message/create.php'
 };
 
+// 等待JsonUtils加载完成
+let jsonUtils = null;
+
+// 监听DOM加载完成事件
+document.addEventListener('DOMContentLoaded', () => {
+    // 确保JsonUtils已加载
+    if (window.JsonUtils) {
+        jsonUtils = new JsonUtils();
+    } else {
+        console.error('JsonUtils未加载，请确保已引入json-utils.js');
+        // 尝试延迟初始化
+        setTimeout(() => {
+            if (window.JsonUtils) {
+                jsonUtils = new JsonUtils();
+            }
+        }, 1000);
+    }
+});
+
 /**
  * 获取所有留言
  * @returns {Promise<Array>} 留言列表
@@ -16,12 +36,27 @@ const API_URL = {
 async function fetchMessages() {
     try {
         const response = await fetch(API_URL.GET_MESSAGES);
-        // 获取原始响应文本，不进行JSON解析
+        // 获取原始响应文本
         const rawResponse = await response.text();
-        return rawResponse;
+        
+        // 使用JsonUtils安全解析JSON
+        if (jsonUtils) {
+            const result = jsonUtils.processResponse(rawResponse);
+            return result.data || [];
+        } else {
+            // 回退方案：尝试使用标准JSON解析
+            try {
+                const result = JSON.parse(rawResponse);
+                return result.data || [];
+            } catch (e) {
+                console.error('JSON解析失败，回退到原始数据:', e);
+                return [];
+            }
+        }
     } catch (error) {
         console.error('获取留言网络错误:', error);
-        return '获取数据失败: ' + error.message;
+        showError('获取数据失败: ' + error.message);
+        return [];
     }
 }
 
@@ -31,9 +66,18 @@ async function fetchMessages() {
 // 页面加载时获取并显示留言
 // 页面加载完成后初始化
  document.addEventListener('DOMContentLoaded', async () => { 
-     // 获取并显示留言
-     const rawResponse = await fetchMessages();
-     renderMessages(rawResponse);
+     // 等待JsonUtils初始化完成
+     if (!jsonUtils) {
+         // 如果JsonUtils尚未加载，等待1秒后重试
+         setTimeout(async () => {
+             const messages = await fetchMessages();
+             renderMessages(messages);
+         }, 1000);
+     } else {
+         // 获取并显示留言
+         const messages = await fetchMessages();
+         renderMessages(messages);
+     }
  
      // 绑定表单提交事件
      const messageForm = document.getElementById('messageForm');
@@ -47,45 +91,35 @@ async function fetchMessages() {
 
 /**
  * 渲染留言列表
- * @param {string} rawResponse 原始响应文本
+ * @param {Array} messages 留言数据数组
  */
-function renderMessages(rawResponse) {
-    try {
-        // 尝试解析JSON
-        const messages = JSON.parse(rawResponse);
-        const messageContainer = document.getElementById('message-container');
+function renderMessages(messages) {
+    const messageContainer = document.getElementById('message-container');
 
-        if (!messageContainer) return;
+    if (!messageContainer) return;
 
-        // 清空容器
-        messageContainer.innerHTML = '';
+    // 清空容器
+    messageContainer.innerHTML = '';
 
-        // 检查是否有留言数据
-        if (!messages || !Array.isArray(messages) || messages.length === 0) {
-            messageContainer.innerHTML = '<div class="no-message">暂无留言</div>';
-            return;
-        }
-
-        // 渲染每条留言
-        messages.forEach(message => {
-            const messageEl = createMessageElement('message-item');
-            messageEl.innerHTML = `
-                <div class="message-header">
-                    <h3>${escapeHtml(message.name)}</h3>
-                    <span>${formatDate(message.created_at)}</span>
-                </div>
-                <div class="message-content">${escapeHtml(message.content)}</div>
-                ${message.contact ? `<div class="message-contact">联系方式: ${escapeHtml(message.contact)}</div>` : ''}
-            `;
-            messageContainer.appendChild(messageEl);
-        });
-    } catch (error) {
-        console.error('解析留言数据失败:', error);
-        const messageContainer = document.getElementById('message-container');
-        if (messageContainer) {
-            messageContainer.innerHTML = '<div class="error-message">数据加载失败</div>';
-        }
+    // 检查是否有留言数据
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+        messageContainer.innerHTML = '<div class="no-message">暂无留言</div>';
+        return;
     }
+
+    // 渲染每条留言
+    messages.forEach(message => {
+        const messageEl = createMessageElement('message-item');
+        messageEl.innerHTML = `
+            <div class="message-header">
+                <h3>${escapeHtml(message.name)}</h3>
+                <span>${formatDate(message.created_at)}</span>
+            </div>
+            <div class="message-content">${escapeHtml(message.content)}</div>
+            ${message.contact ? `<div class="message-contact">联系方式: ${escapeHtml(message.contact)}</div>` : ''}
+        `;
+        messageContainer.appendChild(messageEl);
+    });
 }
 
 /**
@@ -265,18 +299,23 @@ async function submitMessage() {
                 throw new Error(`服务器响应错误: ${response.status} - ${errorText.substring(0, 100)}`);
             }
 
-            // 尝试以文本形式获取响应，以便处理非JSON响应
+            // 尝试以文本形式获取响应
             const text = await response.text();
             console.log('服务器响应文本:', text);
-            let result;
 
-            try {
-                // 尝试解析为JSON
-                result = JSON.parse(text);
-                console.log('解析后的JSON响应:', result);
-            } catch (jsonError) {
-                // 如果解析失败，将文本作为错误信息抛出
-                throw new Error(`服务器返回非JSON响应: ${text.substring(0, 100)}...`);
+            // 使用JsonUtils安全解析JSON响应
+            let result;
+            if (jsonUtils) {
+                result = jsonUtils.processResponse(text);
+                console.log('使用JsonUtils解析后的响应:', result);
+            } else {
+                // 回退方案：尝试使用标准JSON解析
+                try {
+                    result = JSON.parse(text);
+                    console.log('标准JSON解析后的响应:', result);
+                } catch (jsonError) {
+                    throw new Error(`服务器返回非JSON响应: ${text.substring(0, 100)}...`);
+                }
             }
 
             if (result.success) {

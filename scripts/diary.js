@@ -1,6 +1,7 @@
 /**
  * 日记API交互模块
  * 重构版：使用新的API端点获取和提交日记
+ * 集成JsonUtils安全处理JSON响应
  */
 
 // API端点URL
@@ -9,36 +10,55 @@ const API_URL = {
     CREATE_DIARY: '/api/diary/create.php'
 };
 
+// 等待JsonUtils加载完成
+let jsonUtils = null;
+
+// 监听DOM加载完成事件
+document.addEventListener('DOMContentLoaded', () => {
+    // 确保JsonUtils已加载
+    if (window.JsonUtils) {
+        jsonUtils = new JsonUtils();
+    } else {
+        console.error('JsonUtils未加载，请确保已引入json-utils.js');
+        // 尝试延迟初始化
+        setTimeout(() => {
+            if (window.JsonUtils) {
+                jsonUtils = new JsonUtils();
+            }
+        }, 1000);
+    }
+});
+
 /**
  * 获取所有日记
  * @returns {Promise<Array>} 日记列表
  */
 async function fetchDiaries() {
     try {
-        const response = await fetch('/api/diary/read.php');
-        const rawResponse = await response.text();
-        renderDiaries(rawResponse);
-    } catch (error) {
-        console.error('获取日记失败:', error);
-        document.getElementById('diaryContainer').innerHTML = `<div class="error-message">加载失败: ${error.message}</div>`;
-    }
-}
-    try {
         const response = await fetch(API_URL.GET_DIARIES);
-        const result = await response.json();
-
-        if (!result.success) {
-            console.error('获取日记失败:', result.error);
-            showError(result.error || '获取日记失败，请重试');
-            return [];
+        // 获取原始响应文本
+        const rawResponse = await response.text();
+        
+        // 使用JsonUtils安全解析JSON
+        if (jsonUtils) {
+            const result = jsonUtils.processResponse(rawResponse);
+            return result.data || [];
+        } else {
+            // 回退方案：尝试使用标准JSON解析
+            try {
+                const result = JSON.parse(rawResponse);
+                return result.data || [];
+            } catch (e) {
+                console.error('JSON解析失败，回退到原始数据:', e);
+                return [];
+            }
         }
-
-        return result.data || [];
     } catch (error) {
         console.error('获取日记网络错误:', error);
-        showError('网络错误，无法连接到服务器');
+        showError('获取数据失败: ' + error.message);
         return [];
     }
+}
 
 
 /**
@@ -56,7 +76,23 @@ async function submitDiary(diary) {
             body: JSON.stringify(diary)
         });
 
-        const result = await response.json();
+        // 获取原始响应文本
+        const rawResponse = await response.text();
+        let result;
+
+        // 使用JsonUtils安全解析JSON
+        if (jsonUtils) {
+            result = jsonUtils.processResponse(rawResponse);
+        } else {
+            // 回退方案：尝试使用标准JSON解析
+            try {
+                result = JSON.parse(rawResponse);
+            } catch (e) {
+                console.error('JSON解析失败:', e);
+                showError('服务器响应格式错误');
+                return false;
+            }
+        }
 
         if (!result.success) {
             console.error('提交日记失败:', result.error);
@@ -76,37 +112,8 @@ async function submitDiary(diary) {
  * 渲染日记列表
  * @param {Array} diaries 日记数据数组
  */
-function renderDiaries(rawResponse) {
-    const diaryContainer = document.getElementById('diaryContainer');
-    if (!diaryContainer) return;
-
-    // 创建用于显示原始响应的容器
-    const preElement = document.createElement('pre');
-    preElement.className = 'raw-response';
-    preElement.textContent = rawResponse;
-
-    // 清空容器并添加原始响应
-    diaryContainer.innerHTML = '';
-    diaryContainer.appendChild(preElement);
-
-    // 添加样式
-    const style = document.createElement('style');
-    style.textContent = `
-        .raw-response {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 400px;
-            overflow-y: auto;
-            color: #333;
-        }
-    `;
-    document.head.appendChild(style);
-}
-    const container = document.getElementById('diaries-container');
+function renderDiaries(diaries) {
+    const container = document.getElementById('diaries-container') || document.getElementById('diaryContainer');
     if (!container) return;
 
     if (diaries.length === 0) {
@@ -120,24 +127,36 @@ function renderDiaries(rawResponse) {
     container.innerHTML = diaries.map(diary => `
         <div class="diary-item">
             <div class="diary-header">
-                <h2>${escapeHtml(diary.title)}</h2>
+                <h2>${escapeHtml(diary.title || '无标题')}</h2>
                 <time>${formatDate(diary.created_at)}</time>
             </div>
             <div class="diary-content">${escapeHtml(diary.content)}</div>
             <div class="diary-meta">
                 <span class="diary-author">作者: ${escapeHtml(diary.author || '匿名')}</span>
+                ${diary.weather ? `<span class="diary-weather">天气: ${escapeHtml(diary.weather)}</span>` : ''}
+                ${diary.mood ? `<span class="diary-mood">心情: ${escapeHtml(diary.mood)}</span>` : ''}
             </div>
         </div>
     `).join('');
+}
 
 
 /**
  * 页面加载时初始化日记功能
  */
 document.addEventListener('DOMContentLoaded', async () => {
-    // 获取并渲染日记列表
-    const diaries = await fetchDiaries();
-    renderDiaries(diaries);
+    // 等待JsonUtils初始化完成
+    if (!jsonUtils) {
+        // 如果JsonUtils尚未加载，等待1秒后重试
+        setTimeout(async () => {
+            const diaries = await fetchDiaries();
+            renderDiaries(diaries);
+        }, 1000);
+    } else {
+        // 获取并渲染日记列表
+        const diaries = await fetchDiaries();
+        renderDiaries(diaries);
+    }
 
     // 绑定日记提交表单事件
     const diaryForm = document.getElementById('diaryForm');
@@ -148,12 +167,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             const diary = {
                 title: document.getElementById('title').value,
                 content: document.getElementById('content').value,
-                author: document.getElementById('author').value || '匿名'
+                author: document.getElementById('author').value || '匿名',
+                weather: document.getElementById('weather')?.value || '',
+                mood: document.getElementById('mood')?.value || ''
             };
 
             // 简单验证
-            if (!diary.title || !diary.content) {
-                showError('标题和内容不能为空');
+            if (!diary.content) {
+                showError('日记内容不能为空');
                 return;
             }
 

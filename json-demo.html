@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON工具演示 - 处理服务器返回的JSON格式错误</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .demo-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.15);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 2px solid #ff69b4;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: monospace;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-container {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .demo-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .demo-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #ff69b4;
+            margin-top: 0;
+        }
+
+        .example-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .example-button {
+            background-color: #ffb6c1;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .example-button:hover {
+            background-color: #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="images/mushroom-icon.svg" class="logo-icon">蘑菇的小站</a>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="json-demo.html">JSON工具演示</a>
+                <a href="gallery.html">照片墙</a>
+                <a href="about.html">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="demo-container">
+            <h1>JSON工具演示 - 处理服务器返回的JSON格式错误</h1>
+            <p>这个工具可以帮助你处理服务器返回的可能有格式错误的JSON数据。</p>
+
+            <div class="demo-section">
+                <h2>1. 测试自定义JSON</h2>
+                <div class="input-group">
+                    <label for="json-input">请输入JSON字符串：</label>
+                    <textarea id="json-input" placeholder="{'name': '蘑菇', 'age': 18}"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="parse-btn">解析JSON</button>
+                    <button id="clear-btn">清除</button>
+                </div>
+                <div class="input-group">
+                    <label for="result-output">解析结果：</label>
+                    <div id="result-output" class="result-container"></div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2>2. 尝试预设示例</h2>
+                <p>点击以下按钮查看不同类型的JSON错误处理效果：</p>
+                <div class="example-buttons">
+                    <button class="example-button" data-example="valid">格式正确的JSON</button>
+                    <button class="example-button" data-example="missing-comma">缺少逗号</button>
+                    <button class="example-button" data-example="single-quote">使用单引号</button>
+                    <button class="example-button" data-example="unescaped-quote">未转义的引号</button>
+                    <button class="example-button" data-example="incomplete">不完整的JSON</button>
+                    <button class="example-button" data-example="non-json">非JSON字符串</button>
+                </div>
+                <div class="input-group">
+                    <label for="example-output">处理结果：</label>
+                    <div id="example-output" class="result-container"></div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2>3. 模拟服务器响应</h2>
+                <p>点击按钮模拟服务器返回可能有格式错误的响应：</p>
+                <button id="server-sim-btn">模拟服务器响应</button>
+                <div class="input-group">
+                    <label for="server-output">服务器响应处理结果：</label>
+                    <div id="server-output" class="result-container"></div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2>4. 使用方法</h2>
+                <pre><code>// 1. 引入工具类
+&lt;script src="scripts/json-utils.js"&gt;&lt;/script&gt;
+
+// 2. 安全解析JSON
+const jsonString = '{"name": "蘑菇", "age": 18}';
+const result = JsonUtils.safeParse(jsonString, {
+    tryFix: true,  // 尝试修复格式错误
+    defaultValue: {},  // 解析失败时的默认值
+    onError: function(error) {
+        console.error('解析JSON失败:', error);
+    }
+});
+
+// 3. 处理服务器响应
+const serverResponse = '{"status": "success", "data": {...}}';
+const processedData = JsonUtils.processResponse(serverResponse);</code></pre>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 镇 2025 送给李晓琪的 18 岁生日礼物</p>
+    </footer>
+
+    <script src="scripts/json-utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const jsonInput = document.getElementById('json-input');
+            const parseBtn = document.getElementById('parse-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const resultOutput = document.getElementById('result-output');
+            const exampleButtons = document.querySelectorAll('.example-button');
+            const exampleOutput = document.getElementById('example-output');
+            const serverSimBtn = document.getElementById('server-sim-btn');
+            const serverOutput = document.getElementById('server-output');
+
+            // 预设示例数据
+            const examples = {
+                'valid': '{"name": "蘑菇", "age": 18, "hobbies": ["编程", "画画", "听音乐"]}',
+                'missing-comma': '{"name": "蘑菇" "age": 18 "hobbies": ["编程", "画画", "听音乐"]}',
+                'single-quote': "{'name': '蘑菇', 'age': 18, 'hobbies': ['编程', '画画', '听音乐']}",
+                'unescaped-quote': '{"name": "蘑菇"s blog", "age": 18}',
+                'incomplete': '"name": "蘑菇", "age": 18',
+                'non-json': '操作失败: 数据库连接错误'
+            };
+
+            // 解析按钮点击事件
+            parseBtn.addEventListener('click', function() {
+                const jsonString = jsonInput.value.trim();
+                if (!jsonString) {
+                    resultOutput.textContent = '请输入JSON字符串';
+                    return;
+                }
+
+                try {
+                    const result = JsonUtils.safeParse(jsonString, {
+                        tryFix: true,
+                        onError: function(error) {
+                            resultOutput.textContent = `解析失败: ${error.message}\n\n原始数据: ${jsonString}`;
+                        },
+                        defaultValue: {error: '无法解析JSON'}
+                    });
+
+                    resultOutput.textContent = JSON.stringify(result, null, 2);
+                } catch (error) {
+                    resultOutput.textContent = `发生错误: ${error.message}`;
+                }
+            });
+
+            // 清除按钮点击事件
+            clearBtn.addEventListener('click', function() {
+                jsonInput.value = '';
+                resultOutput.textContent = '';
+            });
+
+            // 示例按钮点击事件
+            exampleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exampleType = this.getAttribute('data-example');
+                    const jsonString = examples[exampleType];
+
+                    exampleOutput.textContent = `示例类型: ${exampleType}\n\n原始数据: ${jsonString}\n\n`;
+
+                    try {
+                        const result = JsonUtils.safeParse(jsonString, {
+                            tryFix: true,
+                            onError: function(error) {
+                                exampleOutput.textContent += `解析失败: ${error.message}`;
+                            },
+                            defaultValue: {error: '无法解析JSON'}
+                        });
+
+                        exampleOutput.textContent += `解析结果: ${JSON.stringify(result, null, 2)}`;
+                    } catch (error) {
+                        exampleOutput.textContent += `发生错误: ${error.message}`;
+                    }
+                });
+            });
+
+            // 模拟服务器响应按钮点击事件
+            serverSimBtn.addEventListener('click', function() {
+                // 模拟服务器返回的可能有问题的响应
+                const responses = [
+                    // 格式正确的JSON
+                    '{"status": "success", "data": {"message": "操作成功"}}',
+                    // 格式错误的JSON (缺少逗号)
+                    '{"status": "error" "code": 500 "message": "服务器错误"}',
+                    // 格式错误的JSON (单引号)
+                    "{'status': 'warning', 'message': '数据不完整'}",
+                    // 非JSON字符串
+                    "操作失败: 数据库连接错误"
+                ];
+
+                // 随机选择一个响应
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                serverOutput.textContent = `服务器响应: ${randomResponse}\n\n`;
+
+                // 使用工具类处理响应
+                try {
+                    const result = JsonUtils.processResponse(randomResponse, {
+                        onError: function(error) {
+                            serverOutput.textContent += `处理错误: ${error.message}\n\n`;
+                        },
+                        defaultValue: {status: 'error', message: '无法解析服务器响应'}
+                    });
+
+                    serverOutput.textContent += `处理结果: ${JSON.stringify(result, null, 2)}`;
+                } catch (error) {
+                    serverOutput.textContent += `发生错误: ${error.message}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
